@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <!-- The Basics -->
+  <groupId>com.andrewswan</groupId>
+  <artifactId>power-grid</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+    <dependency>
+      <groupId>jung</groupId>
+      <artifactId>jung</artifactId>
+      <version>1.7.6</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymockclassextension</artifactId>
+      <version>2.3</version>
+    </dependency>
+  </dependencies>
+  
+  <!-- Build Settings -->
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.0</version>
+        <configuration>
+          <instrumentation>
+            <excludes>
+              <exclude>**/*Test.class</exclude>
+            </excludes>
+          </instrumentation>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <pluginRepositories>
+    <pluginRepository>
+      <releases />
+      <snapshots />
+      <id>codehaus</id>
+      <url>http://dist.codehaus.org/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <releases />
+      <snapshots />
+      <id>codehaus-legacy</id>
+      <url>http://dist.codehaus.org/</url>
+      <layout>legacy</layout>
+    </pluginRepository>
+    <pluginRepository>
+      <releases />
+      <snapshots />
+      <id>codehaus-mojo</id>
+      <url>http://mojo.codehaus.org/</url>
+    </pluginRepository>
+  </pluginRepositories>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.0</version>
+      </plugin>
+      <!--
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      -->
+    </plugins>
+  </reporting>
+  
+  <!-- More Project Information -->
+  <name>Power Grid</name>
+  <description>My Power Grid implementation</description>
+  <developers>
+    <developer>
+      <id>andrews</id>
+      <name>Andrew Swan</name>
+      <email>andrew.i.swan@gmail.com</email>
+      <url>http://www.andrewswan.com</url>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>+10</timezone>
+    </developer>
+  </developers>
+</project>
