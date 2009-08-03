@@ -13,17 +13,17 @@ public class NuclearPlant extends AbstractPlant {
 
   /**
    * Constructor
-   * 
+   *
    * @param minimumPrice
    * @param fuelUsage
    * @param capacity
    */
-  public NuclearPlant(int minimumPrice, int fuelUsage, int capacity) {
+  public NuclearPlant(final int minimumPrice, final int fuelUsage, final int capacity) {
     super(minimumPrice, fuelUsage, PlantType.NUCLEAR, capacity);
   }
-  
+
   @Override
-  protected boolean isUsable(Resource resource) {
+  protected boolean isUsable(final Resource resource) {
     return Resource.URANIUM.equals(resource);
   }
 }

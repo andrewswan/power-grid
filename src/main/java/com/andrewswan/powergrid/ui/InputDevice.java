@@ -3,6 +3,8 @@
  */
 package com.andrewswan.powergrid.ui;
 
+import java.io.Closeable;
+
 import com.andrewswan.powergrid.domain.Plant;
 import com.andrewswan.powergrid.domain.PlayerStrategy;
 import com.andrewswan.powergrid.domain.ResourcePool;
@@ -11,12 +13,12 @@ import com.andrewswan.powergrid.domain.Player.Colour;
 /**
  * A component that accepts input from one or more humans involved in the game
  */
-public interface InputDevice {
+public interface InputDevice extends Closeable {
 
   /**
    * Invites the person playing the given colour to bid on the given plant
-   * 
-   * @param colour the colour being played; can't be <code>null</code> 
+   *
+   * @param colour the colour being played; can't be <code>null</code>
    * @param plant the plant up for auction; can't be <code>null</code>
    * @param minimumBid the minimum amount of any bid
    * @param canPass whether the player is allowed to pass
@@ -28,8 +30,8 @@ public interface InputDevice {
 
   /**
    * Invites the person playing the given colour to buy resources
-   * 
-   * @param colour the colour being played; can't be <code>null</code> 
+   *
+   * @param colour the colour being played; can't be <code>null</code>
    * @return <code>null</code> or an empty resource pool to buy none
    * @see PlayerStrategy#getResourcesToBuy()
    */
@@ -37,8 +39,8 @@ public interface InputDevice {
 
   /**
    * Invites the person playing the given colour to connect cities
-   * 
-   * @param colour the colour being played; can't be <code>null</code> 
+   *
+   * @param colour the colour being played; can't be <code>null</code>
    * @return the internal names of the cities to connect (case doesn't matter),
    *   in the desired order of connection; can be <code>null</code> or empty for
    *   none
@@ -48,8 +50,8 @@ public interface InputDevice {
 
   /**
    * Asks the person playing the given colour which plants they want to operate
-   * 
-   * @param colour the colour being played; can't be <code>null</code> 
+   *
+   * @param colour the colour being played; can't be <code>null</code>
    * @return the plant numbers of the plants to power; can be <code>null</code>
    *   or an empty array for none
    * @see PlayerStrategy#getPlantsToOperate()
@@ -59,7 +61,7 @@ public interface InputDevice {
   /**
    * Asks the person playing the given colour which plant they want to put up
    * for auction
-   * 
+   *
    * @param colour the colour being played; can't be <code>null</code>
    * @param currentMarket the plants from which the player can choose; can be
    *   <code>null</code> for none, any <code>null</code> elements are ignored
@@ -68,9 +70,4 @@ public interface InputDevice {
    */
   Integer selectPlantForAuction(
       Colour colour, Plant[] currentMarket, boolean mandatory);
-  
-  /**
-   * Closes this input device
-   */
-  void close();
 }

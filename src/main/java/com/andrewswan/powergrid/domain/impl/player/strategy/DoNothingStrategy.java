@@ -13,21 +13,21 @@ import com.andrewswan.powergrid.domain.ResourcePool;
  * A player strategy that involves them doing nothing (useful only for testing).
  */
 public class DoNothingStrategy implements PlayerStrategy {
-  
+
   // Properties
   private final Game game;
 
   /**
    * Constructor
-   * 
+   *
    * @param game the game being played; can't be <code>null</code>
    */
-  public DoNothingStrategy(Game game) {
+  public DoNothingStrategy(final Game game) {
     Utils.checkNotNull(game);
     this.game = game;
   }
 
-  public Integer bidOnPlant(Plant plant, int minimumBid, boolean canPass) {
+  public Integer bidOnPlant(final Plant plant, final int minimumBid, final boolean canPass) {
     // Never bid on anything if you don't have to
     if (canPass) {
       return null;
@@ -50,7 +50,7 @@ public class DoNothingStrategy implements PlayerStrategy {
     return new int[0];
   }
 
-  public Plant selectPlantForAuction(boolean mandatory) {
+  public Plant selectPlantForAuction(final boolean mandatory) {
     // Never put a plant up for auction unless required to
     if (!mandatory) {
       return null;
@@ -59,7 +59,7 @@ public class DoNothingStrategy implements PlayerStrategy {
     return game.getCurrentMarket()[0];
   }
 
-  public void redistributeResources(Plant[] plants, Plant plantBeingReplaced) {
+  public void redistributeResources(final Plant[] plants, final Plant plantBeingReplaced) {
     // Do nothing
   }
 }

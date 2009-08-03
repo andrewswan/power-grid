@@ -13,17 +13,17 @@ public class HybridPlant extends AbstractPlant {
 
   /**
    * Constructor
-   * 
+   *
    * @param minimumPrice
    * @param fuelUsage
    * @param capacity
    */
-  public HybridPlant(int minimumPrice, int fuelUsage, int capacity) {
+  public HybridPlant(final int minimumPrice, final int fuelUsage, final int capacity) {
     super(minimumPrice, fuelUsage, PlantType.HYBRID, capacity);
   }
-  
+
   @Override
-  protected boolean isUsable(Resource resource) {
+  protected boolean isUsable(final Resource resource) {
     return Resource.COAL.equals(resource) || Resource.OIL.equals(resource);
   }
 }

@@ -5,11 +5,11 @@ package com.andrewswan.powergrid;
 
 import java.util.ArrayList;
 import java.util.List;
- 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.easymock.classextension.EasyMock;
- 
+
 /**
  * <p>Description: simplifies the creation and usage of multiple EasyMocks.
  *   Supports mocks of both interfaces and classes. Not tied to JUnit.</p>
@@ -17,20 +17,20 @@ import org.easymock.classextension.EasyMock;
  *   jeremyhare@googlemail.com). Uses the "Aggregate" pattern.</p>
  */
 public class EasyMockContainer {
- 
+
   // Constants
   protected static final Log LOGGER = LogFactory.getLog(EasyMockContainer.class);
- 
+
   // Properties
   private final List<Object> mocks;
- 
+
   /**
    * Constructor for an empty container
    */
   public EasyMockContainer() {
     mocks = new ArrayList<Object>();
   }
- 
+
   /**
    * Creates a "nice" mock of the given type, adds it to this container, and
    * returns it
@@ -39,12 +39,12 @@ public class EasyMockContainer {
    * @param toMock the class or interface to mock
    * @return the created mock
    */
-  public <T> T createNiceMock(Class<T> toMock) {
-    T mock = EasyMock.createNiceMock(toMock);
+  public <T> T createNiceMock(final Class<T> toMock) {
+    final T mock = EasyMock.createNiceMock(toMock);
     mocks.add(mock);
     return mock;
   }
- 
+
   /**
    * Creates a strict mock of the given type, adds it to this container, and
    * returns it
@@ -53,12 +53,12 @@ public class EasyMockContainer {
    * @param toMock the class or interface to mock
    * @return the created mock
    */
-  public <T> T createStrictMock(Class<T> toMock) {
-    T mock = EasyMock.createStrictMock(toMock);
+  public <T> T createStrictMock(final Class<T> toMock) {
+    final T mock = EasyMock.createStrictMock(toMock);
     mocks.add(mock);
     return mock;
   }
- 
+
   /**
    * Replays the mocks in this container
    *
@@ -75,20 +75,20 @@ public class EasyMockContainer {
      * had the problem. We therefore replay the mocks one at a time. This takes
      * slightly longer, but milliseconds aren't a big issue when running tests.
      */
-    for (Object mock : mocks) {
+    for (final Object mock : mocks) {
       LOGGER.debug("Replaying " + mock);
       try {
         // This line throws an error with EasyMock CE 2.2 => use 2.2.2 or later
         EasyMock.replay(mock);
       }
-      catch (RuntimeException e) {
+      catch (final RuntimeException e) {
         // The default message doesn't tell us which mock it was
-        String message = getInformativeMessage(mock, e);
+        final String message = getInformativeMessage(mock, e);
         throw new IllegalStateException(message);
       }
     }
   }
- 
+
   /**
    * Returns an informative message about the given {@link Throwable}. This is
    * necessary because the exception messages thrown by {@link EasyMock} don't
@@ -98,14 +98,14 @@ public class EasyMockContainer {
    * @param throwable can't be <code>null</code>
    * @return a non-<code>null</code> message
    */
-  private String getInformativeMessage(Object mock, Throwable throwable) {
-    StringBuilder stringBuilder = new StringBuilder("Error in ");
+  private String getInformativeMessage(final Object mock, final Throwable throwable) {
+    final StringBuilder stringBuilder = new StringBuilder("Error in ");
     stringBuilder.append(mock);
     stringBuilder.append(": ");
     stringBuilder.append(throwable.getMessage());
     return stringBuilder.toString();
   }
- 
+
   /**
    * Resets the mocks in this container
    *
@@ -113,19 +113,19 @@ public class EasyMockContainer {
    */
   public void reset() {
     // See the big comment in the replay() method
-    for (Object mock : mocks) {
+    for (final Object mock : mocks) {
       LOGGER.debug("Resetting " + mock);
       try {
         EasyMock.reset(mock);
       }
-      catch (RuntimeException e) {
+      catch (final RuntimeException e) {
         // Sadly the default message doesn't tell us which mock it was
-        String message = getInformativeMessage(mock, e);
+        final String message = getInformativeMessage(mock, e);
         throw new IllegalStateException(message);
       }
     }
   }
- 
+
   /**
    * Verifies the mocks in this container
    *
@@ -133,19 +133,19 @@ public class EasyMockContainer {
    */
   public void verify() {
     // See the big comment in the replay() method
-    for (Object mock : mocks) {
+    for (final Object mock : mocks) {
       LOGGER.debug("Verifying " + mock);
       try {
         EasyMock.verify(mock);
       }
-      catch (RuntimeException e) {
+      catch (final RuntimeException e) {
         // Sadly the default message doesn't tell us which mock it was
-        String message = getInformativeMessage(mock, e);
+        final String message = getInformativeMessage(mock, e);
         throw new IllegalStateException(message);
       }
     }
   }
- 
+
   /**
    * Clears the mocks from this container (equivalent to making a new container)
    */

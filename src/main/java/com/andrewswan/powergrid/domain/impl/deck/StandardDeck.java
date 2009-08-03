@@ -20,7 +20,7 @@ public class StandardDeck extends AbstractDeck {
 
   // Constants
   public static final int PLANT_ON_TOP = 13;
-  
+
   private static final Plant[] PLANTS_IN_DECK = {
     // Coal
     new CoalPlant(15, 2, 3),
@@ -67,10 +67,10 @@ public class StandardDeck extends AbstractDeck {
 
   /**
    * Constructor
-   * 
+   *
    * @param players the number of players in the game
    */
-  public StandardDeck(int players) {
+  public StandardDeck(final int players) {
     super(PLANTS_IN_DECK, PLANT_ON_TOP, players);
   }
 }

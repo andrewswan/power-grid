@@ -14,6 +14,7 @@ package com.andrewswan.powergrid.application;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Game;
 import com.andrewswan.powergrid.domain.Plant;
 import com.andrewswan.powergrid.domain.PlayerFactory;
@@ -29,56 +30,52 @@ import com.andrewswan.powergrid.ui.impl.StandardOutput;
  * <p>Description: runs the Power Grid simulator</p>
  * <p>Copyright: Copyright (c) 2007</p>
  * <p>Company: Business Information Services</p>
- * 
+ *
  * @author andrews
  */
 public class TextRunner {
-  
+
   // Constants
   private static final int GAMES = 1;
   private static final Log LOGGER = LogFactory.getLog(TextRunner.class);
 
   /**
    * Runs the Power Grid simulator
-   * 
+   *
    * @param args
    */
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
     new TextRunner();
   }
-  
+
   public TextRunner() {
     OutputDevice outputDevice = null;
     InputDevice inputDevice = null;
     try {
       outputDevice = new StandardOutput();
       inputDevice = new StandardInput(outputDevice);
-      PlayerFactory playerFactory = new PlayerFactoryImpl(inputDevice);
+      final PlayerFactory playerFactory = new PlayerFactoryImpl(inputDevice);
       for (int gameNumber = 1; gameNumber <= GAMES; gameNumber++) {
         LOGGER.debug(">>>>>>> Game " + gameNumber + ":");
-        int players = 3;
-        Game game = new StandardGame(new USABoard(players), players);
+        final int players = 3;
+        final Game game = new StandardGame(new USABoard(players), players);
         LOGGER.debug("Start market: ");
         print(game.getCurrentMarket());
         game.play(playerFactory.getPlayers(players, game));
       }
     }
     finally {
-      if (inputDevice != null) {
-        inputDevice.close();
-      }
-      if (outputDevice != null) {
-        outputDevice.close();
-      }
+    	Utils.closeQuietly(inputDevice);
+    	Utils.closeQuietly(outputDevice);
     }
   }
-  
+
   /**
    * Prints out the numbers of the given array of {@link Plant}s
-   * 
+   *
    * @param plants can't be <code>null</code>
    */
-  private void print(Plant[] plants) {
+  private void print(final Plant[] plants) {
     for (int i = 0; i < plants.length; i++) {
       System.out.print(plants[i].getNumber());
       if (i == plants.length - 1) {

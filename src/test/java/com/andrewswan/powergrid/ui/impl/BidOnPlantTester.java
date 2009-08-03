@@ -24,19 +24,19 @@ public class BidOnPlantTester {
 
   /**
    * The entry point for this tester
-   * 
+   *
    * @param args not used
    */
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
     // Set up
-    StandardInput console = new StandardInput(new StandardOutput());
-    Plant mockPlant = createStrictMock(Plant.class);
+    final StandardInput console = new StandardInput(new StandardOutput());
+    final Plant mockPlant = createStrictMock(Plant.class);
     expect(mockPlant.getNumber()).andStubReturn(PLANT_NUMBER);
     replay(mockPlant);
-    
+
     // Invoke
-    Integer bid = console.bidOnPlant(Colour.BLUE, mockPlant, MINIMUM_BID, true);
-    
+    final Integer bid = console.bidOnPlant(Colour.BLUE, mockPlant, MINIMUM_BID, true);
+
     // Output
     verify(mockPlant);
     System.out.println("Bid = " + bid);

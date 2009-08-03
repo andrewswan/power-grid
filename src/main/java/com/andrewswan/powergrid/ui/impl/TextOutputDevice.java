@@ -21,20 +21,20 @@ public class TextOutputDevice implements OutputDevice {
 
   /**
    * Constructor
-   * 
+   *
    * @param printStream the destination to which the text output should be sent;
    *   can't be <code>null</code>
    */
-  public TextOutputDevice(PrintStream printStream) {
+  public TextOutputDevice(final PrintStream printStream) {
     Utils.checkNotNull(printStream);
     this.printStream = printStream;
   }
-  
-  public void prompt(String prompt) {
+
+  public void prompt(final String prompt) {
     printStream.println(prompt);
   }
 
-  public void showError(String message) {
+  public void showError(final String message) {
     printStream.println(message);
   }
 

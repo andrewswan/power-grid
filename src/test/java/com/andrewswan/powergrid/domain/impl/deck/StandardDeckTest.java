@@ -16,7 +16,7 @@ import junit.framework.TestCase;
 public class StandardDeckTest extends TestCase {
 
   public void testWithTwoPlayers() throws Exception {
-    assertDeckSize(2, 26); 
+    assertDeckSize(2, 26);
   }
 
   public void testWithThreePlayers() throws Exception {
@@ -35,12 +35,12 @@ public class StandardDeckTest extends TestCase {
     assertDeckSize(6, 34); // 11-40, 42, 44, 46, 50
   }
 
-  private void assertDeckSize(int players, int expectedDeckSize)
+  private void assertDeckSize(final int players, final int expectedDeckSize)
     throws Exception
   {
     // Invoke
-    Deck deck = new StandardDeck(players);
-    
+    final Deck deck = new StandardDeck(players);
+
     // Check
     int actualDeckSize = 0;
     Plant plant = deck.getNextPlant();

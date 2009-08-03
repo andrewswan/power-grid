@@ -21,44 +21,44 @@ public class ResourcePoolImpl implements ResourcePool {
 
   // Properties
   private final Map<Resource, Integer> resources;
-  
+
   /**
    * Constructor for an empty resource pool
    */
   public ResourcePoolImpl() {
     this((ResourcePool) null);
   }
-  
+
   /**
    * Constructor for a resource pool containing the given resources. This is
    * what Joshua Bloch calls a "copy constructor", and is preferable to cloning.
-   * 
+   *
    * @param resources the initial resources; can be <code>null</code> for none
    */
-  public ResourcePoolImpl(Map<Resource, Integer> resources) {
+  public ResourcePoolImpl(final Map<Resource, Integer> resources) {
     this.resources = new HashMap<Resource, Integer>();
     if (resources != null) {
       this.resources.putAll(resources);
     }
   }
-  
+
   /**
    * Constructor for a resource pool containing the given resources. This is
    * what Joshua Bloch calls a "copy constructor", and is preferable to cloning.
-   * 
+   *
    * @param resources the initial resources; can be <code>null</code> for none
    */
-  public ResourcePoolImpl(ResourcePool resources) {
+  public ResourcePoolImpl(final ResourcePool resources) {
     this.resources = new HashMap<Resource, Integer>();
     if (resources != null) {
-      for (Entry<Resource, Integer> entry : resources.getContents()) {
+      for (final Entry<Resource, Integer> entry : resources.getContents()) {
         addResource(entry.getKey(), entry.getValue());
       }
     }
   }
-  
-  public int getQuantity(Resource resource) {
-    Integer stock = resources.get(resource);
+
+  public int getQuantity(final Resource resource) {
+    final Integer stock = resources.get(resource);
     if (stock == null) {
       return 0;
     }
@@ -67,7 +67,7 @@ public class ResourcePoolImpl implements ResourcePool {
 
   public int getTotalQuantity() {
     int totalStock = 0;
-    for (Integer stock : resources.values()) {
+    for (final Integer stock : resources.values()) {
       if (stock != null) {
         totalStock += stock;
       }
@@ -75,26 +75,26 @@ public class ResourcePoolImpl implements ResourcePool {
     return totalStock;
   }
 
-  public int removeResource(Resource resource, int quantity) {
+  public int removeResource(final Resource resource, final int quantity) {
     Utils.checkNotNull(resource);
     if (quantity < 0) {
       throw new IllegalArgumentException("Invalid quantity " + quantity);
     }
-    Integer stock = resources.get(resource);
+    final Integer stock = resources.get(resource);
     if (stock == null) {
       return 0;
     }
-    int quantityRemoved = Math.min(quantity, stock);
+    final int quantityRemoved = Math.min(quantity, stock);
     resources.put(resource, stock - quantityRemoved);
     return quantityRemoved;
   }
 
-  public void addResource(Resource resource, int quantity) {
+  public void addResource(final Resource resource, final int quantity) {
     Utils.checkNotNull(resource);
     if (quantity < 0) {
       throw new IllegalArgumentException("Invalid quantity " + quantity);
     }
-    int stock = Utils.nullToZero(resources.get(resource));
+    final int stock = Utils.nullToZero(resources.get(resource));
     resources.put(resource, stock + quantity);
   }
 
@@ -105,9 +105,9 @@ public class ResourcePoolImpl implements ResourcePool {
   public Iterable<Entry<Resource, Integer>> getContents() {
     return new HashMap<Resource, Integer>(resources).entrySet();
   }
-  
+
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (obj == this) {
       return true;
     }
@@ -116,7 +116,7 @@ public class ResourcePoolImpl implements ResourcePool {
     }
     return EqualsBuilder.reflectionEquals(this, obj);
   }
-  
+
   @Override
   public int hashCode() {
     return HashCodeBuilder.reflectionHashCode(this);

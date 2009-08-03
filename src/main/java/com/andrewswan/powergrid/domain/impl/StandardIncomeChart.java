@@ -13,12 +13,12 @@ import com.andrewswan.powergrid.domain.IncomeChart;
  * The standard income chart
  */
 public class StandardIncomeChart implements IncomeChart {
-  
+
   // Constants
   private static final int[] INCOMES;
   static final int MIN_INCOME = 10;
   static final int MAX_INCOME = 150;
-  
+
   static {
     INCOMES = new int[] {
       MIN_INCOME, 22, 33, 44, 54, 64, 73,      // 0-6
@@ -31,7 +31,7 @@ public class StandardIncomeChart implements IncomeChart {
     return INCOMES.clone();
   }
 
-  public int getIncome(int cities) {
+  public int getIncome(final int cities) {
     if (cities < 0) {
       throw new IllegalArgumentException("Can't have negative cities");
     }
@@ -40,7 +40,7 @@ public class StandardIncomeChart implements IncomeChart {
     }
     return INCOMES[cities];
   }
-  
+
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);

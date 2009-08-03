@@ -12,26 +12,26 @@ public class UtilsTest extends TestCase {
 
   public void testNonProhibitedCallerIsAllowed() {
     // Set up
-    Child child = new Child();
-    
+    final Child child = new Child();
+
     // Invoke
     child.methodSecuredAgainstParent();  // shouldn't throw an exception
   }
-  
+
   public void testProhibitedCallerIsNotAllowed() {
     // Set up
-    Parent parent = new ParentImpl();
-    
+    final Parent parent = new ParentImpl();
+
     // Invoke
     try {
       parent.callChild();
       fail("Shouldn't have been able to call the child from the parent");
     }
-    catch (SecurityException expected) {
+    catch (final SecurityException expected) {
       // Success
     }
   }
-  
+
   public void testClassSecuredAgainstItself() {
     new SelfSecured().methodSecuredAgainstOwnClass();  // should be allowed
   }
@@ -42,21 +42,21 @@ interface Parent {
 }
 
 class ParentImpl implements Parent {
-  
+
   public void callChild() {
     new Child().methodSecuredAgainstParent();  // should throw an exception
   }
 }
 
 class Child {
-  
+
   void methodSecuredAgainstParent() {
     Utils.checkNotInCallStack(Parent.class);
   }
 }
 
 class SelfSecured {
-  
+
   void methodSecuredAgainstOwnClass() {
     Utils.checkNotInCallStack(SelfSecured.class);
   }

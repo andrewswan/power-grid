@@ -15,18 +15,18 @@ import edu.uci.ics.jung.graph.impl.UndirectedSparseEdge;
  * The implementation of a {@link Link}
  */
 public class LinkImpl extends UndirectedSparseEdge implements Link {
-  
+
   // Properties
   private final int cost;
-  
+
   /**
    * Constructor
-   * 
+   *
    * @param from
    * @param to
    * @param cost
    */
-  public LinkImpl(City from, City to, int cost) {
+  public LinkImpl(final City from, final City to, final int cost) {
     super(from, to);
     this.cost = cost;
   }

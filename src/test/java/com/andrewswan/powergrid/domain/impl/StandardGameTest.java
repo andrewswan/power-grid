@@ -28,14 +28,14 @@ public class StandardGameTest extends TestCase {
   private EasyMockContainer mocks;
   private StandardGame game;
   private Board mockBoard;
-  
+
   @Override
   protected void setUp() throws Exception {
     super.setUp();
     mocks = new EasyMockContainer();
     mockBoard = mocks.createStrictMock(Board.class);
   }
-  
+
   public void testCitiesToEndTwoPlayerGame() {
     assertEndCitiesForNumberOfPlayers(CITIES_TO_END_2_PLAYER_GAME, 2);
   }
@@ -59,25 +59,25 @@ public class StandardGameTest extends TestCase {
   /**
    * Checks that building the given number of cities will end the game when the
    * given number of people are playing
-   * 
+   *
    * @param expectedNumberOfCities
    * @param numberOfPlayers
    */
   private void assertEndCitiesForNumberOfPlayers(
-      int expectedNumberOfCities, int numberOfPlayers)
+      final int expectedNumberOfCities, final int numberOfPlayers)
   {
     // Set up
     game = new StandardGame(mockBoard, numberOfPlayers);
-    Set<Player> players = new HashSet<Player>();
+    final Set<Player> players = new HashSet<Player>();
     for (int i = 0; i < numberOfPlayers; i++) {
       players.add(mocks.createStrictMock(Player.class));
     }
     game.setPlayers(players);
     mocks.replay();
-    
+
     // Invoke and check
-    int numberOfCitiesToEndGame = game.getNumberOfCitiesToEndGame();
-    
+    final int numberOfCitiesToEndGame = game.getNumberOfCitiesToEndGame();
+
     // Check
     mocks.verify();
     assertEquals(expectedNumberOfCities, numberOfCitiesToEndGame);

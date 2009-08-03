@@ -13,7 +13,7 @@ public interface Link extends Edge {
 
   /**
    * Returns the cost of building across this link
-   * 
+   *
    * @return zero or more
    */
   int getCost();

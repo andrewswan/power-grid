@@ -21,9 +21,9 @@ import com.andrewswan.powergrid.domain.impl.plant.OilPlant;
  * The {@link PlantMarket} used in the standard game
  */
 public class StandardPlantMarket extends AbstractPlantMarket {
-  
+
   private static final Set<Plant> STARTING_PLANTS;
-  
+
   static {
     STARTING_PLANTS = new HashSet<Plant>();
     STARTING_PLANTS.add(new OilPlant(3, 2, 1));
@@ -37,11 +37,11 @@ public class StandardPlantMarket extends AbstractPlantMarket {
   }
   /**
    * Constructor for the standard starting market
-   * 
+   *
    * @param players the number of players in the game; affects how many plants
    *   are taken out of the deck at the start of the game
    */
-  public StandardPlantMarket(int players) {
+  public StandardPlantMarket(final int players) {
     super(STARTING_PLANTS, new StandardDeck(players));
   }
 

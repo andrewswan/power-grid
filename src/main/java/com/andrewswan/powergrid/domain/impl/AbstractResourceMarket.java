@@ -22,7 +22,7 @@ import com.andrewswan.powergrid.domain.Game.Step;
  * The standard implementation of a {@link ResourceMarket}
  */
 public abstract class AbstractResourceMarket implements ResourceMarket {
-  
+
   // Properties
   protected final ResourcePool resources;       // for sale
   protected final ResourcePool spareResources;  // not for sale
@@ -30,7 +30,7 @@ public abstract class AbstractResourceMarket implements ResourceMarket {
 
   /**
    * Constructor
-   * 
+   *
    * @param startingResources the resources available for sale at the start of
    *   the game; can't be <code>null</code>
    * @param startingSpareResources the spare resources at the start of the game;
@@ -39,8 +39,8 @@ public abstract class AbstractResourceMarket implements ResourceMarket {
    *   {@link Step} of the game; can't be <code>null</code>, must have the same
    *   number of entries as there are steps in the game
    */
-  protected AbstractResourceMarket(ResourcePool startingResources,
-      ResourcePool startingSpareResources, Map<Step, ResourcePool> restockRates)
+  protected AbstractResourceMarket(final ResourcePool startingResources,
+      final ResourcePool startingSpareResources, final Map<Step, ResourcePool> restockRates)
   {
     Utils.checkNotNull(startingResources, startingSpareResources, restockRates);
     this.resources = startingResources.getCopy();
@@ -53,8 +53,8 @@ public abstract class AbstractResourceMarket implements ResourceMarket {
     this.restockRates.putAll(restockRates);
   }
 
-  public Integer getPrice(Resource resource) {
-    int stock = getStock(resource);
+  public Integer getPrice(final Resource resource) {
+    final int stock = getStock(resource);
     if (stock <= 0) {
       // Unknown resource or it has simply run out
       return null;
@@ -65,59 +65,59 @@ public abstract class AbstractResourceMarket implements ResourceMarket {
   /**
    * Returns the price of the given Resource when there is the given number of
    * units left in stock
-   * 
+   *
    * @param resource can't be <code>null</code>
    * @param stock the amount of stock left (one or more)
    * @return the price in Elektros
    */
   protected abstract int getPrice(Resource resource, int stock);
-  
-  public void returnResources(Map<Resource, Integer> returnedResources) {
+
+  public void returnResources(final Map<Resource, Integer> returnedResources) {
     if (returnedResources == null) {
       return;
     }
-    for (Entry<Resource, Integer> entry : returnedResources.entrySet()) {
-      int returnedSpares = Utils.nullToZero(entry.getValue());
+    for (final Entry<Resource, Integer> entry : returnedResources.entrySet()) {
+      final int returnedSpares = Utils.nullToZero(entry.getValue());
       spareResources.addResource(entry.getKey(), returnedSpares);
     }
   }
-  
-  public void restock(Step step) {
+
+  public void restock(final Step step) {
     Utils.checkNotNull(step);
-    ResourcePool stepRestockRates = restockRates.get(step);
+    final ResourcePool stepRestockRates = restockRates.get(step);
     if (stepRestockRates == null) {
       throw new IllegalStateException("Null restock rates for step " + step);
     }
-    for (Entry<Resource, Integer> entry : stepRestockRates.getContents()) {
-      Resource resource = entry.getKey();
-      int restockRate = Utils.nullToZero(entry.getValue());
+    for (final Entry<Resource, Integer> entry : stepRestockRates.getContents()) {
+      final Resource resource = entry.getKey();
+      final int restockRate = Utils.nullToZero(entry.getValue());
       if (restockRate < 0) {
         throw new IllegalStateException("Invalid restock rate " + restockRate);
       }
       // Move up to this number of units from the spares to the current market
       // We assume this can never result in too many of any one resource.
-      int resourcesToAdd = spareResources.removeResource(resource, restockRate);
+      final int resourcesToAdd = spareResources.removeResource(resource, restockRate);
       resources.addResource(resource, resourcesToAdd);
     }
   }
-  
-  public int getStock(Resource resource) {
+
+  public int getStock(final Resource resource) {
     Utils.checkNotNull(resource);
     return resources.getQuantity(resource);
   }
-  
-  public void returnAsSpares(ResourcePool resourcePool) {
-    for (Entry<Resource, Integer> entry : resourcePool.getContents()) {
-      int quantityToReturn = Utils.nullToZero(entry.getValue());
+
+  public void returnAsSpares(final ResourcePool resourcePool) {
+    for (final Entry<Resource, Integer> entry : resourcePool.getContents()) {
+      final int quantityToReturn = Utils.nullToZero(entry.getValue());
       spareResources.addResource(entry.getKey(), quantityToReturn);
     }
   }
-  
-  public CostedResourcePool buy(ResourcePool resourcesToBuy, int maxElektros) {
+
+  public CostedResourcePool buy(final ResourcePool resourcesToBuy, final int maxElektros) {
     if (resourcesToBuy == null || maxElektros <= 0) {
       return new CostedResourcePoolImpl(null, 0);
     }
-    ResourcePool resourcesBought = new ResourcePoolImpl();
+    final ResourcePool resourcesBought = new ResourcePoolImpl();
     int elektrosLeft = maxElektros;
     /*
      * Buy coal, then oil, then garbage, then uranium; this order is fairly
@@ -125,7 +125,7 @@ public abstract class AbstractResourceMarket implements ResourceMarket {
      * should have given us accurate information about what to buy if money was
      * short.
      */
-    for (Resource resource : new Resource[] {COAL, OIL, GARBAGE, URANIUM}) {
+    for (final Resource resource : new Resource[] {COAL, OIL, GARBAGE, URANIUM}) {
       Integer currentPrice = getPrice(resource);
       while (resourcesToBuy.getQuantity(resource) > 0
           && currentPrice != null && currentPrice <= elektrosLeft)

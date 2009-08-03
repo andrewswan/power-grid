@@ -23,7 +23,7 @@ public class HumanPlayerStrategy implements PlayerStrategy {
 
   /**
    * Constructor
-   * 
+   *
    * @param colour the colour being played by this person; can't be
    *   <code>null</code>
    * @param game the game being played; can't be <code>null</code>
@@ -31,7 +31,7 @@ public class HumanPlayerStrategy implements PlayerStrategy {
    *   can't be <code>null</code>
    */
   public HumanPlayerStrategy(
-      Colour colour, Game game, InputDevice inputDevice)
+      final Colour colour, final Game game, final InputDevice inputDevice)
   {
     Utils.checkNotNull(colour, game, inputDevice);
     this.colour = colour;
@@ -39,7 +39,7 @@ public class HumanPlayerStrategy implements PlayerStrategy {
     this.inputDevice = inputDevice;
   }
 
-  public Integer bidOnPlant(Plant plant, int minimumBid, boolean canPass) {
+  public Integer bidOnPlant(final Plant plant, final int minimumBid, final boolean canPass) {
     return inputDevice.bidOnPlant(colour, plant, minimumBid, canPass);
   }
 
@@ -55,14 +55,14 @@ public class HumanPlayerStrategy implements PlayerStrategy {
     return inputDevice.getPlantsToOperate(colour);
   }
 
-  public void redistributeResources(Plant[] plants, Plant plantBeingReplaced) {
+  public void redistributeResources(final Plant[] plants, final Plant plantBeingReplaced) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Not implemented");
   }
 
-  public Plant selectPlantForAuction(boolean mandatory) {
-    Plant[] currentMarket = game.getCurrentMarket();
-    Integer plantNumber =
+  public Plant selectPlantForAuction(final boolean mandatory) {
+    final Plant[] currentMarket = game.getCurrentMarket();
+    final Integer plantNumber =
         inputDevice.selectPlantForAuction(colour, currentMarket, mandatory);
     if (plantNumber == null) {
       if (mandatory) {
@@ -71,7 +71,7 @@ public class HumanPlayerStrategy implements PlayerStrategy {
       }
       return null;
     }
-    for (Plant plant : currentMarket) {
+    for (final Plant plant : currentMarket) {
       if (plant.getNumber() == plantNumber) {
         return plant;
       }

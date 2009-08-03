@@ -12,7 +12,7 @@ public class StandardGame extends AbstractGame {
 
   // Required for serialization
   private static final long serialVersionUID = -3220758203063551851L;
-  
+
   /**
    * The number of cities that need to be build to end the game, when a given
    * number of people are playing.
@@ -25,17 +25,17 @@ public class StandardGame extends AbstractGame {
 
   /**
    * Constructor for a standard game on the given board
-   * 
+   *
    * @param board the board on which to play; can't be <code>null</code>
    * @param numberOfPlayers must be between {@link #MIN_PLAYERS} and
    *   {@link #MAX_PLAYERS}
    */
-  public StandardGame(Board board, int numberOfPlayers) {
+  public StandardGame(final Board board, final int numberOfPlayers) {
     super(board, new StandardIncomeChart(),
         new StandardPlantMarket(numberOfPlayers),
         new StandardResourceMarket(numberOfPlayers));
   }
-  
+
   @Override
   protected int getNumberOfCitiesToEndGame() {
     switch (players.size()) {

@@ -36,28 +36,28 @@ import edu.uci.ics.jung.utils.Pair;
 
 /**
  * Superclass for specific boards. This implementation delegates its link cost
- * calculations to a Jung {@link Graph}. 
+ * calculations to a Jung {@link Graph}.
  */
 public abstract class AbstractBoard extends UndirectedSparseGraph
   implements Board
 {
   // Properties
-  // -- There's no harm in subclasses having access to these 
+  // -- There's no harm in subclasses having access to these
   protected final int players;
   protected final Distance distanceCalculator;
   protected final String name;
   // -- But we keep the collections private to improve encapsulation
   private final Set<Area> areas;
   private final Set<Area> areasInPlay;
-  
+
   /**
    * Constructor for a board with the given name and no areas
-   * 
+   *
    * @param name can't be blank
    * @param players the number of people playing; this determines how many areas
    *   of the board will be in play
    */
-  protected AbstractBoard(String name, int players) {
+  protected AbstractBoard(final String name, final int players) {
     if (StringUtils.isBlank(name)) {
       throw new IllegalArgumentException("Invalid name '" + name + "'");
     }
@@ -67,62 +67,62 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
     this.name = name;
     this.players = players;
   }
-  
+
   /**
    * Adds an area with the given name to the board
-   * 
+   *
    * @param areaName can't be blank, must not already be on this board
    * @return the added area
    */
-  protected final Area addArea(String areaName) {
-    Area area = new AreaImpl(areaName);
+  protected final Area addArea(final String areaName) {
+    final Area area = new AreaImpl(areaName);
     if (!areas.add(area)) {
       throw new IllegalArgumentException(
           "Already an area called '" + areaName + "'");
     }
     return area;
   }
-  
+
   /**
    * Adds a city with the given name to the given area of the board
-   * 
+   *
    * @param cityName can't be blank
    * @param area can't be <code>null</code>
    * @return the added City
    */
-  protected final City addCity(String cityName, Area area) {
+  protected final City addCity(final String cityName, final Area area) {
     // Use the given name as both the display and internal name
     return addCity(cityName, null, area);
   }
-  
+
   /**
    * Adds a city with the given display and internal names to the given area of
    * the board
-   * 
+   *
    * @param displayName can't be blank
    * @param internalName if blank, the display name is used as the internal name
    * @param area can't be <code>null</code>
    * @return the added City
    */
   protected final City addCity(
-      String displayName, String internalName, Area area)
+      final String displayName, final String internalName, final Area area)
   {
     Utils.checkNotNull(area);
     areas.add(area);    // might already be there, doesn't matter
-    City city = (City) addVertex(new CityImpl(area, displayName, internalName));
+    final City city = (City) addVertex(new CityImpl(area, displayName, internalName));
     area.add(city);
     return city;
   }
-  
-  protected final void addLink(City from, City to, int cost) {
+
+  protected final void addLink(final City from, final City to, final int cost) {
     Utils.checkNotNull(from, to);
     addEdge(new LinkImpl(from, to, cost));
   }
-  
-  public Set<City> getConnectedCities(Player player) {
-    Set<City> connectedCities = new HashSet<City>();
-    for (Area area : areas) {
-      for (City city : area) {
+
+  public Set<City> getConnectedCities(final Player player) {
+    final Set<City> connectedCities = new HashSet<City>();
+    for (final Area area : areas) {
+      for (final City city : area) {
         if (city.getConnectedPlayers().contains(player)) {
           connectedCities.add(city);
         }
@@ -131,9 +131,9 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
     return connectedCities;
   }
 
-  public void connectCity(String cityName, Player player, Step step) {
+  public void connectCity(final String cityName, final Player player, final Step step) {
     // Get the city to be connected
-    Integer connectionCost = getConnectionCost(cityName, player, step);
+    final Integer connectionCost = getConnectionCost(cityName, player, step);
     if (connectionCost != null) {
       getCity(cityName).connect(player, step);
     }
@@ -141,17 +141,17 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
 
   /**
    * Returns the total link cost between the two given cities
-   * 
+   *
    * @param source one city; can't be <code>null</code>
    * @param destination the other city; can't be <code>null</code>
    * @return a number zero or more
    */
-  public int getTotalLinkCost(City source, City destination) {
+  public int getTotalLinkCost(final City source, final City destination) {
     Utils.checkNotNull(source, destination);
     if (source.equals(destination)) {
       return 0;
     }
-    Number linkCost = distanceCalculator.getDistance(source, destination);
+    final Number linkCost = distanceCalculator.getDistance(source, destination);
     if (linkCost == null) {
       throw new IllegalStateException(
           "No route from " + source + " to " + destination);
@@ -168,16 +168,16 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
   }
 
   /**
-   * Sets up the adjacencies of the known areas to each other 
+   * Sets up the adjacencies of the known areas to each other
    */
   void setAreaAdjacencies() {
-    for (Object object : getEdges()) {
-      Edge edge = (Edge) object;
-      Pair cities = edge.getEndpoints();
-      City from = (City) cities.getFirst();
-      City to = (City) cities.getSecond();
-      Area fromArea = from.getArea();
-      Area toArea = to.getArea();
+    for (final Object object : getEdges()) {
+      final Edge edge = (Edge) object;
+      final Pair cities = edge.getEndpoints();
+      final City from = (City) cities.getFirst();
+      final City to = (City) cities.getSecond();
+      final Area fromArea = from.getArea();
+      final Area toArea = to.getArea();
       if (!fromArea.equals(toArea)) {
         // Found an inter-area link => these two areas are adjacent
         fromArea.addAdjacentArea(toArea);
@@ -196,7 +196,7 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
       throw new IllegalStateException(
           "Have to add areas before choosing which are in play");
     }
-    int numberOfAreasInPlay = getNumberOfAreasInPlay();
+    final int numberOfAreasInPlay = getNumberOfAreasInPlay();
     if (areas.size() < numberOfAreasInPlay) {
       throw new IllegalStateException(
           "There are only " + areas.size() + " areas on the board. " +
@@ -204,7 +204,7 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
     }
     do {
       // Randomly choose the required number of areas ...
-      List<Area> unchosenAreas = new ArrayList<Area>(areas);
+      final List<Area> unchosenAreas = new ArrayList<Area>(areas);
       // ... by shuffling all the areas and getting the first "n"
       Collections.shuffle(unchosenAreas);
       areasInPlay.clear();
@@ -213,16 +213,16 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
       }
     } while (!areasInPlayAreAdjacent());
   }
-  
+
   /**
    * Indicates whether the areas currently selected as being in play are all
    * adjacent to at least one other area in play
-   * 
+   *
    * @return <code>false</code> if any of those areas is not adjacent to at
    *   least one other
    */
   protected final boolean areasInPlayAreAdjacent() {
-    for (Area area : areasInPlay) {
+    for (final Area area : areasInPlay) {
       if (Collections.disjoint(areasInPlay, area.getAdjacentAreas())) {
         // None of this area's adjacent areas are in play
         return false;
@@ -233,12 +233,12 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
 
   /**
    * Returns the area having the given name
-   * 
+   *
    * @param areaName the area name to look for
    * @return a non-<code>null</code> area
    */
-  protected final Area getArea(String areaName) {
-    for (Area area : areas) {
+  protected final Area getArea(final String areaName) {
+    for (final Area area : areas) {
       if (area.getName().equalsIgnoreCase(areaName)) {
         return area;
       }
@@ -248,13 +248,13 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
 
   /**
    * Returns the city having the given internal name
-   * 
+   *
    * @param internalName the internal name to look for
    * @return a non-<code>null</code> city
    */
-  protected final City getCity(String internalName) {
-    for (Object vertex : getVertices()) {
-      City city = (City) vertex;
+  protected final City getCity(final String internalName) {
+    for (final Object vertex : getVertices()) {
+      final City city = (City) vertex;
       if (city.getInternalName().equalsIgnoreCase(internalName)) {
         return city;
       }
@@ -266,7 +266,7 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
    * Returns the number of areas of the board that will be in play for the given
    * number of players. Subclasses can override this method to vary the standard
    * Power Grid rule.
-   *  
+   *
    * @param players
    * @return a number greater than zero
    */
@@ -288,20 +288,20 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
     }
   }
 
-  public Integer getConnectionCost(String cityName, Player player, Step step) {
+  public Integer getConnectionCost(final String cityName, final Player player, final Step step) {
     // Get the city to be connected
-    City city = getCity(cityName);
-    
+    final City city = getCity(cityName);
+
     // Get the player's existing cities (if any)
-    Set<City> connectedCities = getConnectedCities(player);
-    
+    final Set<City> connectedCities = getConnectedCities(player);
+
     // Get the base city cost
-    int cityCost = city.getConnectionCost(player, step);
-    
+    final int cityCost = city.getConnectionCost(player, step);
+
     // Add the cheapest link cost(s) from the player's existing cities (if any)
     int linkCost = 0;   // the link cost of the player's first city
-    for (City source : connectedCities) {
-      int aLinkCost = getTotalLinkCost(source, city);
+    for (final City source : connectedCities) {
+      final int aLinkCost = getTotalLinkCost(source, city);
       if (linkCost == 0 || aLinkCost < linkCost) {
         // This link is the first found, or is cheaper than the cheapest so far
         linkCost = aLinkCost;
@@ -313,24 +313,24 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
   public String getName() {
     return name;
   }
-  
+
   @Override
-  public boolean equals(Object object) {
+  public boolean equals(final Object object) {
     if (object == this) {
       return true;
     }
     if (!(object instanceof Board)) {
       return false;
     }
-    Board otherBoard = (Board) object;
+    final Board otherBoard = (Board) object;
     return name.equalsIgnoreCase(otherBoard.getName());
   }
-  
+
   @Override
   public int hashCode() {
     return name.toLowerCase(Locale.getDefault()).hashCode();
   }
-  
+
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
@@ -341,24 +341,24 @@ public abstract class AbstractBoard extends UndirectedSparseGraph
    * of a given edge
    */
   static class LinkCostValue implements NumberEdgeValue {
-    
+
     /**
      * Constructor
      */
-    private LinkCostValue() {
+    LinkCostValue() {
       // Empty
     }
 
-    public Number getNumber(ArchetypeEdge edge) {
+    public Number getNumber(final ArchetypeEdge edge) {
       if (!(edge instanceof Link)) {
         throw new UnsupportedOperationException(
             "Unsupported edge type " + edge.getClass());
       }
-      Link link = (Link) edge;
+      final Link link = (Link) edge;
       return link.getCost();
     }
 
-    public void setNumber(ArchetypeEdge edge, Number number) {
+    public void setNumber(final ArchetypeEdge edge, final Number number) {
       throw new UnsupportedOperationException("Link costs are immutable");
     }
   }

@@ -19,22 +19,22 @@ import com.andrewswan.powergrid.domain.City;
  * Basic implementation of an {@link Area} of the {@link Board}
  */
 public class AreaImpl extends HashSet<City> implements Area {
-  
+
   /**
-   * Required for serialisation 
+   * Required for serialisation
    */
   private static final long serialVersionUID = -578968504862405486L;
-  
+
   // Properties
   private final Set<Area> adjacentAreas;
   private final String name;
-  
+
   /**
    * Constructor
-   * 
+   *
    * @param name the name of the area; can't be blank
    */
-  public AreaImpl(String name) {
+  public AreaImpl(final String name) {
     if (StringUtils.isBlank(name)) {
       throw new IllegalArgumentException("Invalid name '" + name + "'");
     }
@@ -47,23 +47,23 @@ public class AreaImpl extends HashSet<City> implements Area {
   }
 
   @Override
-  public boolean equals(Object object) {
+  public boolean equals(final Object object) {
     if (object == this) {
       return true;
     }
     if (!(object instanceof Area)) {
       return false;
     }
-    Area otherArea = (Area) object;
+    final Area otherArea = (Area) object;
     return name.equalsIgnoreCase(otherArea.getName());
   }
-  
+
   @Override
   public int hashCode() {
     return name.toLowerCase(Locale.getDefault()).hashCode();
   }
 
-  public void addAdjacentArea(Area area) {
+  public void addAdjacentArea(final Area area) {
     if (area == null || area == this) {
       throw new IllegalArgumentException("Invalid area " + area);
     }
@@ -73,7 +73,7 @@ public class AreaImpl extends HashSet<City> implements Area {
   public Set<Area> getAdjacentAreas() {
     return new HashSet<Area>(adjacentAreas);   // defensive copy
   }
-  
+
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);

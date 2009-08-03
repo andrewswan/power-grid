@@ -17,11 +17,11 @@ public class CostedResourcePoolImpl extends ResourcePoolImpl
 
   /**
    * Constructor
-   * 
+   *
    * @param resources
    * @param cost
    */
-  public CostedResourcePoolImpl(ResourcePool resources, int cost) {
+  public CostedResourcePoolImpl(final ResourcePool resources, final int cost) {
     super(resources);
     this.cost = cost;
   }

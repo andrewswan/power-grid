@@ -13,21 +13,21 @@ public class USABoard extends AbstractBoard {
 
   /**
    * Constructor
-   * 
+   *
    * @param players
    */
-  public USABoard(int players) {
+  public USABoard(final int players) {
     super("U.S.A.", players);
-    
+
     // Purple (NW) area
-    Area purple = addArea("Purple");
-    City seattle = addCity("Seattle", purple);
-    City portland = addCity("Portland", purple);
-    City boise = addCity("Boise", purple);
-    City billings = addCity("Billings", purple);
-    City cheyenne = addCity("Cheyenne", purple);
-    City omaha = addCity("Omaha", purple);
-    City denver = addCity("Denver", purple);
+    final Area purple = addArea("Purple");
+    final City seattle = addCity("Seattle", purple);
+    final City portland = addCity("Portland", purple);
+    final City boise = addCity("Boise", purple);
+    final City billings = addCity("Billings", purple);
+    final City cheyenne = addCity("Cheyenne", purple);
+    final City omaha = addCity("Omaha", purple);
+    final City denver = addCity("Denver", purple);
     addLink(seattle, portland, 3);
     addLink(seattle, billings, 9);
     addLink(seattle, boise, 12);
@@ -37,16 +37,16 @@ public class USABoard extends AbstractBoard {
     addLink(billings, cheyenne, 9);
     addLink(cheyenne, omaha, 14);
     addLink(cheyenne, denver, 0);
-    
+
     // Dark Green (SW) area
-    Area darkGreen = addArea("Dark Green");
-    City sanFrancisco = addCity("San Francisco", darkGreen);
-    City losAngeles = addCity("Los Angeles", darkGreen);
-    City sanDiego = addCity("San Diego", darkGreen);
-    City lasVegas = addCity("Las Vegas", darkGreen);
-    City phoenix = addCity("Phoenix", darkGreen);
-    City santaFe = addCity("Santa Fe", darkGreen);
-    City saltLakeCity = addCity("Salt Lake City", darkGreen);
+    final Area darkGreen = addArea("Dark Green");
+    final City sanFrancisco = addCity("San Francisco", darkGreen);
+    final City losAngeles = addCity("Los Angeles", darkGreen);
+    final City sanDiego = addCity("San Diego", darkGreen);
+    final City lasVegas = addCity("Las Vegas", darkGreen);
+    final City phoenix = addCity("Phoenix", darkGreen);
+    final City santaFe = addCity("Santa Fe", darkGreen);
+    final City saltLakeCity = addCity("Salt Lake City", darkGreen);
     addLink(portland, sanFrancisco, 24);
     addLink(boise, sanFrancisco, 23);
     addLink(boise, saltLakeCity, 8);
@@ -64,16 +64,16 @@ public class USABoard extends AbstractBoard {
     addLink(phoenix, santaFe, 18);
     addLink(saltLakeCity, santaFe, 28);
     addLink(denver, santaFe, 13);
-    
+
     // Yellow (N) area
-    Area yellow = addArea("Yellow");
-    City fargo = addCity("Fargo", yellow);
-    City duluth = addCity("Duluth", yellow);
-    City minneapolis = addCity("Minneapolis", yellow);
-    City chicago = addCity("Chicago", yellow);
-    City stLouis = addCity("St. Louis", yellow);
-    City cincinnati = addCity("Cincinnati", yellow);
-    City knoxville = addCity("Knoxville", yellow);
+    final Area yellow = addArea("Yellow");
+    final City fargo = addCity("Fargo", yellow);
+    final City duluth = addCity("Duluth", yellow);
+    final City minneapolis = addCity("Minneapolis", yellow);
+    final City chicago = addCity("Chicago", yellow);
+    final City stLouis = addCity("St. Louis", yellow);
+    final City cincinnati = addCity("Cincinnati", yellow);
+    final City knoxville = addCity("Knoxville", yellow);
     addLink(billings, fargo, 17);
     addLink(billings, minneapolis, 18);
     addLink(cheyenne, minneapolis, 18);
@@ -88,16 +88,16 @@ public class USABoard extends AbstractBoard {
     addLink(chicago, cincinnati, 7);
     addLink(stLouis, cincinnati, 12);
     addLink(cincinnati, knoxville, 6);
-    
+
     // Red (S) area
-    Area red = addArea("Red");
-    City kansasCity = addCity("Kansas City", red);
-    City oklahomaCity = addCity("Oklahoma City", red);
-    City dallas = addCity("Dallas", red);
-    City houston = addCity("Houston", red);
-    City memphis = addCity("Memphis", red);
-    City newOrleans = addCity("New Orleans", red);
-    City birmingham = addCity("Birmingham", red);
+    final Area red = addArea("Red");
+    final City kansasCity = addCity("Kansas City", red);
+    final City oklahomaCity = addCity("Oklahoma City", red);
+    final City dallas = addCity("Dallas", red);
+    final City houston = addCity("Houston", red);
+    final City memphis = addCity("Memphis", red);
+    final City newOrleans = addCity("New Orleans", red);
+    final City birmingham = addCity("Birmingham", red);
     addLink(santaFe, houston, 21);
     addLink(santaFe, dallas, 16);
     addLink(santaFe, oklahomaCity, 15);
@@ -118,16 +118,16 @@ public class USABoard extends AbstractBoard {
     addLink(memphis, newOrleans, 7);
     addLink(memphis, birmingham, 6);
     addLink(newOrleans, birmingham, 11);
-    
+
     // Brown (NE) area
-    Area brown = addArea("Brown");
-    City detroit = addCity("Detroit", brown);
-    City buffalo = addCity("Buffalo", brown);
-    City pittsburgh = addCity("Pittsburgh", brown);
-    City boston = addCity("Boston", brown);
-    City newYork = addCity("New York", brown);
-    City philadelphia = addCity("Philadelphia", brown);
-    City washingtonDC = addCity("Washington, D.C.", brown);
+    final Area brown = addArea("Brown");
+    final City detroit = addCity("Detroit", brown);
+    final City buffalo = addCity("Buffalo", brown);
+    final City pittsburgh = addCity("Pittsburgh", brown);
+    final City boston = addCity("Boston", brown);
+    final City newYork = addCity("New York", brown);
+    final City philadelphia = addCity("Philadelphia", brown);
+    final City washingtonDC = addCity("Washington, D.C.", brown);
     addLink(duluth, detroit, 15);
     addLink(chicago, detroit, 7);
     addLink(cincinnati, detroit, 4);
@@ -140,16 +140,16 @@ public class USABoard extends AbstractBoard {
     addLink(boston, newYork, 3);
     addLink(newYork, philadelphia, 0);
     addLink(philadelphia, washingtonDC, 3);
-    
+
     // Light Green (SE) area
-    Area lightGreen = addArea("Light Green");
-    City atlanta = addCity("Atlanta", lightGreen);
-    City norfolk = addCity("Norfolk", lightGreen);
-    City raleigh = addCity("Raleigh", lightGreen);
-    City savannah = addCity("Savannah", lightGreen);
-    City jacksonville = addCity("Jacksonville", lightGreen);
-    City tampa = addCity("Tampa", lightGreen);
-    City miami = addCity("Miami", lightGreen);
+    final Area lightGreen = addArea("Light Green");
+    final City atlanta = addCity("Atlanta", lightGreen);
+    final City norfolk = addCity("Norfolk", lightGreen);
+    final City raleigh = addCity("Raleigh", lightGreen);
+    final City savannah = addCity("Savannah", lightGreen);
+    final City jacksonville = addCity("Jacksonville", lightGreen);
+    final City tampa = addCity("Tampa", lightGreen);
+    final City miami = addCity("Miami", lightGreen);
     addLink(newOrleans, jacksonville, 16);
     addLink(birmingham, jacksonville, 9);
     addLink(birmingham, atlanta, 3);

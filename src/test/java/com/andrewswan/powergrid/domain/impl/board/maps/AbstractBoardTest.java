@@ -16,36 +16,36 @@ public class AbstractBoardTest extends TestCase {
 
   public void testAddAreasAndCitiesAndGetDistances() {
     // Set up
-    TestBoard board = new TestBoard(2);
-    
+    final TestBoard board = new TestBoard(2);
+
     // Invoke
-    int cost = board.getTotalLinkCost(board.cityA, board.cityC);
-    
+    final int cost = board.getTotalLinkCost(board.cityA, board.cityC);
+
     // Check
     assertEquals(4 + 3, cost);
   }
-  
+
   /**
    * A test {@link Board}
    */
   private static class TestBoard extends AbstractBoard {
-    
-    // Properties
-    private final City cityA;
-    private final City cityB;
-    private final City cityC;
+
+    // Properties (non-private at compiler's suggestion)
+    final City cityA;
+    final City cityB;
+    final City cityC;
 
     /**
      * Constructor
-     * 
+     *
      * @param players
      */
-    protected TestBoard(int players) {
+    protected TestBoard(final int players) {
       super("Nowhere", players);
-      Area north = addArea("North");
-      cityA = addCity("A", north); 
-      cityB = addCity("B", north); 
-      Area south = addArea("South");
+      final Area north = addArea("North");
+      cityA = addCity("A", north);
+      cityB = addCity("B", north);
+      final Area south = addArea("South");
       cityC = addCity("C", south);
       addLink(cityA, cityB, 4);
       addLink(cityA, cityC, 10);

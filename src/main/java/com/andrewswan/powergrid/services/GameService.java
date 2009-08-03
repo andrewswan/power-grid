@@ -10,10 +10,10 @@ import com.andrewswan.powergrid.domain.Game;
  * Provides non-domain services relating to {@link Game}s
  */
 public interface GameService {
-  
+
   /**
    * Loads the game that's saved in the specified file
-   * 
+   *
    * @param directory the directory containing the save file; must be an
    *   existing directory
    * @param fileName the name of the save file; must be a readable file
@@ -23,7 +23,7 @@ public interface GameService {
 
   /**
    * Saves the given game to the specified file
-   * 
+   *
    * @param game
    * @param directory
    * @param fileName

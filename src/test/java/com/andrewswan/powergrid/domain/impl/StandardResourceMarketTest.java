@@ -25,44 +25,44 @@ public class StandardResourceMarketTest extends TestCase {
   public void testStartingResources() {
     // Invoke
     market = new StandardResourceMarket(2); // number of players irrelevant here
-    
+
     // Check
     assertEquals(STARTING_COAL, market.getStock(Resource.COAL));
     assertEquals(STARTING_OIL, market.getStock(Resource.OIL));
     assertEquals(STARTING_GARBAGE, market.getStock(Resource.GARBAGE));
     assertEquals(STARTING_URANIUM, market.getStock(Resource.URANIUM));
   }
-  
+
   public void testStartingPrices() {
     // Invoke
     market = new StandardResourceMarket(2); // number of players irrelevant here
-    
+
     // Check (none of these prices should be null)
     assertEquals(1, market.getPrice(Resource.COAL).intValue());
     assertEquals(3, market.getPrice(Resource.OIL).intValue());
     assertEquals(7, market.getPrice(Resource.GARBAGE).intValue());
     assertEquals(14, market.getPrice(Resource.URANIUM).intValue());
   }
-  
+
   /**
    * Checks that buying the given resources costs the given number of elektros
-   * 
+   *
    * @param resources the resources to buy; can be <code>null</code>
    * @param expectedCost
    */
-  private void assertResourceCost(ResourcePool resources, int expectedCost) {
+  private void assertResourceCost(final ResourcePool resources, final int expectedCost) {
     // Set up
     market = new StandardResourceMarket(2); // number of players irrelevant here
-    
+
     // Invoke
-    CostedResourcePool resourcesBought =
+    final CostedResourcePool resourcesBought =
         market.buy(resources, Integer.MAX_VALUE);
-    
+
     // Check
     assertNotNull(resourcesBought);
     assertEquals(expectedCost, resourcesBought.getCost());
   }
-  
+
   public void testBuyingNullResourcesCostsZero() {
     assertResourceCost(null, 0);
   }
@@ -70,41 +70,41 @@ public class StandardResourceMarketTest extends TestCase {
   public void testBuyingNoResourcesCostsZero() {
     assertResourceCost(new ResourcePoolImpl(), 0);
   }
-  
+
   public void testBuyingOneCoalCostsOneElektro() {
-    ResourcePool resources = new ResourcePoolImpl();
+    final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.COAL, 1);
     assertResourceCost(resources, 1);
   }
-  
+
   public void testBuyingOneOilCostsThreeElektro() {
-    ResourcePool resources = new ResourcePoolImpl();
+    final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.OIL, 1);
     assertResourceCost(resources, 3);
   }
-  
+
   public void testBuyingOneGarbageCostsSevenElektro() {
-    ResourcePool resources = new ResourcePoolImpl();
+    final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.GARBAGE, 1);
     assertResourceCost(resources, 7);
   }
-  
+
   public void testBuyingOneUraniumCostsFourteenElektro() {
-    ResourcePool resources = new ResourcePoolImpl();
+    final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.URANIUM, 1);
     assertResourceCost(resources, 14);
   }
-  
+
   public void testBuyingFourCoalCostsFiveElektro() {
-    ResourcePool resources = new ResourcePoolImpl();
+    final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.COAL, 4);
     assertResourceCost(resources, 5);
   }
-  
+
   public void testPriceOfCoalForAllStockLevels() {
     // Set up
     market = new StandardResourceMarket(2); // number of players irrelevant here
-    
+
     // Invoke and check
     assertEquals(1, market.getPrice(Resource.COAL, 24));
     assertEquals(1, market.getPrice(Resource.COAL, 23));

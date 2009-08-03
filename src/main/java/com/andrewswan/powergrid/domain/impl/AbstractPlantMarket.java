@@ -30,29 +30,29 @@ import com.andrewswan.powergrid.domain.exceptions.StepThreeStartingException;
  * Basic implementation of a {@link PlantMarket}
  */
 public abstract class AbstractPlantMarket implements PlantMarket {
-  
+
   // Constants
   protected static final int
     STEPS_ONE_AND_TWO_CURRENT_MARKET_SIZE = 4,
     INITIAL_MARKET_SIZE = STEPS_ONE_AND_TWO_CURRENT_MARKET_SIZE * 2;
-  
+
   protected static final Log LOGGER = LogFactory.getLog(PlantMarket.class);
 
   // Properties
   private final Deck deck;
   private final SortedSet<Plant> plants;
-  
+
   private boolean inStepThree;
-  
+
   /**
    * Constructor
-   * 
+   *
    * @param startingPlants the plants in the initial market (current and
    *   future); can't be <code>null</code>, must contain exactly
    *   {@link #INITIAL_MARKET_SIZE} plants
    * @param deck the other plants in the game; can't be <code>null</code>
    */
-  public AbstractPlantMarket(Set<Plant> startingPlants, Deck deck) {
+  public AbstractPlantMarket(final Set<Plant> startingPlants, final Deck deck) {
     Utils.checkNotNull(startingPlants, deck);
     if (startingPlants.size() != INITIAL_MARKET_SIZE) {
       throw new IllegalArgumentException(
@@ -63,9 +63,9 @@ public abstract class AbstractPlantMarket implements PlantMarket {
     this.plants.addAll(startingPlants);
   }
 
-  public void buyPlant(Plant plant) {
+  public void buyPlant(final Plant plant) {
     Utils.checkNotNull(plant);
-    Collection<Plant> buyablePlants = Arrays.asList(getCurrentMarket());
+    final Collection<Plant> buyablePlants = Arrays.asList(getCurrentMarket());
     if (!buyablePlants.contains(plant)) {
       throw new IllegalArgumentException(
           "Plant not in the current market " + plant);
@@ -77,13 +77,13 @@ public abstract class AbstractPlantMarket implements PlantMarket {
    * Removes the plant at the given index, then adds a new plant to the market
    * from the {@link Deck}. The market should automatically re-sort itself,
    * because it's implemented as a SortedSet.
-   * 
+   *
    * @param index
    * @param phase the current phase of the game turn
    * @return the removed plant (non-<code>null</code>)
    */
-  private Plant removePlant(int index, Phase phase) {
-    Plant plant = getPlant(index);
+  private Plant removePlant(final int index, final Phase phase) {
+    final Plant plant = getPlant(index);
     removePlant(plant, phase);
     return plant;
   }
@@ -92,17 +92,17 @@ public abstract class AbstractPlantMarket implements PlantMarket {
    * Removes the given plant from the market, then adds a new plant from the
    * {@link Deck}. The market should automatically re-sort itself, because it's
    * implemented as a SortedSet.
-   * 
+   *
    * @param plant the plant to remove
    * @param phase the current phase of the turn
    */
-  private void removePlant(Plant plant, Phase phase) {
+  private void removePlant(final Plant plant, final Phase phase) {
     plants.remove(plant);
     Plant nextPlant = null;
     try {
       nextPlant = deck.getNextPlant();
     }
-    catch (StepThreeStartingException ex) {
+    catch (final StepThreeStartingException ex) {
       // Handling of step three starting depends on what phase we're in
       switch (phase) {
         case TWO:
@@ -121,7 +121,7 @@ public abstract class AbstractPlantMarket implements PlantMarket {
               "Can't remove a plant in phase " + phase);
       }
     }
-    
+
     if (nextPlant != null) {
       plants.add(nextPlant);
     }
@@ -129,15 +129,15 @@ public abstract class AbstractPlantMarket implements PlantMarket {
 
   /**
    * Returns the plant at the given index
-   * 
+   *
    * @param index zero-based
    * @return a non-<code>null</code> Plant
    */
-  private Plant getPlant(int index) {
+  private Plant getPlant(final int index) {
     return plants.toArray(new Plant[plants.size()])[index];
   }
 
-  public void endTurn(Step step) {
+  public void endTurn(final Step step) {
     if (!plants.isEmpty()) {
       if (Step.THREE.equals(step)) {
         // Remove the lowest plant in the market (if any) from the game
@@ -145,15 +145,15 @@ public abstract class AbstractPlantMarket implements PlantMarket {
       }
       else {
         // Put the highest plant in the market back under the deck for step 3
-        Plant highestPlant = removePlant(plants.size() - 1, Phase.FIVE);
+        final Plant highestPlant = removePlant(plants.size() - 1, Phase.FIVE);
         deck.assignToStepThree(highestPlant);
       }
     }
   }
 
   public Plant[] getCurrentMarket() {
-    List<Plant> currentMarket = new ArrayList<Plant>(); 
-    for (Plant plant : plants) {
+    final List<Plant> currentMarket = new ArrayList<Plant>();
+    for (final Plant plant : plants) {
       if (currentMarket.size() < getCurrentMarketSize()) {
         currentMarket.add(plant);
       }
@@ -163,35 +163,35 @@ public abstract class AbstractPlantMarket implements PlantMarket {
     }
     return currentMarket.toArray(new Plant[currentMarket.size()]); // a copy
   }
-  
+
   public Plant[] getFutureMarket() {
-    List<Plant> futureMarket = new ArrayList<Plant>(); 
+    final List<Plant> futureMarket = new ArrayList<Plant>();
     // Convert the whole market to an array
-    Plant[] market = plants.toArray(new Plant[plants.size()]);
+    final Plant[] market = plants.toArray(new Plant[plants.size()]);
     // Copy in the plants not in the current market
     for (int i = getCurrentMarketSize(); i < market.length; i++) {
       futureMarket.add(market[i]);
     }
     return futureMarket.toArray(new Plant[futureMarket.size()]);
   }
-  
+
   private int getCurrentMarketSize() {
     if (inStepThree) {
       return plants.size();
     }
     return STEPS_ONE_AND_TWO_CURRENT_MARKET_SIZE;
   }
-  
+
   public void noPlantsBought() {
     if (!plants.isEmpty()) {
       // Remove the lowest-numbered plant from the game
-      Plant removedPlant = removePlant(0, Phase.TWO);
+      final Plant removedPlant = removePlant(0, Phase.TWO);
       LOGGER.debug("Removed plant " + removedPlant + " from the game");
     }
   }
-  
-  public Plant[] removeObsoletePlants(int citiesConnected) {
-    List<Plant> removedPlants = new ArrayList<Plant>();
+
+  public Plant[] removeObsoletePlants(final int citiesConnected) {
+    final List<Plant> removedPlants = new ArrayList<Plant>();
     Plant plant = getPlant(0);
     while (plant.getNumber() <= citiesConnected) {
       removedPlants.add(removePlant(0, Phase.FOUR));
@@ -199,7 +199,7 @@ public abstract class AbstractPlantMarket implements PlantMarket {
     }
     return removedPlants.toArray(new Plant[removedPlants.size()]);
   }
-  
+
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
@@ -215,7 +215,7 @@ class PriceComparator implements Comparator<Plant>, Serializable {
   // Constants
   private static final long serialVersionUID = 5943648789531153414L;
 
-  public int compare(Plant plant1, Plant plant2) {
+  public int compare(final Plant plant1, final Plant plant2) {
     return plant1.getMinimumPrice() - plant2.getMinimumPrice();
   }
 }

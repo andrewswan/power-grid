@@ -10,19 +10,19 @@ import com.andrewswan.powergrid.domain.ResourceMarket.Resource;
  * A wind-powered {@link Plant}
  */
 public class WindPlant extends AbstractPlant {
-  
+
   /**
    * Constructor
-   * 
+   *
    * @param minimumPrice
    * @param capacity
    */
-  public WindPlant(int minimumPrice, int capacity) {
+  public WindPlant(final int minimumPrice, final int capacity) {
     super(minimumPrice, 0, PlantType.ECOLOGICAL, capacity);
   }
-  
+
   @Override
-  protected boolean isUsable(Resource resource) {
+  protected boolean isUsable(final Resource resource) {
     return false;
   }
 }

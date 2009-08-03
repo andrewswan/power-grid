@@ -18,16 +18,16 @@ public class ConnectCitiesTester {
 
   /**
    * The entry point for this tester
-   * 
+   *
    * @param args not used
    */
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
     // Set up
-    InputDevice inputDevice = new StandardInput(new StandardOutput());
-    
+    final InputDevice inputDevice = new StandardInput(new StandardOutput());
+
     // Invoke
-    String[] cities = inputDevice.getCitiesToConnect(Colour.BLUE);
-    
+    final String[] cities = inputDevice.getCitiesToConnect(Colour.BLUE);
+
     // Output
     System.out.println("Cities = " + Arrays.toString(cities));
   }

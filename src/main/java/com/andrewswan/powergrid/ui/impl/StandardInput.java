@@ -13,14 +13,14 @@ public class StandardInput extends TextInputDevice {
 
   /**
    * Constructor
-   * 
+   *
    * @param outputDevice the device to which output should be sent; can't be
    *   <code>null</code>
    */
-  public StandardInput(OutputDevice outputDevice) {
+  public StandardInput(final OutputDevice outputDevice) {
     super(System.in, outputDevice);
   }
-  
+
   @Override
   public void close() {
     // The System.in stream should never be closed

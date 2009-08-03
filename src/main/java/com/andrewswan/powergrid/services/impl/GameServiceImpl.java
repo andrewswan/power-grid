@@ -14,34 +14,34 @@ import com.andrewswan.powergrid.services.GameService;
  */
 public class GameServiceImpl implements GameService {
 
-  public Game load(String directoryName, String fileName) {
-    File file = getFile(directoryName, fileName);
-    
+  public Game load(final String directoryName, final String fileName) {
+    final File file = getFile(directoryName, fileName);
+
     // TODO Auto-generated method stub
     return null;
   }
 
   /**
    * Returns the file specified by the given directory and file names
-   * 
+   *
    * @param directoryName must be a valid path
    * @param fileName must be a readable file in that directory
    */
-  private File getFile(String directoryName, String fileName) {
+  private File getFile(final String directoryName, final String fileName) {
     Utils.checkNotNull(directoryName, fileName);
-    File directory = new File(directoryName);
+    final File directory = new File(directoryName);
     if (!directory.isDirectory()) {
       throw new IllegalArgumentException(
           "Invalid directory '" + directoryName + "'");
     }
-    File file = new File(directory, fileName);
+    final File file = new File(directory, fileName);
     if (!file.canRead()) {
       throw new IllegalArgumentException("Invalid file '" + fileName + "'");
     }
     return file;
   }
 
-  public void save(Game game, String directory, String fileName) {
+  public void save(final Game game, final String directory, final String fileName) {
     // TODO Auto-generated method stub
 
   }

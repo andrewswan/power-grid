@@ -27,16 +27,16 @@ import com.andrewswan.powergrid.domain.ResourceMarket;
  * A generic game of Power Grid using pluggable components
  */
 public abstract class AbstractGame implements Game {
-  
+
   // Constants
   public static final int MIN_PLAYERS = 2;
   public static final int MAX_PLAYERS = 6;
-  
-  protected static final Log LOGGER = LogFactory.getLog(Game.class); 
-  
+
+  protected static final Log LOGGER = LogFactory.getLog(Game.class);
+
   // Required for serialization
   private static final long serialVersionUID = 2248398619578004763L;
-  
+
   // Properties
   protected final List<Player> players;
   private Board board;
@@ -44,10 +44,10 @@ public abstract class AbstractGame implements Game {
   private PlantMarket plantMarket;
   private ResourceMarket resourceMarket;
   private TurnOrderComparator turnOrderComparator;
-  
+
   private int turn;
   private Step step;
-  
+
   /**
    * No-arg constructor required for serialization
    */
@@ -57,7 +57,7 @@ public abstract class AbstractGame implements Game {
 
   /**
    * Constructor for a game using the given components.
-   * 
+   *
    * @param board can't be <code>null</code>
    * @param incomeChart can't be <code>null</code>
    * @param plantMarket can't be <code>null</code>
@@ -65,8 +65,8 @@ public abstract class AbstractGame implements Game {
    * @param players must contain between {@link #MIN_PLAYERS} and
    *   {@link #MAX_PLAYERS}
    */
-  protected AbstractGame(Board board, IncomeChart incomeChart,
-      PlantMarket plantMarket, ResourceMarket resourceMarket)
+  protected AbstractGame(final Board board, final IncomeChart incomeChart,
+      final PlantMarket plantMarket, final ResourceMarket resourceMarket)
   {
     this();
     Utils.checkNotNull(board, incomeChart, plantMarket, resourceMarket);
@@ -78,8 +78,8 @@ public abstract class AbstractGame implements Game {
     this.turn = 0;
     this.turnOrderComparator = new TurnOrderComparator(board);
   }
-  
-  public List<Player> play(Set<Player> thePlayers) {
+
+  public List<Player> play(final Set<Player> thePlayers) {
     setPlayers(thePlayers);
     boolean gameOver = false;
     do {
@@ -91,11 +91,11 @@ public abstract class AbstractGame implements Game {
 
   /**
    * Sets the players taking part in this game
-   * 
+   *
    * @param thePlayers can't be <code>null</code>, must contain between
    *   {@link #MIN_PLAYERS} and {@link #MAX_PLAYERS}
    */
-  void setPlayers(Set<Player> thePlayers) {
+  void setPlayers(final Set<Player> thePlayers) {
     Utils.checkNotNull(thePlayers);
     if (thePlayers.size() < MIN_PLAYERS || thePlayers.size() > MAX_PLAYERS) {
       throw new IllegalArgumentException("Invalid players " + thePlayers);
@@ -106,7 +106,7 @@ public abstract class AbstractGame implements Game {
 
   /**
    * Executes one turn of the game
-   * 
+   *
    * @return <code>true</code> if the game is over
    */
   private boolean oneTurn() {
@@ -137,7 +137,7 @@ public abstract class AbstractGame implements Game {
     }
     LOGGER.debug("Turn order is now " + players);
   }
-  
+
   /**
    * Executes the phase in which plants are auctioned (Phase 2)
    */
@@ -147,15 +147,15 @@ public abstract class AbstractGame implements Game {
     final Set<Player> playersWhoHaveBoughtPlants = new HashSet<Player>();
     // Keep track of which players have declined to put up a plant for auction
     final Set<Player> playersWhoHaveOptedOut = new HashSet<Player>();
-    
+
     // Go through the players in turn order
-    for (Player player : players) {
+    for (final Player player : players) {
       if (!playersWhoHaveBoughtPlants.contains(player)
           && !playersWhoHaveOptedOut.contains(player))
       {
         // Give the player a chance to put up a plant for auction
-        boolean mandatory = isMandatoryToSelectPlantForAuction();
-        Plant plant = player.selectPlantForAuction(mandatory);
+        final boolean mandatory = isMandatoryToSelectPlantForAuction();
+        final Plant plant = player.selectPlantForAuction(mandatory);
         if (plant == null) {
           if (mandatory) {
             throw new IllegalStateException("Players must select a plant");
@@ -169,7 +169,7 @@ public abstract class AbstractGame implements Game {
         }
       }
     }
-    
+
     // End-of-auction-phase housekeeping
     if (turn == 1) {
       if (playersWhoHaveBoughtPlants.size() != players.size()) {
@@ -188,7 +188,7 @@ public abstract class AbstractGame implements Game {
    * Indicates whether it's mandatory that each player selects a plant for
    * auction. This implementation returns <code>true</code> if it's the first
    * turn, otherwise <code>false</code>.
-   * 
+   *
    * @return see above
    */
   protected boolean isMandatoryToSelectPlantForAuction() {
@@ -198,7 +198,7 @@ public abstract class AbstractGame implements Game {
   /**
    * Auctions off the given plant to the players who have not yet bought a plant
    * or opted out of the auction phase
-   * 
+   *
    * @param plant the plant to auction; can't be <code>null</code>
    * @param playersWhoHaveOptedOut players who have turned down the chance to
    *   put up a plant for auction; can't be <code>null</code>
@@ -206,8 +206,8 @@ public abstract class AbstractGame implements Game {
    *   can't be <code>null</code>
    * @param firstBidder the player to bid first
    */
-  private void auction(Plant plant, Set<Player> playersWhoHaveBoughtPlants,
-      Set<Player> playersWhoHaveOptedOut, Player firstBidder)
+  private void auction(final Plant plant, final Set<Player> playersWhoHaveBoughtPlants,
+      final Set<Player> playersWhoHaveOptedOut, final Player firstBidder)
   {
     Utils.checkNotNull(
         plant, playersWhoHaveBoughtPlants, playersWhoHaveOptedOut);
@@ -218,7 +218,7 @@ public abstract class AbstractGame implements Game {
     }
     LOGGER.debug(
         firstBidder + " has put up the " + plant + " plant for " + highestBid);
-    List<Player> bidders = new ArrayList<Player>(players);
+    final List<Player> bidders = new ArrayList<Player>(players);
     bidders.removeAll(playersWhoHaveBoughtPlants);
     bidders.removeAll(playersWhoHaveOptedOut);
     int bidderIndex = bidders.indexOf(firstBidder);
@@ -227,9 +227,9 @@ public abstract class AbstractGame implements Game {
       if (bidderIndex >= bidders.size()) {
         bidderIndex = 0;
       }
-      Player bidder = bidders.get(bidderIndex);
-      int minimumBid = highestBid + 1;
-      Integer bid = bidder.bidOnPlant(plant, minimumBid, true);
+      final Player bidder = bidders.get(bidderIndex);
+      final int minimumBid = highestBid + 1;
+      final Integer bid = bidder.bidOnPlant(plant, minimumBid, true);
       if (bid == null) {
         // This bidder passed
         LOGGER.debug(bidder + " passed");
@@ -245,7 +245,7 @@ public abstract class AbstractGame implements Game {
         highestBid = bid;
       }
     }
-    Player highestBidder = bidders.get(0);
+    final Player highestBidder = bidders.get(0);
     highestBidder.buyPlant(plant, highestBid);
     plantMarket.buyPlant(plant);
     LOGGER.debug(highestBidder + " bought it for " + highestBid);
@@ -262,7 +262,7 @@ public abstract class AbstractGame implements Game {
       players.get(i).buyResources();
     }
   }
-  
+
   /**
    * Executes the phase in which players connect cities (Phase 4)
    */
@@ -274,43 +274,43 @@ public abstract class AbstractGame implements Game {
      * building. We should actually be doing this after each new connection is
      * made, so that players can see the new state of the market after each
      * plant is removed (esp. knowing that Step 3 is about to start), but that's
-     * a nicety we can add later. 
+     * a nicety we can add later.
      */
     int maxCityCount = 0;
     for (int i = players.size() - 1; i >= 0; i--) {
-      Player player = players.get(i);
+      final Player player = players.get(i);
       // Invite the player to connect new cities
       player.connectCities();
-      // See if this player now has more connections than anyone else 
-      int totalCitiesConnected = board.getConnectedCities(player).size();
+      // See if this player now has more connections than anyone else
+      final int totalCitiesConnected = board.getConnectedCities(player).size();
       if (totalCitiesConnected > maxCityCount) {
         maxCityCount = totalCitiesConnected;
       }
     }
     plantMarket.removeObsoletePlants(maxCityCount);
   }
-  
+
   /**
    * Indicates whether the game-ending condition(s) have been met. This
    * implementation uses the standard rule about how many cities have been
    * connected by any one player.
-   * 
+   *
    * @return <code>true</code> if the game is over
    */
   protected boolean gameOver() {
-    int citiesToEndGame = getNumberOfCitiesToEndGame();
-    for (Player player : players) {
+    final int citiesToEndGame = getNumberOfCitiesToEndGame();
+    for (final Player player : players) {
       if (board.getConnectedCities(player).size() >= citiesToEndGame) {
         return true;
       }
     }
     return false;
   }
-  
+
   /**
    * Returns the number of cities built by any player that will cause the game
    * to end
-   * 
+   *
    * @return a number greater than zero
    */
   protected abstract int getNumberOfCitiesToEndGame();
@@ -321,7 +321,7 @@ public abstract class AbstractGame implements Game {
   private void bureaucracy() {
     LOGGER.debug("> Starting phase 5 (Bureaucracy) of turn " + turn);
     // Power up
-    for (Player player : players) {
+    for (final Player player : players) {
       player.powerCities(); // here we don't care how many they power
     }
 
@@ -331,15 +331,15 @@ public abstract class AbstractGame implements Game {
     // Discard lowest/highest plant
     plantMarket.endTurn(step);
   }
-  
+
   public Plant[] getCurrentMarket() {
     return plantMarket.getCurrentMarket();
   }
-  
+
   public Step getStep() {
     return step;
   }
-  
+
   @Override
   public String toString() {
     return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);

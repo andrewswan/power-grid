@@ -26,7 +26,7 @@ public class PlayerFactoryImplTest extends TestCase {
   private PlayerFactoryImpl factory;    // the factory being tested
   private EasyMockContainer mocks;
   private InputDevice mockInputDevice;
-  
+
   @Override
   protected void setUp() throws Exception {
     super.setUp();
@@ -38,10 +38,10 @@ public class PlayerFactoryImplTest extends TestCase {
   public void testGetNameOfFirstPlayer() {
     // Set up
     mocks.replay();
-    
+
     // Invoke
-    String name = factory.getName(0, new ArrayList<String>());
-    
+    final String name = factory.getName(0, new ArrayList<String>());
+
     // Check
     mocks.verify();
     assertEquals("Player 1", name);
@@ -50,45 +50,45 @@ public class PlayerFactoryImplTest extends TestCase {
   public void testGetColourOfFirstPlayer() {
     // Set up
     mocks.replay();
-    
+
     // Invoke
-    Colour colour = factory.getColour(0, Arrays.asList(Colour.values()));
-    
+    final Colour colour = factory.getColour(0, Arrays.asList(Colour.values()));
+
     // Check
     mocks.verify();
     assertEquals(Colour.values()[0], colour);
   }
-  
+
   public void testGetStrategyOfFirstPlayer() {
     // Set up
-    Game mockGame = mocks.createStrictMock(Game.class);
+    final Game mockGame = mocks.createStrictMock(Game.class);
     mocks.replay();
-    
+
     // Invoke
-    PlayerStrategy strategy = factory.getStrategy(Colour.BLACK, mockGame);
-    
+    final PlayerStrategy strategy = factory.getStrategy(Colour.BLACK, mockGame);
+
     // Check
     mocks.verify();
     assertNotNull(strategy);
   }
-  
+
   public void testGetPlayers() {
     // Set up
-    int numberOfPlayers = 3;
-    Game mockGame = mocks.createStrictMock(Game.class);
+    final int numberOfPlayers = 3;
+    final Game mockGame = mocks.createStrictMock(Game.class);
     mocks.replay();
-    
+
     // Invoke
-    List<Player> players =
+    final List<Player> players =
         new ArrayList<Player>(factory.getPlayers(numberOfPlayers, mockGame));
-    
+
     // Check
     mocks.verify();
     assertNotNull(players);
     assertEquals(numberOfPlayers, players.size());
-    Player player1 = players.get(0);
-    Player player2 = players.get(1);
-    Player player3 = players.get(2);
+    final Player player1 = players.get(0);
+    final Player player2 = players.get(1);
+    final Player player3 = players.get(2);
     // Ensure the colours are all different
     assertFalse(player1.getColour().equals(player2.getColour()));
     assertFalse(player1.getColour().equals(player3.getColour()));

@@ -22,17 +22,17 @@ import com.andrewswan.powergrid.domain.exceptions.StepThreeStartingException;
  * Base implementation of a {@link Deck}
  */
 public abstract class AbstractDeck implements Deck {
-  
+
   // Constants
   protected static final Log LOGGER = LogFactory.getLog(Deck.class);
 
   // Properties
   private final List<Plant> drawPile;
   private final Set<Plant> stepThreePlants;
-  
+
   /**
    * Constructor
-   * 
+   *
    * @param plantsInDeck the plants that start the game in the deck (before any
    *   are removed based on the number of players); this array can't be empty
    * @param plantNumberOnTop the plant number of the plant to be put on top of
@@ -40,12 +40,12 @@ public abstract class AbstractDeck implements Deck {
    * @param players the number of people playing
    */
   protected AbstractDeck(
-      Plant[] plantsInDeck, int plantNumberOnTop, int players)
+      final Plant[] plantsInDeck, final int plantNumberOnTop, final int players)
   {
     this.drawPile = new ArrayList<Plant>();
     this.stepThreePlants = new HashSet<Plant>();
     Plant plantOnTop = null;
-    for (Plant plant : plantsInDeck) {
+    for (final Plant plant : plantsInDeck) {
       if (plant.getMinimumPrice() == plantNumberOnTop) {
         plantOnTop = plant;
       }
@@ -58,12 +58,12 @@ public abstract class AbstractDeck implements Deck {
           "Plant number " + plantNumberOnTop + " was not among those given");
     }
     Collections.shuffle(drawPile);
-    int plantsToRemove = getPlantsToRemove(players);
+    final int plantsToRemove = getPlantsToRemove(players);
     for (int i = 0; i < plantsToRemove; i++) {
       try {
         drawPile.remove(0);
       }
-      catch (IndexOutOfBoundsException ex) {
+      catch (final IndexOutOfBoundsException ex) {
         throw new IllegalArgumentException("There must be at least " +
             plantsToRemove + " plants in the deck for " + players + " players");
       }
@@ -78,11 +78,11 @@ public abstract class AbstractDeck implements Deck {
    * Returns the number of plants to remove from the deck before the game
    * starts, based on the given number of players. This implementation returns
    * the numbers from the standard rules.
-   * 
+   *
    * @param players the numer of players in the game
    * @return zero or more
    */
-  protected int getPlantsToRemove(int players) {
+  protected int getPlantsToRemove(final int players) {
     switch (players) {
       case 2:
         return 8;
@@ -114,7 +114,7 @@ public abstract class AbstractDeck implements Deck {
     return drawPile.remove(0);
   }
 
-  public void assignToStepThree(Plant plant) {
+  public void assignToStepThree(final Plant plant) {
     Utils.checkNotNull(plant);
     stepThreePlants.add(plant);
   }
