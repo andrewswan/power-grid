@@ -1,56 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <!-- The Basics -->
   <groupId>com.andrewswan</groupId>
   <artifactId>power-grid</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <dependencies>
-    <dependency>
-      <groupId>jung</groupId>
-      <artifactId>jung</artifactId>
-      <version>1.7.6</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>1.4</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>2.4</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymock</artifactId>
-      <version>2.4</version>
-    </dependency>
-    <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymockclassextension</artifactId>
-      <version>2.4</version>
-    </dependency>
-  </dependencies>
+  <name>Power Grid</name>
+  <version>0.1</version>
+  <description>Java implementation of the board game "Power Grid"</description>
   
-  <!-- Build Settings -->
+  <developers>
+    <developer>
+      <id>andrews</id>
+      <name>Andrew Swan</name>
+      <email>andrew.i.swan@gmail.com</email>
+      <url>http://www.andrewswan.com</url>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>+10</timezone>
+    </developer>
+  </developers>
+
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
       <plugin>
@@ -67,6 +47,7 @@
       </plugin>
     </plugins>
   </build>
+
   <pluginRepositories>
     <pluginRepository>
       <releases />
@@ -88,6 +69,48 @@
       <url>http://mojo.codehaus.org/</url>
     </pluginRepository>
   </pluginRepositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>jung</groupId>
+      <artifactId>jung</artifactId>
+      <version>1.7.6</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>2.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymockclassextension</artifactId>
+      <version>2.4</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
   <reporting>
     <plugins>
       <plugin>
@@ -104,20 +127,4 @@
     </plugins>
   </reporting>
   
-  <!-- More Project Information -->
-  <name>Power Grid</name>
-  <description>My Power Grid implementation</description>
-  <developers>
-    <developer>
-      <id>andrews</id>
-      <name>Andrew Swan</name>
-      <email>andrew.i.swan@gmail.com</email>
-      <url>http://www.andrewswan.com</url>
-      <roles>
-        <role>architect</role>
-        <role>developer</role>
-      </roles>
-      <timezone>+10</timezone>
-    </developer>
-  </developers>
 </project>
