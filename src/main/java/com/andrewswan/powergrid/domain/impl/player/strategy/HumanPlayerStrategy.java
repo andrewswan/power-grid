@@ -55,8 +55,10 @@ public class HumanPlayerStrategy implements PlayerStrategy {
     return inputDevice.getPlantsToOperate(colour);
   }
 
-  public void redistributeResources(final Plant[] plants, final Plant plantBeingReplaced) {
-    // TODO Auto-generated method stub
+  public void redistributeResources(
+		  final Plant[] plants, final Plant plantBeingReplaced)
+  {
+    // TODO Offer human the chance to redistribute resources
     throw new UnsupportedOperationException("Not implemented");
   }
 
