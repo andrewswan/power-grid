@@ -46,7 +46,11 @@
    <category name="com.andrewswan.powergrid.ui.impl.TextInputDeviceTest">
      <priority value="DEBUG"/>
    </category>
-
+   
+   <category name="com.andrewswan.powergrid.ui.pivot.PivotRunner">
+     <priority value="DEBUG"/>
+   </category>
+   
    <!-- ======================= -->
    <!-- Setup the Root category -->
    <!-- ======================= -->

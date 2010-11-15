@@ -1,0 +1,61 @@
+<!-- Window that prompts for the details of a new game -->
+<Window title="%new_game" maximized="true"
+	xmlns:wtkx="http://pivot.apache.org/wtkx" xmlns="org.apache.pivot.wtk">
+	<content>
+		<BoxPane orientation="vertical" styles="{padding: 10, spacing: 10}">
+			<TablePane styles="{
+	            horizontalSpacing: 5,
+				showHorizontalGridLines: true,
+				showVerticalGridLines: false,
+	            verticalSpacing: 5}"
+		    >
+	            <columns>
+	                <TablePane.Column width="-1" highlighted="true"/>
+	                <TablePane.Column width="1*"/>
+	            </columns>
+				<rows>
+					<!-- Map (TODO allow choice of regions) -->
+					<TablePane.Row height="-1">
+						<Label text="%map" styles="{font: 'Verdana bold 12'}"/>
+						<BoxPane>
+							<ListButton wtkx:id="btnMap" enabled="false"/>
+						</BoxPane>
+					</TablePane.Row>
+					<!-- Players -->
+					<TablePane.Row height="-1">
+						<Label text="%players" styles="{font: 'Verdana bold 12'}"/>
+						<TablePane wtkx:id="tblPlayers" styles="{
+				            horizontalSpacing: 10,
+							showHorizontalGridLines: true,
+							showVerticalGridLines: false,
+				            verticalSpacing: 10}"
+					    >
+					    	<columns>
+				                <TablePane.Column />
+				                <TablePane.Column />
+				                <TablePane.Column />
+					    	</columns>
+					    	<rows>
+					    		<!-- Players header row -->
+					    		<TablePane.Row highlighted="true">
+									<Label text="%colour" styles="{font: 'Verdana bold 12'}"/>
+									<Label text="%player_type" styles="{font: 'Verdana bold 12'}"/>
+									<Label text="%player_name" styles="{font: 'Verdana bold 12'}"/>
+					    		</TablePane.Row>
+					    		<!-- Detail rows are added via Java -->
+					    	</rows>
+						</TablePane>
+					</TablePane.Row>
+				</rows>
+			</TablePane>
+			<!-- Button Bar -->
+			<BoxPane>
+				<PushButton wtkx:id="btnStartGame" buttonData="%start_game"
+					styles="{font: 'Verdana bold 12'}"/>
+				<PushButton wtkx:id="btnQuit" buttonData="%quit"
+					styles="{font: 'Verdana bold 12'}"/>
+			</BoxPane>
+		</BoxPane>
+	
+	</content>
+</Window>

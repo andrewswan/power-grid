@@ -1,0 +1,21 @@
+{
+	ai_do_nothing: "AI - Do Nothing",
+	colour: "Colour",
+	human: "Human",
+    map: "Map",
+	new_game: "Power Grid - New Game",
+	none: "(nobody)",
+	player_name: "Player Name",
+	player_type: "Player Type",
+	players: "Players",
+	quit: "Quit",
+	start_game: "Start Game",
+	
+	black: "Black",
+	blue: "Blue",
+	green: "Green",
+	purple: "Purple",
+	red: "Red",
+	yellow: "Yellow",
+	usa: "U.S.A."
+}

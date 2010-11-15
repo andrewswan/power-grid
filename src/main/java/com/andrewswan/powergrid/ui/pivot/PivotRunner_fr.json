@@ -1,0 +1,21 @@
+{
+	ai_do_nothing: "IA - Ne Fait Rien",
+	colour: "Couleur",
+	human: "Humain",
+    map: "Carte",
+	new_game: "Réseau Electrique - Nouveau Jeu",
+	none: "(personne)",
+	player_name: "Nom de Joueur",
+	player_type: "Type de Joueur",
+	players: "Joueurs",
+	quit: "Quitter",
+	start_game: "Commencer",
+	
+	black: "Noir",
+	blue: "Bleu",
+	green: "Vert",
+	purple: "Pourpre",
+	red: "Rouge",
+	yellow: "Jaune",
+	usa: "Etats-Unis"
+}

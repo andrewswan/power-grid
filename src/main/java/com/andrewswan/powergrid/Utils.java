@@ -140,6 +140,19 @@ public class Utils {
     }
     return plantNumbers;
   }
+  
+  /**
+   * Checks that the given condition is <code>true</code>
+   * 
+   * @param condition the condition to check
+   * @param message the exception message if it's <code>false</code>
+   * @throws IllegalArgumentException if it's <code>false</code>
+   */
+  public static void checkTrue(final boolean condition, final String message) {
+      if (!condition) {
+          throw new IllegalArgumentException(message);
+      }
+  }
 
   /**
    * Constructor is private to prevent instantiation
