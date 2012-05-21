@@ -22,9 +22,9 @@ import org.apache.commons.logging.LogFactory;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Plant;
-import com.andrewswan.powergrid.domain.ResourcePool;
 import com.andrewswan.powergrid.domain.Player.Colour;
 import com.andrewswan.powergrid.domain.ResourceMarket.Resource;
+import com.andrewswan.powergrid.domain.ResourcePool;
 import com.andrewswan.powergrid.domain.impl.ResourcePoolImpl;
 import com.andrewswan.powergrid.ui.InputDevice;
 import com.andrewswan.powergrid.ui.OutputDevice;
@@ -52,7 +52,7 @@ public class TextInputDevice implements InputDevice {
     RESOURCES_PROMPT = "%s: what resources do you want to buy?\n" +
       "(format is [n][c|o|g|u] per resource, e.g. '1c 2o' means 1 coal and" +
       " 2 oil): ",
-    SELECT_PLANT_PROMPT = "%s: which plant number do you want to auction: ";
+    SELECT_PLANT_PROMPT = "%s: which plant number do you want to auction%s: ";
 
   private static final char
     COAL_CHARACTER = 'c',

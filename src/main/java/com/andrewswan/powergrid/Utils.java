@@ -25,11 +25,10 @@ public class Utils {
    * caller, i.e. the first one on the stack before the one that called Utils.
    * The first ones on the stack are:
    * 0: java.lang.Thread
-   * 1: java.lang.Thread
-   * 2: com.andrewswan.powergrid.Utils
-   * 3: the class that called Utils
+   * 1: com.andrewswan.powergrid.Utils
+   * 2: the class that called Utils
    */
-  private static final int FIRST_INDIRECT_CALLER = 4;
+  private static final int FIRST_INDIRECT_CALLER = 3;
 
 /**
    * Checks that none of the given objects are null
@@ -92,11 +91,9 @@ public class Utils {
   }
 
   /**
-   * Checks the call stack doesn't include the given class more than the given
-   * allowed number of times
+   * Checks the call stack doesn't include the given class.
    *
    * @param prohibitedClass the class being screened for
-   * @param allowedTimes the number of times the screened class is
    * @throws SecurityException if it does
    */
   public static void checkNotInCallStack(final Class<?> prohibitedClass) {
