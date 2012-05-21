@@ -3,10 +3,8 @@
  */
 package com.andrewswan.powergrid.ui.impl;
 
-import static org.easymock.EasyMock.expect;
-import static org.easymock.classextension.EasyMock.createStrictMock;
-import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.verify;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.andrewswan.powergrid.domain.Plant;
 import com.andrewswan.powergrid.domain.Player.Colour;
@@ -30,15 +28,13 @@ public class BidOnPlantTester {
   public static void main(final String[] args) {
     // Set up
     final StandardInput console = new StandardInput(new StandardOutput());
-    final Plant mockPlant = createStrictMock(Plant.class);
-    expect(mockPlant.getNumber()).andStubReturn(PLANT_NUMBER);
-    replay(mockPlant);
+    final Plant mockPlant = mock(Plant.class);
+    when(mockPlant.getNumber()).thenReturn(PLANT_NUMBER);
 
     // Invoke
     final Integer bid = console.bidOnPlant(Colour.BLUE, mockPlant, MINIMUM_BID, true);
 
     // Output
-    verify(mockPlant);
     System.out.println("Bid = " + bid);
   }
 }

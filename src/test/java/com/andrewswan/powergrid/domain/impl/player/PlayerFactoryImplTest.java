@@ -3,13 +3,17 @@
  */
 package com.andrewswan.powergrid.domain.impl.player;
 
+import static org.mockito.Mockito.mock;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.andrewswan.powergrid.EasyMockContainer;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import com.andrewswan.powergrid.domain.Game;
 import com.andrewswan.powergrid.domain.Player;
 import com.andrewswan.powergrid.domain.Player.Colour;
@@ -24,66 +28,52 @@ public class PlayerFactoryImplTest extends TestCase {
 
   // Fixture
   private PlayerFactoryImpl factory;    // the factory being tested
-  private EasyMockContainer mocks;
-  private InputDevice mockInputDevice;
+  @Mock private InputDevice mockInputDevice;
 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    mocks = new EasyMockContainer();
-    mockInputDevice = mocks.createStrictMock(InputDevice.class);
+    MockitoAnnotations.initMocks(this);
     factory = new PlayerFactoryImpl(mockInputDevice);
   }
 
   public void testGetNameOfFirstPlayer() {
-    // Set up
-    mocks.replay();
-
     // Invoke
     final String name = factory.getName(0, new ArrayList<String>());
 
     // Check
-    mocks.verify();
     assertEquals("Player 1", name);
   }
 
   public void testGetColourOfFirstPlayer() {
-    // Set up
-    mocks.replay();
-
     // Invoke
     final Colour colour = factory.getColour(0, Arrays.asList(Colour.values()));
 
     // Check
-    mocks.verify();
     assertEquals(Colour.values()[0], colour);
   }
 
   public void testGetStrategyOfFirstPlayer() {
     // Set up
-    final Game mockGame = mocks.createStrictMock(Game.class);
-    mocks.replay();
+    final Game mockGame = mock(Game.class);
 
     // Invoke
     final PlayerStrategy strategy = factory.getStrategy(Colour.BLACK, mockGame);
 
     // Check
-    mocks.verify();
     assertNotNull(strategy);
   }
 
   public void testGetPlayers() {
     // Set up
     final int numberOfPlayers = 3;
-    final Game mockGame = mocks.createStrictMock(Game.class);
-    mocks.replay();
+    final Game mockGame = mock(Game.class);
 
     // Invoke
     final List<Player> players =
         new ArrayList<Player>(factory.getPlayers(numberOfPlayers, mockGame));
 
     // Check
-    mocks.verify();
     assertNotNull(players);
     assertEquals(numberOfPlayers, players.size());
     final Player player1 = players.get(0);

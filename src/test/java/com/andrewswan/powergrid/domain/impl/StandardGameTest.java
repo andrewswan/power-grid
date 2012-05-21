@@ -8,13 +8,16 @@ import static com.andrewswan.powergrid.domain.impl.StandardGame.CITIES_TO_END_3_
 import static com.andrewswan.powergrid.domain.impl.StandardGame.CITIES_TO_END_4_PLAYER_GAME;
 import static com.andrewswan.powergrid.domain.impl.StandardGame.CITIES_TO_END_5_PLAYER_GAME;
 import static com.andrewswan.powergrid.domain.impl.StandardGame.CITIES_TO_END_6_PLAYER_GAME;
+import static org.mockito.Mockito.mock;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import junit.framework.TestCase;
 
-import com.andrewswan.powergrid.EasyMockContainer;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import com.andrewswan.powergrid.domain.Board;
 import com.andrewswan.powergrid.domain.Game;
 import com.andrewswan.powergrid.domain.Player;
@@ -25,15 +28,13 @@ import com.andrewswan.powergrid.domain.Player;
 public class StandardGameTest extends TestCase {
 
   // Fixture
-  private EasyMockContainer mocks;
   private StandardGame game;
-  private Board mockBoard;
+  @Mock private Board mockBoard;
 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    mocks = new EasyMockContainer();
-    mockBoard = mocks.createStrictMock(Board.class);
+    MockitoAnnotations.initMocks(this);
   }
 
   public void testCitiesToEndTwoPlayerGame() {
@@ -70,16 +71,14 @@ public class StandardGameTest extends TestCase {
     game = new StandardGame(mockBoard, numberOfPlayers);
     final Set<Player> players = new HashSet<Player>();
     for (int i = 0; i < numberOfPlayers; i++) {
-      players.add(mocks.createStrictMock(Player.class));
+      players.add(mock(Player.class));
     }
     game.setPlayers(players);
-    mocks.replay();
 
     // Invoke and check
     final int numberOfCitiesToEndGame = game.getNumberOfCitiesToEndGame();
 
     // Check
-    mocks.verify();
     assertEquals(expectedNumberOfCities, numberOfCitiesToEndGame);
   }
 }

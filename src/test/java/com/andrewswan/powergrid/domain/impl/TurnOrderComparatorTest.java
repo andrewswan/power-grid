@@ -3,7 +3,7 @@
  */
 package com.andrewswan.powergrid.domain.impl;
 
-import static org.easymock.EasyMock.expect;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +13,9 @@ import java.util.Set;
 
 import junit.framework.TestCase;
 
-import com.andrewswan.powergrid.EasyMockContainer;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import com.andrewswan.powergrid.domain.Board;
 import com.andrewswan.powergrid.domain.City;
 import com.andrewswan.powergrid.domain.Player;
@@ -24,25 +26,18 @@ import com.andrewswan.powergrid.domain.Player;
 public class TurnOrderComparatorTest extends TestCase {
 
   // Fixture
-  private EasyMockContainer mocks;
-  private Board mockBoard;
-  private Player mockPlayer1;
-  private Player mockPlayer2;
-  private Set<City> mockCitySet1;
-  private Set<City> mockCitySet2;
+  @Mock private Board mockBoard;
+  @Mock private Player mockPlayer1;
+  @Mock private Player mockPlayer2;
+  @Mock private Set<City> mockCitySet1;
+  @Mock private Set<City> mockCitySet2;
   private TurnOrderComparator comparator;
 
-  @SuppressWarnings("unchecked")
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    mocks = new EasyMockContainer();
-    mockBoard = mocks.createStrictMock(Board.class);
+    MockitoAnnotations.initMocks(this);
     comparator = new TurnOrderComparator(mockBoard);
-    mockCitySet1 = mocks.createStrictMock(Set.class);
-    mockCitySet2 = mocks.createStrictMock(Set.class);
-    mockPlayer1 = mocks.createStrictMock(Player.class);
-    mockPlayer2 = mocks.createStrictMock(Player.class);
   }
 
   public void testCompareWithNullFirstPlayer() {
@@ -69,19 +64,17 @@ public class TurnOrderComparatorTest extends TestCase {
 
   public void testCompareWithDifferentNumbersOfCitiesConnected() {
     // Set up
-    expect(mockBoard.getConnectedCities(mockPlayer1))
-        .andStubReturn(mockCitySet1);
-    expect(mockCitySet1.size()).andStubReturn(3);
-    expect(mockBoard.getConnectedCities(mockPlayer2))
-        .andStubReturn(mockCitySet2);
-    expect(mockCitySet2.size()).andStubReturn(2);
-    mocks.replay();
+    when(mockBoard.getConnectedCities(mockPlayer1))
+        .thenReturn(mockCitySet1);
+    when(mockCitySet1.size()).thenReturn(3);
+    when(mockBoard.getConnectedCities(mockPlayer2))
+        .thenReturn(mockCitySet2);
+    when(mockCitySet2.size()).thenReturn(2);
 
     // Invoke
     final int result = comparator.compare(mockPlayer1, mockPlayer2);
 
     // Check
-    mocks.verify();
     assertTrue(result < 0); // i.e. the player with more cities is "lesser"
   }
 
@@ -89,13 +82,11 @@ public class TurnOrderComparatorTest extends TestCase {
     // Set up
     // -- Neither player has connected any cities
     setUpHighestPlantsAndSameNumberOfCities(20, 19);
-    mocks.replay();
 
     // Invoke
     final int result = comparator.compare(mockPlayer1, mockPlayer2);
 
     // Check
-    mocks.verify();
     assertTrue(result < 0); // i.e. the player with higher plant is "lesser"
   }
 
@@ -109,15 +100,15 @@ public class TurnOrderComparatorTest extends TestCase {
   private void setUpHighestPlantsAndSameNumberOfCities(
       final Integer player1HighestPlant, final Integer player2HighestPlant)
   {
-    expect(mockBoard.getConnectedCities(mockPlayer1))
-        .andStubReturn(new HashSet<City>());
-    expect(mockBoard.getConnectedCities(mockPlayer2))
-        .andStubReturn(new HashSet<City>());
+    when(mockBoard.getConnectedCities(mockPlayer1))
+        .thenReturn(new HashSet<City>());
+    when(mockBoard.getConnectedCities(mockPlayer2))
+        .thenReturn(new HashSet<City>());
     // -- Set up plant numbers
-    expect(mockPlayer1.getHighestPlantNumber())
-        .andStubReturn(player1HighestPlant);
-    expect(mockPlayer2.getHighestPlantNumber())
-        .andStubReturn(player2HighestPlant);
+    when(mockPlayer1.getHighestPlantNumber())
+        .thenReturn(player1HighestPlant);
+    when(mockPlayer2.getHighestPlantNumber())
+        .thenReturn(player2HighestPlant);
   }
 
   /**
@@ -125,32 +116,30 @@ public class TurnOrderComparatorTest extends TestCase {
    */
   public void testSortListOfPlayersHavingDifferentNumbersOfCities() {
     // Set up
-    expect(mockBoard.getConnectedCities(mockPlayer1))
-        .andStubReturn(mockCitySet1);
-    expect(mockCitySet1.size()).andStubReturn(3);
-    expect(mockBoard.getConnectedCities(mockPlayer2))
-        .andStubReturn(mockCitySet2);
-    expect(mockCitySet2.size()).andStubReturn(2);
+    when(mockBoard.getConnectedCities(mockPlayer1))
+        .thenReturn(mockCitySet1);
+    when(mockCitySet1.size()).thenReturn(3);
+    when(mockBoard.getConnectedCities(mockPlayer2))
+        .thenReturn(mockCitySet2);
+    when(mockCitySet2.size()).thenReturn(2);
 
     // -- Create the list with the players in the wrong order
     final List<Player> players = new ArrayList<Player>();
     players.add(mockPlayer2);
     players.add(mockPlayer1);
-    mocks.replay();
 
     // Invoke
     Collections.sort(players, comparator);
 
     // Check
-    mocks.verify();
     // -- The players should now be around the right way
     assertSame(mockPlayer1, players.get(0));
     assertSame(mockPlayer2, players.get(1));
   }
 
   public void testFirstPlayerMustOwnAPlant() {
+      // Set up
     setUpHighestPlantsAndSameNumberOfCities(null, 10);
-    mocks.replay();
 
     // Invoke
     try {
@@ -160,13 +149,11 @@ public class TurnOrderComparatorTest extends TestCase {
     }
     catch (final IllegalStateException expected) {
       // Success
-      mocks.verify();
     }
   }
 
   public void testSecondPlayerMustOwnAPlant() {
     setUpHighestPlantsAndSameNumberOfCities(11, null);
-    mocks.replay();
 
     // Invoke
     try {
@@ -176,7 +163,6 @@ public class TurnOrderComparatorTest extends TestCase {
     }
     catch (final IllegalStateException expected) {
       // Success
-      mocks.verify();
     }
   }
 }
