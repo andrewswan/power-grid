@@ -3,9 +3,9 @@
  */
 package com.andrewswan.powergrid.domain.impl;
 
-import com.andrewswan.powergrid.domain.ResourcePool;
-
 import junit.framework.TestCase;
+
+import com.andrewswan.powergrid.domain.ResourcePool;
 
 /**
  * Unit test of the {@link ResourcePool} implementation

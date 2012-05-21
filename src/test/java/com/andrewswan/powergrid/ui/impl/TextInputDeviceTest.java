@@ -13,15 +13,15 @@ import static org.easymock.EasyMock.expect;
 import java.io.InputStream;
 import java.util.Arrays;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import junit.framework.TestCase;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.EasyMockContainer;
 import com.andrewswan.powergrid.domain.Plant;
-import com.andrewswan.powergrid.domain.ResourcePool;
 import com.andrewswan.powergrid.domain.Player.Colour;
+import com.andrewswan.powergrid.domain.ResourcePool;
 import com.andrewswan.powergrid.domain.impl.ResourcePoolImpl;
 import com.andrewswan.powergrid.ui.OutputDevice;
 
@@ -31,8 +31,8 @@ import com.andrewswan.powergrid.ui.OutputDevice;
 public class TextInputDeviceTest extends TestCase {
 
   // Constants
-  protected static final Log LOGGER =
-      LogFactory.getLog(TextInputDeviceTest.class);
+  protected static final Logger LOGGER =
+      LoggerFactory.getLogger(TextInputDeviceTest.class);
 
   private static final int MINIMUM_BID = 10;
   private static final int PLANT_NUMBER = 3;

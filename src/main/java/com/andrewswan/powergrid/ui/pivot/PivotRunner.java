@@ -11,8 +11,6 @@ import java.text.Collator;
 import java.util.HashMap;
 import java.util.Locale;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.pivot.collections.ArrayList;
 import org.apache.pivot.collections.List;
 import org.apache.pivot.collections.Map;
@@ -26,11 +24,13 @@ import org.apache.pivot.wtk.ImageView;
 import org.apache.pivot.wtk.ListButton;
 import org.apache.pivot.wtk.PushButton;
 import org.apache.pivot.wtk.TablePane;
+import org.apache.pivot.wtk.TablePane.RowSequence;
 import org.apache.pivot.wtk.TextInput;
 import org.apache.pivot.wtk.Window;
-import org.apache.pivot.wtk.TablePane.RowSequence;
 import org.apache.pivot.wtkx.WTKX;
 import org.apache.pivot.wtkx.WTKXSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.domain.Player;
 import com.andrewswan.powergrid.domain.PlayerStrategy;
@@ -47,7 +47,7 @@ import com.andrewswan.powergrid.domain.service.impl.PlayerServiceImpl;
 public class PivotRunner implements Application {
 
     // Constants
-    protected static final Log LOGGER = LogFactory.getLog(PivotRunner.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(PivotRunner.class);
     
     private static final String CHARACTER_SET = "UTF-8";
     

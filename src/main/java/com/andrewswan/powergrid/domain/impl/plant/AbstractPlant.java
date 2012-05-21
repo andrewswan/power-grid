@@ -5,8 +5,8 @@ package com.andrewswan.powergrid.domain.impl.plant;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Plant;
-import com.andrewswan.powergrid.domain.ResourcePool;
 import com.andrewswan.powergrid.domain.ResourceMarket.Resource;
+import com.andrewswan.powergrid.domain.ResourcePool;
 import com.andrewswan.powergrid.domain.impl.ResourcePoolImpl;
 
 /**

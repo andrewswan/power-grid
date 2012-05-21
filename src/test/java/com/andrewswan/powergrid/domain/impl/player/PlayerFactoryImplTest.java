@@ -12,9 +12,9 @@ import junit.framework.TestCase;
 import com.andrewswan.powergrid.EasyMockContainer;
 import com.andrewswan.powergrid.domain.Game;
 import com.andrewswan.powergrid.domain.Player;
+import com.andrewswan.powergrid.domain.Player.Colour;
 import com.andrewswan.powergrid.domain.PlayerFactory;
 import com.andrewswan.powergrid.domain.PlayerStrategy;
-import com.andrewswan.powergrid.domain.Player.Colour;
 import com.andrewswan.powergrid.ui.InputDevice;
 
 /**

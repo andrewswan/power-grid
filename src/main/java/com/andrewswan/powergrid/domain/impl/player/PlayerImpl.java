@@ -4,18 +4,18 @@
 package com.andrewswan.powergrid.domain.impl.player;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Board;
 import com.andrewswan.powergrid.domain.CostedResourcePool;
 import com.andrewswan.powergrid.domain.Game;
+import com.andrewswan.powergrid.domain.Game.Step;
 import com.andrewswan.powergrid.domain.Plant;
 import com.andrewswan.powergrid.domain.Player;
 import com.andrewswan.powergrid.domain.PlayerStrategy;
 import com.andrewswan.powergrid.domain.ResourcePool;
-import com.andrewswan.powergrid.domain.Game.Step;
 
 /**
  * Implementation of a {@link Player}
@@ -23,7 +23,7 @@ import com.andrewswan.powergrid.domain.Game.Step;
 public class PlayerImpl implements Player {
 
   // Constants
-  protected static final Log LOGGER = LogFactory.getLog(Player.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(Player.class);
 
   private static final int DEFAULT_MAXIMUM_NUMBER_OF_PLANTS = 3;
   private static final int MAXIMUM_NUMBER_OF_PLANTS_FOR_TWO_PLAYERS = 4;

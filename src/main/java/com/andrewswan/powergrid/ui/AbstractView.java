@@ -6,8 +6,8 @@ package com.andrewswan.powergrid.ui;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Controller;
@@ -21,7 +21,7 @@ import com.andrewswan.powergrid.domain.GameModel;
 public abstract class AbstractView implements Observer {
     
     // Constants
-    protected static final Log LOGGER = LogFactory.getLog(AbstractView.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractView.class);
     
     // Properties
     protected final Controller controller;

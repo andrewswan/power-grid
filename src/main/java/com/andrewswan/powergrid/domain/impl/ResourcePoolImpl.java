@@ -11,8 +11,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import com.andrewswan.powergrid.Utils;
-import com.andrewswan.powergrid.domain.ResourcePool;
 import com.andrewswan.powergrid.domain.ResourceMarket.Resource;
+import com.andrewswan.powergrid.domain.ResourcePool;
 
 /**
  * Implementation of a {@link ResourcePool}

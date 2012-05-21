@@ -3,10 +3,9 @@
  */
 package com.andrewswan.powergrid.domain.impl;
 
-import com.andrewswan.powergrid.domain.IncomeChart;
-import com.andrewswan.powergrid.domain.impl.StandardIncomeChart;
-
 import junit.framework.TestCase;
+
+import com.andrewswan.powergrid.domain.IncomeChart;
 
 /**
  * Tests the standard {@link IncomeChart}

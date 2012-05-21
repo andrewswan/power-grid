@@ -20,8 +20,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Area;
 import com.andrewswan.powergrid.domain.City;
-import com.andrewswan.powergrid.domain.Player;
 import com.andrewswan.powergrid.domain.Game.Step;
+import com.andrewswan.powergrid.domain.Player;
 
 import edu.uci.ics.jung.graph.impl.SparseVertex;
 

@@ -11,9 +11,9 @@ import static com.andrewswan.powergrid.domain.ResourceMarket.Resource.URANIUM;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.andrewswan.powergrid.domain.Game.Step;
 import com.andrewswan.powergrid.domain.ResourceMarket;
 import com.andrewswan.powergrid.domain.ResourcePool;
-import com.andrewswan.powergrid.domain.Game.Step;
 
 /**
  * The standard {@link ResourceMarket}. Some maps (Italy and France?) use a

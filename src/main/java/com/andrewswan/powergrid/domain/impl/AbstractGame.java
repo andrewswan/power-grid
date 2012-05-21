@@ -11,8 +11,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Board;
@@ -32,7 +32,7 @@ public abstract class AbstractGame implements Game {
   public static final int MIN_PLAYERS = 2;
   public static final int MAX_PLAYERS = 6;
 
-  protected static final Log LOGGER = LogFactory.getLog(Game.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(Game.class);
 
   // Required for serialization
   private static final long serialVersionUID = 2248398619578004763L;

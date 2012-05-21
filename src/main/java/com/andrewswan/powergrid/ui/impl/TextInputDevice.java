@@ -17,8 +17,8 @@ import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Plant;
@@ -35,7 +35,7 @@ import com.andrewswan.powergrid.ui.OutputDevice;
 public class TextInputDevice implements InputDevice {
 
   // Constants
-  private static final Log LOGGER = LogFactory.getLog(TextInputDevice.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TextInputDevice.class);
 
   private static final String
     BID_PROMPT = "%s: how much do you bid on plant %d (minimum = %d%s): ",

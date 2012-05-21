@@ -9,10 +9,10 @@ import junit.framework.TestCase;
 import com.andrewswan.powergrid.EasyMockContainer;
 import com.andrewswan.powergrid.domain.Board;
 import com.andrewswan.powergrid.domain.Game;
-import com.andrewswan.powergrid.domain.Player;
-import com.andrewswan.powergrid.domain.PlayerStrategy;
 import com.andrewswan.powergrid.domain.Game.Step;
+import com.andrewswan.powergrid.domain.Player;
 import com.andrewswan.powergrid.domain.Player.Colour;
+import com.andrewswan.powergrid.domain.PlayerStrategy;
 
 /**
  * Unit test of the {@link Player} implementation

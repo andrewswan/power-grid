@@ -11,8 +11,8 @@ import junit.framework.TestCase;
 
 import com.andrewswan.powergrid.domain.CostedResourcePool;
 import com.andrewswan.powergrid.domain.ResourceMarket;
-import com.andrewswan.powergrid.domain.ResourcePool;
 import com.andrewswan.powergrid.domain.ResourceMarket.Resource;
+import com.andrewswan.powergrid.domain.ResourcePool;
 
 /**
  * Unit test of the standard {@link ResourceMarket}

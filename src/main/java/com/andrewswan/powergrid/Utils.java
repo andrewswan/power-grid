@@ -10,15 +10,15 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.domain.Plant;
 
 public class Utils {
 
   // Constants
-  protected static final Log LOGGER = LogFactory.getLog(Utils.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
 
   /*
    * The index of the StackTraceElement array that contains the first indirect

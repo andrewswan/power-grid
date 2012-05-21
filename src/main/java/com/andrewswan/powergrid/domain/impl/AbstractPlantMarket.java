@@ -15,15 +15,15 @@ import java.util.TreeSet;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Deck;
-import com.andrewswan.powergrid.domain.Plant;
-import com.andrewswan.powergrid.domain.PlantMarket;
 import com.andrewswan.powergrid.domain.Game.Phase;
 import com.andrewswan.powergrid.domain.Game.Step;
+import com.andrewswan.powergrid.domain.Plant;
+import com.andrewswan.powergrid.domain.PlantMarket;
 import com.andrewswan.powergrid.domain.exceptions.StepThreeStartingException;
 
 /**
@@ -36,7 +36,7 @@ public abstract class AbstractPlantMarket implements PlantMarket {
     STEPS_ONE_AND_TWO_CURRENT_MARKET_SIZE = 4,
     INITIAL_MARKET_SIZE = STEPS_ONE_AND_TWO_CURRENT_MARKET_SIZE * 2;
 
-  protected static final Log LOGGER = LogFactory.getLog(PlantMarket.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(PlantMarket.class);
 
   // Properties
   private final Deck deck;

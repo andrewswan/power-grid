@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Deck;
@@ -24,7 +24,7 @@ import com.andrewswan.powergrid.domain.exceptions.StepThreeStartingException;
 public abstract class AbstractDeck implements Deck {
 
   // Constants
-  protected static final Log LOGGER = LogFactory.getLog(Deck.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(Deck.class);
 
   // Properties
   private final List<Plant> drawPile;

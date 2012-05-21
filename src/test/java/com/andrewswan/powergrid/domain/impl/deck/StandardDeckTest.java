@@ -3,11 +3,10 @@
  */
 package com.andrewswan.powergrid.domain.impl.deck;
 
+import junit.framework.TestCase;
+
 import com.andrewswan.powergrid.domain.Deck;
 import com.andrewswan.powergrid.domain.Plant;
-import com.andrewswan.powergrid.domain.impl.deck.StandardDeck;
-
-import junit.framework.TestCase;
 
 /**
  * Tests our implementation of the standard

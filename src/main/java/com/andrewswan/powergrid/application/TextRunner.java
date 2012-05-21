@@ -11,8 +11,8 @@
  */
 package com.andrewswan.powergrid.application;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Game;
@@ -34,7 +34,7 @@ import com.andrewswan.powergrid.ui.impl.StandardOutput;
 public final class TextRunner {
 
 	// Constants
-	private static final Log LOGGER = LogFactory.getLog(TextRunner.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TextRunner.class);
 
 	private static final int
 	    GAMES_TO_PLAY = 1,

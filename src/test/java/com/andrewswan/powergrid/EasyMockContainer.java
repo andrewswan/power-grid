@@ -6,9 +6,9 @@ package com.andrewswan.powergrid;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.easymock.classextension.EasyMock;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>Description: simplifies the creation and usage of multiple EasyMocks.
@@ -19,7 +19,7 @@ import org.easymock.classextension.EasyMock;
 public class EasyMockContainer {
 
   // Constants
-  protected static final Log LOGGER = LogFactory.getLog(EasyMockContainer.class);
+  protected static final Logger LOGGER = LoggerFactory.getLogger(EasyMockContainer.class);
 
   // Properties
   private final List<Object> mocks;

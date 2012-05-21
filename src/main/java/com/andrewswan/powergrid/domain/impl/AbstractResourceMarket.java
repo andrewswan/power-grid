@@ -14,9 +14,9 @@ import java.util.Map.Entry;
 
 import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.CostedResourcePool;
+import com.andrewswan.powergrid.domain.Game.Step;
 import com.andrewswan.powergrid.domain.ResourceMarket;
 import com.andrewswan.powergrid.domain.ResourcePool;
-import com.andrewswan.powergrid.domain.Game.Step;
 
 /**
  * The standard implementation of a {@link ResourceMarket}

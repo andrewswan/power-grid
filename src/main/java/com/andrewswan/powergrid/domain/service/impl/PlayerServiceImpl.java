@@ -3,12 +3,8 @@
  */
 package com.andrewswan.powergrid.domain.service.impl;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.pivot.wtk.skin.CardPaneSkin;
 
 import com.andrewswan.powergrid.domain.PlayerStrategy;
 import com.andrewswan.powergrid.domain.impl.player.strategy.DoNothingStrategy;

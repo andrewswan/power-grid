@@ -6,9 +6,9 @@ package com.andrewswan.powergrid.ui;
 import java.io.Closeable;
 
 import com.andrewswan.powergrid.domain.Plant;
+import com.andrewswan.powergrid.domain.Player.Colour;
 import com.andrewswan.powergrid.domain.PlayerStrategy;
 import com.andrewswan.powergrid.domain.ResourcePool;
-import com.andrewswan.powergrid.domain.Player.Colour;
 
 /**
  * A component that accepts input from one or more humans involved in the game
