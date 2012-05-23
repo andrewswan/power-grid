@@ -94,6 +94,23 @@ public class TextInputDeviceTest {
         assertNotNull(bid);
         assertEquals(13, bid.intValue());
     }
+    
+    @Test
+    public void testOptionalBidOnPlant() throws Exception {
+        // Set up
+        final Plant mockPlant = mock(Plant.class);
+        when(mockPlant.getNumber()).thenReturn(PLANT_NUMBER);
+        setUpInputStream("0" + LINE_SEPARATOR);
+
+        // Invoke
+        final Integer bid = inputDevice.bidOnPlant(COLOUR, mockPlant,
+                MINIMUM_BID, true);
+
+        // Check
+        verify(mockOutputDevice).prompt(
+                "PURPLE: how much do you bid on plant 3" + " (minimum = 10, pass = 0): ");
+        assertNull(bid);
+    }
 
     @Test
     public void testGetNoCitiesToConnect() throws Exception {
@@ -282,5 +299,24 @@ public class TextInputDeviceTest {
             mockPlants[i] = mockPlant;
         }
         return mockPlants;
+    }
+    
+    @Test
+    public void testCannotBidZeroWhenPlayerCannotPass() throws IOException {
+        // Set up
+        final Plant mockPlant = mock(Plant.class);
+        when(mockPlant.getNumber()).thenReturn(PLANT_NUMBER);
+        setUpInputStream("2" + LINE_SEPARATOR + "10" + LINE_SEPARATOR);
+        
+        // Invoke
+        final Integer bid = inputDevice.bidOnPlant(COLOUR, mockPlant, MINIMUM_BID, false);
+        
+        // Check
+        assertNotNull(bid);
+        assertEquals(10, bid.intValue());
+        verify(mockOutputDevice).prompt(
+                "PURPLE: how much do you bid on plant 3" + " (minimum = 10): ");
+        verify(mockOutputDevice).prompt(
+                "Enter a bid of at least 10 elektros: ");
     }
 }

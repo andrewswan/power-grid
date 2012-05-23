@@ -41,7 +41,7 @@ public class TextInputDevice implements InputDevice {
     private static final String BID_PROMPT = "%s: how much do you bid on plant %d (minimum = %d%s): ",
             CITIES_PROMPT = "%s: which cities do you want to connect (one internal name per"
                     + " line, case-insensitive, with a blank line to finish): ",
-            INVALID_BID_MESSAGE = "Enter a bid of at least %d elektros (or zero to pass): ",
+            INVALID_BID_MESSAGE = "Enter a bid of at least %d elektros%s: ",
             INVALID_RESOURCE_MESSAGE = "Invalid resource token '%s'",
             OPTIONAL_PLANT = " (0 means none)",
             PLANTS_PROMPT = "%s: which plant numbers do you want to operate"
@@ -89,7 +89,7 @@ public class TextInputDevice implements InputDevice {
                 plant.getNumber(), minimumBid, passOption);
         int bid = readInt(prompt);
         while (!isValidBid(bid, minimumBid, canPass)) {
-            bid = readInt(String.format(INVALID_BID_MESSAGE, minimumBid));
+            bid = readInt(String.format(INVALID_BID_MESSAGE, minimumBid, passOption));
         }
         if (bid <= 0) {
             return null;
