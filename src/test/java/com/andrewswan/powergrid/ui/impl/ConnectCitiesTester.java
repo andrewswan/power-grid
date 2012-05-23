@@ -13,7 +13,7 @@ import com.andrewswan.powergrid.ui.InputDevice;
  * {@link StandardInput}, because it's not unit-testable (uses the static fields
  * System.in and System.out).
  */
-public class ConnectCitiesTester {
+public final class ConnectCitiesTester {
 
     /**
      * The entry point for this tester

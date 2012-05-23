@@ -274,16 +274,16 @@ public abstract class AbstractBoard extends UndirectedSparseGraph implements
      * @param players
      * @return a number greater than zero
      */
-    int getNumberOfAreasInPlay() {
+    protected int getNumberOfAreasInPlay() {
         switch (players) {
         case 2:
-            // Falls through
+            return 3;
         case 3:
             return 3;
         case 4:
             return 4;
         case 5:
-            // Falls through
+            return 5;
         case 6:
             return 5;
         default:

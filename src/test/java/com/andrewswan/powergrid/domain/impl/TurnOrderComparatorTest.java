@@ -5,7 +5,6 @@ package com.andrewswan.powergrid.domain.impl;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -42,28 +41,14 @@ public class TurnOrderComparatorTest {
         comparator = new TurnOrderComparator(mockBoard);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCompareWithNullFirstPlayer() {
-        // Invoke
-        try {
-            comparator.compare(null, mockPlayer2);
-            fail("Shouldn't accept a null first player");
-        }
-        catch (final IllegalArgumentException expected) {
-            // Success
-        }
+        comparator.compare(null, mockPlayer2);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCompareWithNullSecondPlayer() {
-        // Invoke
-        try {
-            comparator.compare(mockPlayer1, null);
-            fail("Shouldn't accept a null second player");
-        }
-        catch (final IllegalArgumentException expected) {
-            // Success
-        }
+        comparator.compare(mockPlayer1, null);
     }
 
     @Test
@@ -143,32 +128,21 @@ public class TurnOrderComparatorTest {
         assertSame(mockPlayer2, players.get(1));
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void testFirstPlayerMustOwnAPlant() {
         // Set up
         setUpHighestPlantsAndSameNumberOfCities(null, 10);
 
         // Invoke
-        try {
-            comparator.compare(mockPlayer1, mockPlayer2);
-            fail("Shouldn't be able to compare players if either doesn't own a plant");
-        }
-        catch (final IllegalStateException expected) {
-            // Success
-        }
+        comparator.compare(mockPlayer1, mockPlayer2);
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void testSecondPlayerMustOwnAPlant() {
+        // Set up
         setUpHighestPlantsAndSameNumberOfCities(11, null);
 
         // Invoke
-        try {
-            comparator.compare(mockPlayer1, mockPlayer2);
-            fail("Shouldn't be able to compare players if either doesn't own a plant");
-        }
-        catch (final IllegalStateException expected) {
-            // Success
-        }
+        comparator.compare(mockPlayer1, mockPlayer2);
     }
 }

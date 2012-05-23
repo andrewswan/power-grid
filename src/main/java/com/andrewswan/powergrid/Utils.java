@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.domain.Plant;
 
-public class Utils {
+public final class Utils {
 
     // Constants
     protected static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);

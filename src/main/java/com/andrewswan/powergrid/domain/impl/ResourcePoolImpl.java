@@ -91,7 +91,7 @@ public class ResourcePoolImpl implements ResourcePool {
         return quantityRemoved;
     }
 
-    public void addResource(final Resource resource, final int quantity) {
+    public final void addResource(final Resource resource, final int quantity) {
         Utils.checkNotNull(resource);
         if (quantity < 0) {
             throw new IllegalArgumentException("Invalid quantity " + quantity);

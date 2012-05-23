@@ -3,8 +3,6 @@
  */
 package com.andrewswan.powergrid;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
 
 /**
@@ -21,19 +19,13 @@ public class UtilsTest {
         child.methodSecuredAgainstParent(); // shouldn't throw an exception
     }
 
-    @Test
+    @Test(expected = SecurityException.class)
     public void testProhibitedCallerIsNotAllowed() {
         // Set up a calling instance that implements the prohibited interface
         final Parent parent = new ParentImpl();
 
         // Invoke
-        try {
-            parent.callChild();
-            fail("Shouldn't have been able to call the child from the parent");
-        }
-        catch (final SecurityException expected) {
-            // Success
-        }
+        parent.callChild();
     }
 
     @Test
@@ -41,11 +33,11 @@ public class UtilsTest {
         new SelfSecured().methodSecuredAgainstOwnClass(); // should be allowed
     }
 
-    interface Parent {
+    private interface Parent {
         void callChild();
     }
 
-    class ParentImpl implements Parent {
+    private static class ParentImpl implements Parent {
 
         public void callChild() {
             new Child().methodSecuredAgainstParent(); // should throw an
@@ -53,14 +45,14 @@ public class UtilsTest {
         }
     }
 
-    class Child {
+    private static class Child {
 
         void methodSecuredAgainstParent() {
             Utils.checkNotInCallStack(Parent.class);
         }
     }
 
-    class SelfSecured {
+    private static class SelfSecured {
 
         void methodSecuredAgainstOwnClass() {
             Utils.checkNotInCallStack(SelfSecured.class);

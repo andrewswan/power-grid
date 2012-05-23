@@ -14,7 +14,7 @@ import com.andrewswan.powergrid.domain.Player.Colour;
  * {@link StandardInput}, because it's not unit-testable (uses the static fields
  * System.in and System.out).
  */
-public class BidOnPlantTester {
+public final class BidOnPlantTester {
 
     // Constants
     private static final int MINIMUM_BID = 10;

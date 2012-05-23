@@ -5,7 +5,6 @@ package com.andrewswan.powergrid.domain.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -87,7 +86,7 @@ public class StandardPlantMarketTest {
         assertEquals(4, removedPlants[1].getNumber());
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCannotBuyPlantInFutureMarket() {
         // Set up
         market = new StandardPlantMarket(2); // number of players irrelevant
@@ -97,7 +96,7 @@ public class StandardPlantMarketTest {
         assertCannotBuyPlant(market.getFutureMarket()[0]);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCannotBuyNullPlant() {
         assertCannotBuyPlant(null);
     }
@@ -108,16 +107,10 @@ public class StandardPlantMarketTest {
      * @param index
      */
     private void assertCannotBuyPlant(final Plant plant) {
-        // Set up
-        market = new StandardPlantMarket(2); // number of players irrelevant
-                                             // here
+        // Set up (number of players irrelevant here)
+        market = new StandardPlantMarket(2);
+        
         // Invoke
-        try {
-            market.buyPlant(plant);
-            fail("Shouldn't have been able to buy the plant " + plant);
-        }
-        catch (final IllegalArgumentException expected) {
-            // Success
-        }
+        market.buyPlant(plant);
     }
 }

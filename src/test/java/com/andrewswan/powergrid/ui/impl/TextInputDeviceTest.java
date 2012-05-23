@@ -16,6 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
@@ -61,9 +62,9 @@ public class TextInputDeviceTest {
      * Sets up the mock input stream to return the given string of characters
      * 
      * @param text the characters to return; can't be <code>null</code>
-     * @throws Exception
+     * @throws IOException
      */
-    private void setUpInputStream(final String text) throws Exception {
+    private void setUpInputStream(final String text) throws IOException {
         if (StringUtils.isEmpty(text)) {
             return;
         }
@@ -167,7 +168,7 @@ public class TextInputDeviceTest {
      * @throws Exception
      */
     private void assertGetPlantsToOperate(final String inputStream,
-            final int[] expectedPlantNumbers) throws Exception {
+            final int[] expectedPlantNumbers) throws IOException {
         // Set up
         setUpInputStream(inputStream);
 
@@ -215,7 +216,7 @@ public class TextInputDeviceTest {
      * @throws Exception
      */
     private void assertGetResourcesToBuy(final String inputStream,
-            final ResourcePool expectedResources) throws Exception {
+            final ResourcePool expectedResources) throws IOException {
         // Set up
         setUpInputStream(inputStream);
 

@@ -5,7 +5,6 @@ package com.andrewswan.powergrid.domain.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,16 +24,9 @@ public class StandardIncomeChartTest {
         incomeChart = new StandardIncomeChart();
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetIncomeForNegativeCities() {
-        // Invoke
-        try {
-            incomeChart.getIncome(-1);
-            fail("Shouldn't accept a negative number of cities");
-        }
-        catch (final IllegalArgumentException expected) {
-            // Success
-        }
+        incomeChart.getIncome(-1);
     }
 
     @Test

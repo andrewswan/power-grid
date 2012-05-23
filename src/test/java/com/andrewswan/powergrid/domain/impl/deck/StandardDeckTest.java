@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.andrewswan.powergrid.domain.Deck;
 import com.andrewswan.powergrid.domain.Plant;
+import com.andrewswan.powergrid.domain.exceptions.StepThreeStartingException;
 
 /**
  * Tests our implementation of the standard
@@ -43,7 +44,7 @@ public class StandardDeckTest {
     }
 
     private void assertDeckSize(final int players, final int expectedDeckSize)
-            throws Exception {
+            throws StepThreeStartingException {
         // Invoke
         final Deck deck = new StandardDeck(players);
 
