@@ -10,10 +10,10 @@
  */
 package com.andrewswan.powergrid.application;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.andrewswan.powergrid.Utils;
 import com.andrewswan.powergrid.domain.Game;
 import com.andrewswan.powergrid.domain.Plant;
 import com.andrewswan.powergrid.domain.PlayerFactory;
@@ -70,8 +70,8 @@ public final class TextRunner {
             }
         }
         finally {
-            Utils.closeQuietly(inputDevice);
-            Utils.closeQuietly(outputDevice);
+            IOUtils.closeQuietly(inputDevice);
+            IOUtils.closeQuietly(outputDevice);
         }
     }
 

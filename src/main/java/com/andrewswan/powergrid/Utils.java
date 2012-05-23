@@ -3,8 +3,6 @@
  */
 package com.andrewswan.powergrid;
 
-import java.io.Closeable;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -15,10 +13,15 @@ import org.slf4j.LoggerFactory;
 
 import com.andrewswan.powergrid.domain.Plant;
 
+/**
+ * General utility methods.
+ * 
+ * @author Andrew Swan
+ */
 public final class Utils {
 
     // Constants
-    protected static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
 
     /*
      * The index of the StackTraceElement array that contains the first indirect
@@ -39,22 +42,6 @@ public final class Utils {
         for (int i = 0; i < objects.length; i++) {
             if (objects[i] == null) {
                 throw new IllegalArgumentException("Null object at index " + i);
-            }
-        }
-    }
-
-    /**
-     * Closes the given object
-     * 
-     * @param closeable if <code>null</code>, this method does nothing
-     */
-    public static void closeQuietly(final Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            }
-            catch (IOException e) {
-                throw new RuntimeException(e);
             }
         }
     }
