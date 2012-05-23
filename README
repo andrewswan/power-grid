@@ -1,0 +1,10 @@
+This project aims to implement the Power Grid board game in Java.
+
+Feature roadmap (in no particular order):
+* Create the core game engine (UI- and language- neutral)
+* Create a text interface in English
+* Create a GUI using Swing or similar Java-based GUI library
+* Write a moderately capable AI
+* Create a web interface
+* Convert to a web application
+* Allow translation into languages other than English
