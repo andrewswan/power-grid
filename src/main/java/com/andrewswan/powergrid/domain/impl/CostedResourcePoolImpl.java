@@ -9,24 +9,23 @@ import com.andrewswan.powergrid.domain.ResourcePool;
 /**
  * Implementation of a {@link CostedResourcePool}
  */
-public class CostedResourcePoolImpl extends ResourcePoolImpl
-  implements CostedResourcePool
-{
-  // Properties
-  private final int cost;
+public class CostedResourcePoolImpl extends ResourcePoolImpl implements
+        CostedResourcePool {
+    // Properties
+    private final int cost;
 
-  /**
-   * Constructor
-   *
-   * @param resources
-   * @param cost
-   */
-  public CostedResourcePoolImpl(final ResourcePool resources, final int cost) {
-    super(resources);
-    this.cost = cost;
-  }
+    /**
+     * Constructor
+     * 
+     * @param resources
+     * @param cost
+     */
+    public CostedResourcePoolImpl(final ResourcePool resources, final int cost) {
+        super(resources);
+        this.cost = cost;
+    }
 
-  public int getCost() {
-    return cost;
-  }
+    public int getCost() {
+        return cost;
+    }
 }

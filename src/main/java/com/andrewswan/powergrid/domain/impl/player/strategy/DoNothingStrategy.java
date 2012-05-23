@@ -14,52 +14,54 @@ import com.andrewswan.powergrid.domain.ResourcePool;
  */
 public class DoNothingStrategy implements PlayerStrategy {
 
-  // Properties
-  private final Game game;
+    // Properties
+    private final Game game;
 
-  /**
-   * Constructor
-   *
-   * @param game the game being played; can't be <code>null</code>
-   */
-  public DoNothingStrategy(final Game game) {
-    Utils.checkNotNull(game);
-    this.game = game;
-  }
-
-  public Integer bidOnPlant(final Plant plant, final int minimumBid, final boolean canPass) {
-    // Never bid on anything if you don't have to
-    if (canPass) {
-      return null;
+    /**
+     * Constructor
+     * 
+     * @param game the game being played; can't be <code>null</code>
+     */
+    public DoNothingStrategy(final Game game) {
+        Utils.checkNotNull(game);
+        this.game = game;
     }
-    return minimumBid;
-  }
 
-  public ResourcePool getResourcesToBuy() {
-    // Never buy any resources
-    return null;
-  }
-
-  public String[] getCitiesToConnect() {
-    // Never connect any cities
-    return new String[0];
-  }
-
-  public int[] getPlantsToOperate() {
-    // Never power any cities
-    return new int[0];
-  }
-
-  public Plant selectPlantForAuction(final boolean mandatory) {
-    // Never put a plant up for auction unless required to
-    if (!mandatory) {
-      return null;
+    public Integer bidOnPlant(final Plant plant, final int minimumBid,
+            final boolean canPass) {
+        // Never bid on anything if you don't have to
+        if (canPass) {
+            return null;
+        }
+        return minimumBid;
     }
-    // Put up the cheapest plant
-    return game.getCurrentMarket()[0];
-  }
 
-  public void redistributeResources(final Plant[] plants, final Plant plantBeingReplaced) {
-    // Do nothing
-  }
+    public ResourcePool getResourcesToBuy() {
+        // Never buy any resources
+        return null;
+    }
+
+    public String[] getCitiesToConnect() {
+        // Never connect any cities
+        return new String[0];
+    }
+
+    public int[] getPlantsToOperate() {
+        // Never power any cities
+        return new int[0];
+    }
+
+    public Plant selectPlantForAuction(final boolean mandatory) {
+        // Never put a plant up for auction unless required to
+        if (!mandatory) {
+            return null;
+        }
+        // Put up the cheapest plant
+        return game.getCurrentMarket()[0];
+    }
+
+    public void redistributeResources(final Plant[] plants,
+            final Plant plantBeingReplaced) {
+        // Do nothing
+    }
 }

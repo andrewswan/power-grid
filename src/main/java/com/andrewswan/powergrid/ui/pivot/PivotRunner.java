@@ -47,16 +47,17 @@ import com.andrewswan.powergrid.domain.service.impl.PlayerServiceImpl;
 public class PivotRunner implements Application {
 
     // Constants
-    protected static final Logger LOGGER = LoggerFactory.getLogger(PivotRunner.class);
-    
+    protected static final Logger LOGGER = LoggerFactory
+            .getLogger(PivotRunner.class);
+
     private static final String CHARACTER_SET = "UTF-8";
-    
+
     /**
      * Command-line property to specify the ISO language code. Note that all
      * such properties must be prefixed with "--", e.g. "--language=fr".
      */
     public static final String LANGUAGE_PROPERTY_NAME = "language";
-    
+
     /**
      * @param args
      */
@@ -68,32 +69,28 @@ public class PivotRunner implements Application {
     private final java.util.Map<Class<? extends PlayerStrategy>, String> aiStrategies;
     private final BoardService boardService;
     private final PlayerService playerService;
-    
+
     private Resources translations;
     private Window window;
-    
+
     @WTKX private ListButton btnMap;
     @WTKX private PushButton btnQuit;
     @WTKX private PushButton btnStartGame;
     @WTKX private TablePane tblPlayers;
-    
+
     /**
      * Constructor
-     *
      */
     public PivotRunner() {
         // TODO inject these
-        this.aiStrategies =
-            new HashMap<Class<? extends PlayerStrategy>, String>();
+        this.aiStrategies = new HashMap<Class<? extends PlayerStrategy>, String>();
         this.boardService = new BoardServiceImpl();
         this.playerService = new PlayerServiceImpl();
     }
 
     @Override
-    public void startup(
-            final Display display, final Map<String, String> properties)
-        throws Exception
-    {
+    public void startup(final Display display,
+            final Map<String, String> properties) throws Exception {
         // Set the desired locale and use it to load the translations
         String language = properties.get(LANGUAGE_PROPERTY_NAME);
         if (language != null) {
@@ -104,7 +101,7 @@ public class PivotRunner implements Application {
         // Load and bind to the WTKX source
         final WTKXSerializer wtkxSerializer = new WTKXSerializer(translations);
         window = (Window) wtkxSerializer.readObject(this, "new_game.wtkx");
-        wtkxSerializer.bind(this);  // sets fields annotated with @WTKX
+        wtkxSerializer.bind(this); // sets fields annotated with @WTKX
         initialiseDynamicContent();
         initialiseEventHandlers();
         window.open(display);
@@ -131,10 +128,8 @@ public class PivotRunner implements Application {
         btnMap.setListData(boardNames);
         btnMap.setSelectedIndex(0);
     }
-    
-    private static final java.util.Map<Player.Colour, String>
-        PLAYER_COLOUR_IMAGES = new HashMap<Player.Colour, String>()
-    {
+
+    private static final java.util.Map<Player.Colour, String> PLAYER_COLOUR_IMAGES = new HashMap<Player.Colour, String>() {
         {
             put(BLACK, "images/black_house.png");
             put(BLUE, "images/blue_house.png");
@@ -144,7 +139,7 @@ public class PivotRunner implements Application {
             put(YELLOW, "images/yellow_house.png");
         }
     };
-    
+
     private void initialisePlayerDetails() {
         final RowSequence rows = tblPlayers.getRows();
         for (final Player.Colour colour : Player.Colour.values()) {
@@ -154,62 +149,63 @@ public class PivotRunner implements Application {
             final String imagePath = PLAYER_COLOUR_IMAGES.get(colour);
             imageView.setImage(getClass().getResource(imagePath));
             row.add(imageView);
-            
+
             // Player Type
             final List<Object> playerTypes = new ArrayList<Object>();
             playerTypes.add(translations.get("none"));
             playerTypes.add(translations.get("human"));
-            this.aiStrategies.putAll(playerService.getComputerPlayerStrategies());
+            this.aiStrategies.putAll(playerService
+                    .getComputerPlayerStrategies());
             for (final String aiTypeCode : aiStrategies.values()) {
                 playerTypes.add(translations.get(aiTypeCode));
             }
             final ListButton playerTypeButton = new ListButton(playerTypes);
             playerTypeButton.setSelectedIndex(0);
             row.add(playerTypeButton);
-            
+
             // Player Name
             final TextInput nameField = new TextInput();
             final String colourKey = colour.name().toLowerCase();
             nameField.setText(translations.getString(colourKey));
             row.add(nameField);
-            
+
             rows.add(row);
         }
     }
-    
+
     /**
      * Wires up the event handlers
      */
     private void initialiseEventHandlers() {
         btnQuit.getButtonPressListeners().add(new ButtonPressListener() {
-            
+
             @Override
             public void buttonPressed(final Button button) {
                 System.exit(0);
             }
         });
-        
+
         btnStartGame.getButtonPressListeners().add(new ButtonPressListener() {
-            
+
             @Override
             public void buttonPressed(final Button button) {
                 startGame();
             }
         });
     }
-    
+
     /**
      * Starts a game of Power Grid using the user's entered parameters
      */
     private void startGame() {
         LOGGER.debug("User clicked start game");
         final Object mapItem = btnMap.getSelectedItem();
-        LOGGER.debug("Selected map = " + mapItem +
-                " (" + mapItem.getClass().getName() + ")");
+        LOGGER.debug("Selected map = " + mapItem + " ("
+                + mapItem.getClass().getName() + ")");
     }
-    
+
     // ------------------ Pivot Application lifecycle methods ------------------
-    
+
     @Override
     public boolean shutdown(final boolean optional) {
         if (this.window != null) {
@@ -219,8 +215,10 @@ public class PivotRunner implements Application {
     }
 
     @Override
-    public void suspend() {}
-    
+    public void suspend() {
+    }
+
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 }

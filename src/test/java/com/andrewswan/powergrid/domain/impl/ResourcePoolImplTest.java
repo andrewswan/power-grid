@@ -15,7 +15,7 @@ import com.andrewswan.powergrid.domain.ResourcePool;
 public class ResourcePoolImplTest {
 
     @Test
-  public void testEmptyPoolsAreEqual() {
-    assertEquals(new ResourcePoolImpl(), new ResourcePoolImpl());
-  }
+    public void testEmptyPoolsAreEqual() {
+        assertEquals(new ResourcePoolImpl(), new ResourcePoolImpl());
+    }
 }

@@ -20,62 +20,63 @@ import com.andrewswan.powergrid.domain.City;
  */
 public class AreaImpl extends HashSet<City> implements Area {
 
-  /**
-   * Required for serialisation
-   */
-  private static final long serialVersionUID = -578968504862405486L;
+    /**
+     * Required for serialisation
+     */
+    private static final long serialVersionUID = -578968504862405486L;
 
-  // Properties
-  private final Set<Area> adjacentAreas;
-  private final String name;
+    // Properties
+    private final Set<Area> adjacentAreas;
+    private final String name;
 
-  /**
-   * Constructor
-   *
-   * @param name the name of the area; can't be blank
-   */
-  public AreaImpl(final String name) {
-    if (StringUtils.isBlank(name)) {
-      throw new IllegalArgumentException("Invalid name '" + name + "'");
+    /**
+     * Constructor
+     * 
+     * @param name the name of the area; can't be blank
+     */
+    public AreaImpl(final String name) {
+        if (StringUtils.isBlank(name)) {
+            throw new IllegalArgumentException("Invalid name '" + name + "'");
+        }
+        this.adjacentAreas = new HashSet<Area>();
+        this.name = name;
     }
-    this.adjacentAreas = new HashSet<Area>();
-    this.name = name;
-  }
 
-  public String getName() {
-    return name;
-  }
-
-  @Override
-  public boolean equals(final Object object) {
-    if (object == this) {
-      return true;
+    public String getName() {
+        return name;
     }
-    if (!(object instanceof Area)) {
-      return false;
+
+    @Override
+    public boolean equals(final Object object) {
+        if (object == this) {
+            return true;
+        }
+        if (!(object instanceof Area)) {
+            return false;
+        }
+        final Area otherArea = (Area) object;
+        return name.equalsIgnoreCase(otherArea.getName());
     }
-    final Area otherArea = (Area) object;
-    return name.equalsIgnoreCase(otherArea.getName());
-  }
 
-  @Override
-  public int hashCode() {
-    return name.toLowerCase(Locale.getDefault()).hashCode();
-  }
-
-  public void addAdjacentArea(final Area area) {
-    if (area == null || area == this) {
-      throw new IllegalArgumentException("Invalid area " + area);
+    @Override
+    public int hashCode() {
+        return name.toLowerCase(Locale.getDefault()).hashCode();
     }
-    adjacentAreas.add(area);
-  }
 
-  public Set<Area> getAdjacentAreas() {
-    return new HashSet<Area>(adjacentAreas);   // defensive copy
-  }
+    public void addAdjacentArea(final Area area) {
+        if (area == null || area == this) {
+            throw new IllegalArgumentException("Invalid area " + area);
+        }
+        adjacentAreas.add(area);
+    }
 
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
-  }
+    public Set<Area> getAdjacentAreas() {
+        return new HashSet<Area>(adjacentAreas); // defensive copy
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this,
+                ToStringStyle.SIMPLE_STYLE);
+    }
 }

@@ -11,19 +11,20 @@ import com.andrewswan.powergrid.domain.ResourceMarket.Resource;
  */
 public class GarbagePlant extends AbstractPlant {
 
-  /**
-   * Constructor
-   *
-   * @param minimumPrice
-   * @param fuelUsage
-   * @param capacity
-   */
-  public GarbagePlant(final int minimumPrice, final int fuelUsage, final int capacity) {
-    super(minimumPrice, fuelUsage, PlantType.GARBAGE, capacity);
-  }
+    /**
+     * Constructor
+     * 
+     * @param minimumPrice
+     * @param fuelUsage
+     * @param capacity
+     */
+    public GarbagePlant(final int minimumPrice, final int fuelUsage,
+            final int capacity) {
+        super(minimumPrice, fuelUsage, PlantType.GARBAGE, capacity);
+    }
 
-  @Override
-  protected boolean isUsable(final Resource resource) {
-    return Resource.GARBAGE.equals(resource);
-  }
+    @Override
+    protected boolean isUsable(final Resource resource) {
+        return Resource.GARBAGE.equals(resource);
+    }
 }

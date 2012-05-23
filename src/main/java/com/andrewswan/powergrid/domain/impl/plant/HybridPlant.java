@@ -11,19 +11,20 @@ import com.andrewswan.powergrid.domain.ResourceMarket.Resource;
  */
 public class HybridPlant extends AbstractPlant {
 
-  /**
-   * Constructor
-   *
-   * @param minimumPrice
-   * @param fuelUsage
-   * @param capacity
-   */
-  public HybridPlant(final int minimumPrice, final int fuelUsage, final int capacity) {
-    super(minimumPrice, fuelUsage, PlantType.HYBRID, capacity);
-  }
+    /**
+     * Constructor
+     * 
+     * @param minimumPrice
+     * @param fuelUsage
+     * @param capacity
+     */
+    public HybridPlant(final int minimumPrice, final int fuelUsage,
+            final int capacity) {
+        super(minimumPrice, fuelUsage, PlantType.HYBRID, capacity);
+    }
 
-  @Override
-  protected boolean isUsable(final Resource resource) {
-    return Resource.COAL.equals(resource) || Resource.OIL.equals(resource);
-  }
+    @Override
+    protected boolean isUsable(final Resource resource) {
+        return Resource.COAL.equals(resource) || Resource.OIL.equals(resource);
+    }
 }

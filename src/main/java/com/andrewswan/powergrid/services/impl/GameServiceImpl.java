@@ -31,20 +31,19 @@ public class GameServiceImpl implements GameService {
         Utils.checkNotNull(directoryName, fileName);
         final File directory = new File(directoryName);
         if (!directory.isDirectory()) {
-            throw new IllegalArgumentException(
-                    "Invalid directory '" + directoryName + "'");
+            throw new IllegalArgumentException("Invalid directory '"
+                    + directoryName + "'");
         }
         final File file = new File(directory, fileName);
         if (!file.canRead()) {
-            throw new IllegalArgumentException(
-                    "Invalid file '" + fileName + "'");
+            throw new IllegalArgumentException("Invalid file '" + fileName
+                    + "'");
         }
         return file;
     }
 
-    public void save(
-            final Game game, final String directory, final String fileName)
-    {
+    public void save(final Game game, final String directory,
+            final String fileName) {
         // TODO Implement saving game to disk
         throw new UnsupportedOperationException("Game saving not implemented");
     }

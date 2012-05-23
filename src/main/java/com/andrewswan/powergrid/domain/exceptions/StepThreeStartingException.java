@@ -11,13 +11,13 @@ package com.andrewswan.powergrid.domain.exceptions;
  */
 public class StepThreeStartingException extends Exception {
 
-  // Constants
-  private static final long serialVersionUID = -8375539101862109093L;
+    // Constants
+    private static final long serialVersionUID = -8375539101862109093L;
 
-  /**
-   * Constructor
-   */
-  public StepThreeStartingException() {
-    // Empty
-  }
+    /**
+     * Constructor
+     */
+    public StepThreeStartingException() {
+        // Empty
+    }
 }

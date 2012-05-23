@@ -40,27 +40,28 @@ public class UtilsTest {
     public void testClassSecuredAgainstItself() {
         new SelfSecured().methodSecuredAgainstOwnClass(); // should be allowed
     }
-    
+
     interface Parent {
         void callChild();
     }
-    
+
     class ParentImpl implements Parent {
-        
+
         public void callChild() {
-            new Child().methodSecuredAgainstParent(); // should throw an exception
+            new Child().methodSecuredAgainstParent(); // should throw an
+                                                      // exception
         }
     }
-    
+
     class Child {
-        
+
         void methodSecuredAgainstParent() {
             Utils.checkNotInCallStack(Parent.class);
         }
     }
-    
+
     class SelfSecured {
-        
+
         void methodSecuredAgainstOwnClass() {
             Utils.checkNotInCallStack(SelfSecured.class);
         }

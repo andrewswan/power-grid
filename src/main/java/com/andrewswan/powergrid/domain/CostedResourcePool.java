@@ -8,10 +8,10 @@ package com.andrewswan.powergrid.domain;
  */
 public interface CostedResourcePool extends ResourcePool {
 
-  /**
-   * Returns the cost of this resource pool in elektros
-   *
-   * @return zero or more
-   */
-  int getCost();
+    /**
+     * Returns the cost of this resource pool in elektros
+     * 
+     * @return zero or more
+     */
+    int getCost();
 }

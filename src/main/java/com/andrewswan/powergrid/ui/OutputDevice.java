@@ -10,17 +10,17 @@ import java.io.Closeable;
  */
 public interface OutputDevice extends Closeable {
 
-  /**
-   * Prompts the user for input with the given text
-   *
-   * @param prompt the prompt to show
-   */
-  void prompt(String prompt);
+    /**
+     * Prompts the user for input with the given text
+     * 
+     * @param prompt the prompt to show
+     */
+    void prompt(String prompt);
 
-  /**
-   * Displays the given error message to the user
-   *
-   * @param message the message to show
-   */
-  void showError(String message);
+    /**
+     * Displays the given error message to the user
+     * 
+     * @param message the message to show
+     */
+    void showError(String message);
 }

@@ -11,18 +11,18 @@ import com.andrewswan.powergrid.domain.ResourceMarket.Resource;
  */
 public class FusionPlant extends AbstractPlant {
 
-  /**
-   * Constructor
-   *
-   * @param minimumPrice
-   * @param capacity
-   */
-  public FusionPlant(final int minimumPrice, final int capacity) {
-    super(minimumPrice, 0, PlantType.ECOLOGICAL, capacity);
-  }
+    /**
+     * Constructor
+     * 
+     * @param minimumPrice
+     * @param capacity
+     */
+    public FusionPlant(final int minimumPrice, final int capacity) {
+        super(minimumPrice, 0, PlantType.ECOLOGICAL, capacity);
+    }
 
-  @Override
-  protected boolean isUsable(final Resource resource) {
-    return false;
-  }
+    @Override
+    protected boolean isUsable(final Resource resource) {
+        return false;
+    }
 }

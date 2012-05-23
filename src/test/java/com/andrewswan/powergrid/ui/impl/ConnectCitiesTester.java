@@ -15,19 +15,19 @@ import com.andrewswan.powergrid.ui.InputDevice;
  */
 public class ConnectCitiesTester {
 
-  /**
-   * The entry point for this tester
-   *
-   * @param args not used
-   */
-  public static void main(final String[] args) {
-    // Set up
-    final InputDevice inputDevice = new StandardInput(new StandardOutput());
+    /**
+     * The entry point for this tester
+     * 
+     * @param args not used
+     */
+    public static void main(final String[] args) {
+        // Set up
+        final InputDevice inputDevice = new StandardInput(new StandardOutput());
 
-    // Invoke
-    final String[] cities = inputDevice.getCitiesToConnect(Colour.BLUE);
+        // Invoke
+        final String[] cities = inputDevice.getCitiesToConnect(Colour.BLUE);
 
-    // Output
-    System.out.println("Cities = " + Arrays.toString(cities));
-  }
+        // Output
+        System.out.println("Cities = " + Arrays.toString(cities));
+    }
 }

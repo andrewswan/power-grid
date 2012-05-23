@@ -10,15 +10,15 @@ import com.andrewswan.powergrid.ui.OutputDevice;
  */
 public class StandardOutput extends TextOutputDevice {
 
-  /**
-   * Constructor
-   */
-  public StandardOutput() {
-    super(System.out);
-  }
+    /**
+     * Constructor
+     */
+    public StandardOutput() {
+        super(System.out);
+    }
 
-  @Override
-  public void close() {
-    // The System.out stream should never be closed
-  }
+    @Override
+    public void close() {
+        // The System.out stream should never be closed
+    }
 }

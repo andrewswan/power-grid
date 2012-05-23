@@ -16,29 +16,29 @@ import com.andrewswan.powergrid.ui.OutputDevice;
  */
 public class TextOutputDevice implements OutputDevice {
 
-  // Properties
-  private final PrintStream printStream;
+    // Properties
+    private final PrintStream printStream;
 
-  /**
-   * Constructor
-   *
-   * @param printStream the destination to which the text output should be sent;
-   *   can't be <code>null</code>
-   */
-  public TextOutputDevice(final PrintStream printStream) {
-    Utils.checkNotNull(printStream);
-    this.printStream = printStream;
-  }
+    /**
+     * Constructor
+     * 
+     * @param printStream the destination to which the text output should be
+     *            sent; can't be <code>null</code>
+     */
+    public TextOutputDevice(final PrintStream printStream) {
+        Utils.checkNotNull(printStream);
+        this.printStream = printStream;
+    }
 
-  public void prompt(final String prompt) {
-    printStream.println(prompt);
-  }
+    public void prompt(final String prompt) {
+        printStream.println(prompt);
+    }
 
-  public void showError(final String message) {
-    printStream.println(message);
-  }
+    public void showError(final String message) {
+        printStream.println(message);
+    }
 
-  public void close() {
-    IOUtils.closeQuietly(printStream);
-  }
+    public void close() {
+        IOUtils.closeQuietly(printStream);
+    }
 }

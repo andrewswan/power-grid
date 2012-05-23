@@ -16,8 +16,8 @@ public interface BoardService {
      * Returns the available game boards (i.e. geographic maps)
      * 
      * @return a non-<code>null</code> list of resource keys, not in any
-     *   specific order because they will require sorting after localisation
-     *   anyway
+     *         specific order because they will require sorting after
+     *         localisation anyway
      */
     Iterable<String> getBoardNameCodes();
 }

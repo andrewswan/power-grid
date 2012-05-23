@@ -17,42 +17,42 @@ import com.andrewswan.powergrid.domain.City;
 public class AbstractBoardTest {
 
     @Test
-  public void testAddAreasAndCitiesAndGetDistances() {
-    // Set up
-    final TestBoard board = new TestBoard(2);
+    public void testAddAreasAndCitiesAndGetDistances() {
+        // Set up
+        final TestBoard board = new TestBoard(2);
 
-    // Invoke
-    final int cost = board.getTotalLinkCost(board.cityA, board.cityC);
+        // Invoke
+        final int cost = board.getTotalLinkCost(board.cityA, board.cityC);
 
-    // Check
-    assertEquals(4 + 3, cost);
-  }
-
-  /**
-   * A test {@link Board}
-   */
-  private static class TestBoard extends AbstractBoard {
-
-    // Properties (non-private at compiler's suggestion)
-    final City cityA;
-    final City cityB;
-    final City cityC;
+        // Check
+        assertEquals(4 + 3, cost);
+    }
 
     /**
-     * Constructor
-     *
-     * @param players
+     * A test {@link Board}
      */
-    protected TestBoard(final int players) {
-      super("Nowhere", players);
-      final Area north = addArea("North");
-      cityA = addCity("A", north);
-      cityB = addCity("B", north);
-      final Area south = addArea("South");
-      cityC = addCity("C", south);
-      addLink(cityA, cityB, 4);
-      addLink(cityA, cityC, 10);
-      addLink(cityB, cityC, 3);
+    private static class TestBoard extends AbstractBoard {
+
+        // Properties (non-private at compiler's suggestion)
+        final City cityA;
+        final City cityB;
+        final City cityC;
+
+        /**
+         * Constructor
+         * 
+         * @param players
+         */
+        protected TestBoard(final int players) {
+            super("Nowhere", players);
+            final Area north = addArea("North");
+            cityA = addCity("A", north);
+            cityB = addCity("B", north);
+            final Area south = addArea("South");
+            cityC = addCity("C", south);
+            addLink(cityA, cityB, 4);
+            addLink(cityA, cityC, 10);
+            addLink(cityB, cityC, 3);
+        }
     }
-  }
 }

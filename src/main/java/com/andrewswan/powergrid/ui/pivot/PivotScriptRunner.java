@@ -9,5 +9,4 @@ import org.apache.pivot.wtk.ScriptApplication;
  */
 public class PivotScriptRunner extends ScriptApplication {
 
-
 }

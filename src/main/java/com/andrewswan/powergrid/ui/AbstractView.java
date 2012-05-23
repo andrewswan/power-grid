@@ -14,26 +14,27 @@ import com.andrewswan.powergrid.domain.Controller;
 import com.andrewswan.powergrid.domain.GameModel;
 
 /**
- * Superclass for for this application's MVC views 
+ * Superclass for for this application's MVC views
  * 
  * @author Andrew Swan
  */
 public abstract class AbstractView implements Observer {
-    
+
     // Constants
-    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractView.class);
-    
+    protected static final Logger LOGGER = LoggerFactory
+            .getLogger(AbstractView.class);
+
     // Properties
     protected final Controller controller;
     protected final GameModel game;
-    
+
     /**
      * Constructor
-     *
+     * 
      * @param game the MVC model for the game being viewed; can't be
-     *   <code>null</code>
+     *            <code>null</code>
      * @param controller the MVC controller to invoke upon user actions; can't
-     *   be <code>null</code>
+     *            be <code>null</code>
      */
     protected AbstractView(final GameModel game, final Controller controller) {
         Utils.checkNotNull(controller, game);
@@ -44,8 +45,8 @@ public abstract class AbstractView implements Observer {
 
     @Override
     public void update(final Observable observable, final Object message) {
-        Utils.checkTrue(
-                observable == game, "Unexpected Observable " + observable);
+        Utils.checkTrue(observable == game, "Unexpected Observable "
+                + observable);
         update(message);
     }
 

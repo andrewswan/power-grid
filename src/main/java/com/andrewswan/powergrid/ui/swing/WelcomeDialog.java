@@ -7,7 +7,6 @@ import java.awt.Frame;
 
 import javax.swing.JDialog;
 
-
 /**
  * The modal dialog initially displayed when the application starts
  * 
@@ -20,7 +19,7 @@ public class WelcomeDialog extends JDialog {
 
     /**
      * Constructor
-     *
+     * 
      * @param owner can't be <code>null</code>
      */
     public WelcomeDialog(final Frame owner) {

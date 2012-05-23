@@ -16,69 +16,70 @@ import com.andrewswan.powergrid.ui.InputDevice;
  */
 public class HumanPlayerStrategy implements PlayerStrategy {
 
-  // Properties
-  private final Colour colour;
-  private final Game game;
-  private final InputDevice inputDevice;
+    // Properties
+    private final Colour colour;
+    private final Game game;
+    private final InputDevice inputDevice;
 
-  /**
-   * Constructor
-   *
-   * @param colour the colour being played by this person; can't be
-   *   <code>null</code>
-   * @param game the game being played; can't be <code>null</code>
-   * @param inputDevice the device from which the user's inputs are to be read;
-   *   can't be <code>null</code>
-   */
-  public HumanPlayerStrategy(
-      final Colour colour, final Game game, final InputDevice inputDevice)
-  {
-    Utils.checkNotNull(colour, game, inputDevice);
-    this.colour = colour;
-    this.game = game;
-    this.inputDevice = inputDevice;
-  }
-
-  public Integer bidOnPlant(final Plant plant, final int minimumBid, final boolean canPass) {
-    return inputDevice.bidOnPlant(colour, plant, minimumBid, canPass);
-  }
-
-  public ResourcePool getResourcesToBuy() {
-    return inputDevice.getResourcesToBuy(colour);
-  }
-
-  public String[] getCitiesToConnect() {
-    return inputDevice.getCitiesToConnect(colour);
-  }
-
-  public int[] getPlantsToOperate() {
-    return inputDevice.getPlantsToOperate(colour);
-  }
-
-  public void redistributeResources(
-		  final Plant[] plants, final Plant plantBeingReplaced)
-  {
-    // TODO Offer human the chance to redistribute resources
-    throw new UnsupportedOperationException("Not implemented");
-  }
-
-  public Plant selectPlantForAuction(final boolean mandatory) {
-    final Plant[] currentMarket = game.getCurrentMarket();
-    final Integer plantNumber =
-        inputDevice.selectPlantForAuction(colour, currentMarket, mandatory);
-    if (plantNumber == null) {
-      if (mandatory) {
-        throw new IllegalStateException("Input device " + inputDevice +
-            " allowed the user not to choose a plant when it was mandatory");
-      }
-      return null;
+    /**
+     * Constructor
+     * 
+     * @param colour the colour being played by this person; can't be
+     *            <code>null</code>
+     * @param game the game being played; can't be <code>null</code>
+     * @param inputDevice the device from which the user's inputs are to be
+     *            read; can't be <code>null</code>
+     */
+    public HumanPlayerStrategy(final Colour colour, final Game game,
+            final InputDevice inputDevice) {
+        Utils.checkNotNull(colour, game, inputDevice);
+        this.colour = colour;
+        this.game = game;
+        this.inputDevice = inputDevice;
     }
-    for (final Plant plant : currentMarket) {
-      if (plant.getNumber() == plantNumber) {
-        return plant;
-      }
+
+    public Integer bidOnPlant(final Plant plant, final int minimumBid,
+            final boolean canPass) {
+        return inputDevice.bidOnPlant(colour, plant, minimumBid, canPass);
     }
-    // If we get here, the plant number is neither null nor valid; re-prompt
-    return selectPlantForAuction(mandatory);
-  }
+
+    public ResourcePool getResourcesToBuy() {
+        return inputDevice.getResourcesToBuy(colour);
+    }
+
+    public String[] getCitiesToConnect() {
+        return inputDevice.getCitiesToConnect(colour);
+    }
+
+    public int[] getPlantsToOperate() {
+        return inputDevice.getPlantsToOperate(colour);
+    }
+
+    public void redistributeResources(final Plant[] plants,
+            final Plant plantBeingReplaced) {
+        // TODO Offer human the chance to redistribute resources
+        throw new UnsupportedOperationException("Not implemented");
+    }
+
+    public Plant selectPlantForAuction(final boolean mandatory) {
+        final Plant[] currentMarket = game.getCurrentMarket();
+        final Integer plantNumber = inputDevice.selectPlantForAuction(colour,
+                currentMarket, mandatory);
+        if (plantNumber == null) {
+            if (mandatory) {
+                throw new IllegalStateException(
+                        "Input device "
+                                + inputDevice
+                                + " allowed the user not to choose a plant when it was mandatory");
+            }
+            return null;
+        }
+        for (final Plant plant : currentMarket) {
+            if (plant.getNumber() == plantNumber) {
+                return plant;
+            }
+        }
+        // If we get here, the plant number is neither null nor valid; re-prompt
+        return selectPlantForAuction(mandatory);
+    }
 }

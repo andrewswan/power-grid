@@ -16,38 +16,38 @@ import com.andrewswan.powergrid.domain.City;
  */
 public class CityImplTest {
 
-  // Constants
-  private static final String DISPLAY_NAME = "Paris";
-  private static final String INTERNAL_NAME = "ParisNE";
+    // Constants
+    private static final String DISPLAY_NAME = "Paris";
+    private static final String INTERNAL_NAME = "ParisNE";
 
-  // Fixture
-  private Area area;
-  private City city;
+    // Fixture
+    private Area area;
+    private City city;
 
-  @Before
-  public void setUp() throws Exception {
-    area = new AreaImpl("West");
-  }
+    @Before
+    public void setUp() throws Exception {
+        area = new AreaImpl("West");
+    }
 
-  @Test
-  public void testCityWithDifferentInternalAndDisplayNames() {
-    // Invoke
-    city = new CityImpl(area, DISPLAY_NAME, INTERNAL_NAME);
+    @Test
+    public void testCityWithDifferentInternalAndDisplayNames() {
+        // Invoke
+        city = new CityImpl(area, DISPLAY_NAME, INTERNAL_NAME);
 
-    // Check
-    assertEquals(DISPLAY_NAME, city.getDisplayName());
-    assertEquals(INTERNAL_NAME, city.getInternalName());
-    assertEquals(area, city.getArea());
-  }
+        // Check
+        assertEquals(DISPLAY_NAME, city.getDisplayName());
+        assertEquals(INTERNAL_NAME, city.getInternalName());
+        assertEquals(area, city.getArea());
+    }
 
-  @Test
-  public void testCityWithSameInternalAndDisplayNames() {
-    // Invoke
-    city = new CityImpl(area, DISPLAY_NAME);
+    @Test
+    public void testCityWithSameInternalAndDisplayNames() {
+        // Invoke
+        city = new CityImpl(area, DISPLAY_NAME);
 
-    // Check
-    assertEquals(DISPLAY_NAME, city.getDisplayName());
-    assertEquals(DISPLAY_NAME, city.getInternalName());
-    assertEquals(area, city.getArea());
-  }
+        // Check
+        assertEquals(DISPLAY_NAME, city.getDisplayName());
+        assertEquals(DISPLAY_NAME, city.getInternalName());
+        assertEquals(area, city.getArea());
+    }
 }

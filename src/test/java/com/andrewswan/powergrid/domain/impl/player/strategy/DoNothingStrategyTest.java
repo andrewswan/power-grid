@@ -24,89 +24,89 @@ import com.andrewswan.powergrid.domain.ResourcePool;
  */
 public class DoNothingStrategyTest {
 
-  // Constants
-  private static final int MINIMUM_BID = 3; // arbitrary
+    // Constants
+    private static final int MINIMUM_BID = 3; // arbitrary
 
-  // Fixture
-  private PlayerStrategy strategy;
-  @Mock private Game mockGame;
-  @Mock private Plant mockPlant1;
-  @Mock private Plant mockPlant2;
+    // Fixture
+    private PlayerStrategy strategy;
+    @Mock private Game mockGame;
+    @Mock private Plant mockPlant1;
+    @Mock private Plant mockPlant2;
 
-  @Before
-  public void setUp() throws Exception {
-    MockitoAnnotations.initMocks(this);
-    strategy = new DoNothingStrategy(mockGame);
-  }
+    @Before
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        strategy = new DoNothingStrategy(mockGame);
+    }
 
-  @Test
-  public void testMandatoryBidOnPlant() {
-    // Invoke
-    final Integer bid = strategy.bidOnPlant(mockPlant1, MINIMUM_BID, false);
+    @Test
+    public void testMandatoryBidOnPlant() {
+        // Invoke
+        final Integer bid = strategy.bidOnPlant(mockPlant1, MINIMUM_BID, false);
 
-    // Check
-    assertNotNull(bid);
-    assertEquals(MINIMUM_BID, bid.intValue());
-  }
+        // Check
+        assertNotNull(bid);
+        assertEquals(MINIMUM_BID, bid.intValue());
+    }
 
-  @Test
-  public void testOptionalBidOnPlant() {
-    // Invoke
-    final Integer bid = strategy.bidOnPlant(mockPlant1, MINIMUM_BID, true);
+    @Test
+    public void testOptionalBidOnPlant() {
+        // Invoke
+        final Integer bid = strategy.bidOnPlant(mockPlant1, MINIMUM_BID, true);
 
-    // Check
-    assertNull(bid);
-  }
+        // Check
+        assertNull(bid);
+    }
 
-  @Test
-  public void testBuyResources() {
-    // Invoke
-    final ResourcePool resourcesToBuy = strategy.getResourcesToBuy();
-    
-    // Check
-    assertNull(resourcesToBuy);
-  }
+    @Test
+    public void testBuyResources() {
+        // Invoke
+        final ResourcePool resourcesToBuy = strategy.getResourcesToBuy();
 
-  @Test
-  public void testConnectCities() {
-    // Invoke
-    final String[] citiesToConnect = strategy.getCitiesToConnect();
+        // Check
+        assertNull(resourcesToBuy);
+    }
 
-    // Check
-    assertNotNull(citiesToConnect);
-    assertEquals(0, citiesToConnect.length);
-  }
+    @Test
+    public void testConnectCities() {
+        // Invoke
+        final String[] citiesToConnect = strategy.getCitiesToConnect();
 
-  @Test
-  public void testPowerCities() {
-    // Invoke
-    final int[] plantsToOperate = strategy.getPlantsToOperate();
+        // Check
+        assertNotNull(citiesToConnect);
+        assertEquals(0, citiesToConnect.length);
+    }
 
-    // Check
-    assertNotNull(plantsToOperate);
-    assertEquals(0, plantsToOperate.length);
-  }
+    @Test
+    public void testPowerCities() {
+        // Invoke
+        final int[] plantsToOperate = strategy.getPlantsToOperate();
 
-  @Test
-  public void testSelectOptionalPlantForAuction() {
-    // Invoke
-    final Plant plant = strategy.selectPlantForAuction(false);
+        // Check
+        assertNotNull(plantsToOperate);
+        assertEquals(0, plantsToOperate.length);
+    }
 
-    // Check
-    assertNull(plant);
-  }
+    @Test
+    public void testSelectOptionalPlantForAuction() {
+        // Invoke
+        final Plant plant = strategy.selectPlantForAuction(false);
 
-  @Test
-  public void testSelectMandatoryPlantForAuction() {
-    // Set up
-    when(mockGame.getCurrentMarket())
-        .thenReturn(new Plant[] {mockPlant1, mockPlant2});
+        // Check
+        assertNull(plant);
+    }
 
-    // Invoke
-    final Plant plant = strategy.selectPlantForAuction(true);
+    @Test
+    public void testSelectMandatoryPlantForAuction() {
+        // Set up
+        when(mockGame.getCurrentMarket()).thenReturn(
+                new Plant[] { mockPlant1, mockPlant2 });
 
-    // Check
-    assertNotNull(plant);
-    assertSame(mockPlant1, plant);
-  }
+        // Invoke
+        final Plant plant = strategy.selectPlantForAuction(true);
+
+        // Check
+        assertNotNull(plant);
+        assertSame(mockPlant1, plant);
+    }
 }
