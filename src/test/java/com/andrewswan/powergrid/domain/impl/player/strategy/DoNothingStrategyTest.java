@@ -3,9 +3,14 @@
  */
 package com.andrewswan.powergrid.domain.impl.player.strategy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.when;
-import junit.framework.TestCase;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -17,7 +22,7 @@ import com.andrewswan.powergrid.domain.ResourcePool;
 /**
  * Unit test of the {@link DoNothingStrategy}
  */
-public class DoNothingStrategyTest extends TestCase {
+public class DoNothingStrategyTest {
 
   // Constants
   private static final int MINIMUM_BID = 3; // arbitrary
@@ -28,13 +33,13 @@ public class DoNothingStrategyTest extends TestCase {
   @Mock private Plant mockPlant1;
   @Mock private Plant mockPlant2;
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
+  @Before
+  public void setUp() throws Exception {
     MockitoAnnotations.initMocks(this);
     strategy = new DoNothingStrategy(mockGame);
   }
 
+  @Test
   public void testMandatoryBidOnPlant() {
     // Invoke
     final Integer bid = strategy.bidOnPlant(mockPlant1, MINIMUM_BID, false);
@@ -44,6 +49,7 @@ public class DoNothingStrategyTest extends TestCase {
     assertEquals(MINIMUM_BID, bid.intValue());
   }
 
+  @Test
   public void testOptionalBidOnPlant() {
     // Invoke
     final Integer bid = strategy.bidOnPlant(mockPlant1, MINIMUM_BID, true);
@@ -52,6 +58,7 @@ public class DoNothingStrategyTest extends TestCase {
     assertNull(bid);
   }
 
+  @Test
   public void testBuyResources() {
     // Invoke
     final ResourcePool resourcesToBuy = strategy.getResourcesToBuy();
@@ -60,6 +67,7 @@ public class DoNothingStrategyTest extends TestCase {
     assertNull(resourcesToBuy);
   }
 
+  @Test
   public void testConnectCities() {
     // Invoke
     final String[] citiesToConnect = strategy.getCitiesToConnect();
@@ -69,6 +77,7 @@ public class DoNothingStrategyTest extends TestCase {
     assertEquals(0, citiesToConnect.length);
   }
 
+  @Test
   public void testPowerCities() {
     // Invoke
     final int[] plantsToOperate = strategy.getPlantsToOperate();
@@ -78,6 +87,7 @@ public class DoNothingStrategyTest extends TestCase {
     assertEquals(0, plantsToOperate.length);
   }
 
+  @Test
   public void testSelectOptionalPlantForAuction() {
     // Invoke
     final Plant plant = strategy.selectPlantForAuction(false);
@@ -86,6 +96,7 @@ public class DoNothingStrategyTest extends TestCase {
     assertNull(plant);
   }
 
+  @Test
   public void testSelectMandatoryPlantForAuction() {
     // Set up
     when(mockGame.getCurrentMarket())

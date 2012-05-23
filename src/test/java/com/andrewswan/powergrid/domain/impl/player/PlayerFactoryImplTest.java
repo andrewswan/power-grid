@@ -3,14 +3,17 @@
  */
 package com.andrewswan.powergrid.domain.impl.player;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -24,19 +27,19 @@ import com.andrewswan.powergrid.ui.InputDevice;
 /**
  * Unit test of the basic {@link PlayerFactory} implementation
  */
-public class PlayerFactoryImplTest extends TestCase {
+public class PlayerFactoryImplTest {
 
   // Fixture
   private PlayerFactoryImpl factory;    // the factory being tested
   @Mock private InputDevice mockInputDevice;
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
+  @Before
+  public void setUp() throws Exception {
     MockitoAnnotations.initMocks(this);
     factory = new PlayerFactoryImpl(mockInputDevice);
   }
 
+  @Test
   public void testGetNameOfFirstPlayer() {
     // Invoke
     final String name = factory.getName(0, new ArrayList<String>());
@@ -45,6 +48,7 @@ public class PlayerFactoryImplTest extends TestCase {
     assertEquals("Player 1", name);
   }
 
+  @Test
   public void testGetColourOfFirstPlayer() {
     // Invoke
     final Colour colour = factory.getColour(0, Arrays.asList(Colour.values()));
@@ -53,6 +57,7 @@ public class PlayerFactoryImplTest extends TestCase {
     assertEquals(Colour.values()[0], colour);
   }
 
+  @Test
   public void testGetStrategyOfFirstPlayer() {
     // Set up
     final Game mockGame = mock(Game.class);
@@ -64,6 +69,7 @@ public class PlayerFactoryImplTest extends TestCase {
     assertNotNull(strategy);
   }
 
+  @Test
   public void testGetPlayers() {
     // Set up
     final int numberOfPlayers = 3;

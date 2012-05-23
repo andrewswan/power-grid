@@ -3,24 +3,29 @@
  */
 package com.andrewswan.powergrid.domain.impl;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import com.andrewswan.powergrid.domain.IncomeChart;
 
 /**
  * Tests the standard {@link IncomeChart}
  */
-public class StandardIncomeChartTest extends TestCase {
+public class StandardIncomeChartTest {
 
   // Fixture
   private IncomeChart incomeChart;
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
+  @Before
+  public void setUp() throws Exception {
     incomeChart = new StandardIncomeChart();
   }
 
+  @Test
   public void testGetIncomeForNegativeCities() {
     // Invoke
     try {
@@ -32,18 +37,22 @@ public class StandardIncomeChartTest extends TestCase {
     }
   }
 
+  @Test
   public void testIncomeForZeroCities() {
     assertEquals(StandardIncomeChart.MIN_INCOME, incomeChart.getIncome(0));
   }
 
+  @Test
   public void testIncomeForLargestExplicitNumberOfCities() {
     assertEquals(StandardIncomeChart.MAX_INCOME, incomeChart.getIncome(20));
   }
 
+  @Test
   public void testIncomeForMoreThanLargestExplicitNumberOfCities() {
     assertEquals(StandardIncomeChart.MAX_INCOME, incomeChart.getIncome(21));
   }
 
+  @Test
   public void testGetAllIncomes() {
     // Invoke
     final int[] allIncomes = incomeChart.getAllIncomes();
@@ -56,6 +65,7 @@ public class StandardIncomeChartTest extends TestCase {
         StandardIncomeChart.MAX_INCOME, allIncomes[allIncomes.length - 1]);
   }
 
+  @Test
   public void testGetAllIncomesReturnsDefensiveCopy() {
     // Invoke
     final int[] allIncomes = incomeChart.getAllIncomes();

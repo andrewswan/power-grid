@@ -3,13 +3,16 @@
  */
 package com.andrewswan.powergrid;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
 
 /**
  * Unit test of the {@link Utils} class
  */
-public class UtilsTest extends TestCase {
+public class UtilsTest {
 
+    @Test
     public void testNonProhibitedCallerIsAllowed() {
         // Set up
         final Child child = new Child();
@@ -18,6 +21,7 @@ public class UtilsTest extends TestCase {
         child.methodSecuredAgainstParent(); // shouldn't throw an exception
     }
 
+    @Test
     public void testProhibitedCallerIsNotAllowed() {
         // Set up a calling instance that implements the prohibited interface
         final Parent parent = new ParentImpl();
@@ -32,6 +36,7 @@ public class UtilsTest extends TestCase {
         }
     }
 
+    @Test
     public void testClassSecuredAgainstItself() {
         new SelfSecured().methodSecuredAgainstOwnClass(); // should be allowed
     }

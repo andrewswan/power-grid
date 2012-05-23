@@ -3,6 +3,9 @@
  */
 package com.andrewswan.powergrid.domain.impl;
 
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -11,8 +14,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -23,7 +26,7 @@ import com.andrewswan.powergrid.domain.Player;
 /**
  * Unit test of the {@link TurnOrderComparator}
  */
-public class TurnOrderComparatorTest extends TestCase {
+public class TurnOrderComparatorTest {
 
   // Fixture
   @Mock private Board mockBoard;
@@ -33,13 +36,13 @@ public class TurnOrderComparatorTest extends TestCase {
   @Mock private Set<City> mockCitySet2;
   private TurnOrderComparator comparator;
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
+  @Before
+  public void setUp() throws Exception {
     MockitoAnnotations.initMocks(this);
     comparator = new TurnOrderComparator(mockBoard);
   }
 
+  @Test
   public void testCompareWithNullFirstPlayer() {
     // Invoke
     try {
@@ -51,6 +54,7 @@ public class TurnOrderComparatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testCompareWithNullSecondPlayer() {
     // Invoke
     try {
@@ -62,6 +66,7 @@ public class TurnOrderComparatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testCompareWithDifferentNumbersOfCitiesConnected() {
     // Set up
     when(mockBoard.getConnectedCities(mockPlayer1))
@@ -78,6 +83,7 @@ public class TurnOrderComparatorTest extends TestCase {
     assertTrue(result < 0); // i.e. the player with more cities is "lesser"
   }
 
+  @Test
   public void testCompareWithSameNumbersOfCitiesConnected() {
     // Set up
     // -- Neither player has connected any cities
@@ -114,6 +120,7 @@ public class TurnOrderComparatorTest extends TestCase {
   /**
    * Uses the comparator to sort an actual list of players
    */
+  @Test
   public void testSortListOfPlayersHavingDifferentNumbersOfCities() {
     // Set up
     when(mockBoard.getConnectedCities(mockPlayer1))
@@ -137,6 +144,7 @@ public class TurnOrderComparatorTest extends TestCase {
     assertSame(mockPlayer2, players.get(1));
   }
 
+  @Test
   public void testFirstPlayerMustOwnAPlant() {
       // Set up
     setUpHighestPlantsAndSameNumberOfCities(null, 10);
@@ -152,6 +160,7 @@ public class TurnOrderComparatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testSecondPlayerMustOwnAPlant() {
     setUpHighestPlantsAndSameNumberOfCities(11, null);
 

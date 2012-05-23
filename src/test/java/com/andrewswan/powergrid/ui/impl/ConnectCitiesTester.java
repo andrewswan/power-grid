@@ -8,7 +8,6 @@ import java.util.Arrays;
 import com.andrewswan.powergrid.domain.Player.Colour;
 import com.andrewswan.powergrid.ui.InputDevice;
 
-
 /**
  * A non-JUnit test that allows the developer to manually test the
  * {@link StandardInput}, because it's not unit-testable (uses the static fields

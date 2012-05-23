@@ -3,15 +3,18 @@
  */
 package com.andrewswan.powergrid.domain.impl;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 import com.andrewswan.powergrid.domain.ResourcePool;
 
 /**
  * Unit test of the {@link ResourcePool} implementation
  */
-public class ResourcePoolImplTest extends TestCase {
+public class ResourcePoolImplTest {
 
+    @Test
   public void testEmptyPoolsAreEqual() {
     assertEquals(new ResourcePoolImpl(), new ResourcePoolImpl());
   }

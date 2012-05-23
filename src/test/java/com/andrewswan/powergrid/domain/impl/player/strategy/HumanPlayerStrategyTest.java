@@ -3,10 +3,14 @@
  */
 package com.andrewswan.powergrid.domain.impl.player.strategy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import junit.framework.TestCase;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -19,7 +23,7 @@ import com.andrewswan.powergrid.ui.InputDevice;
 /**
  * Unit test of {@link HumanPlayerStrategy}
  */
-public class HumanPlayerStrategyTest extends TestCase {
+public class HumanPlayerStrategyTest {
 
   // Constants (arbitrary)
   private static final boolean CAN_PASS = false;
@@ -34,13 +38,13 @@ public class HumanPlayerStrategyTest extends TestCase {
   @Mock private Game mockGame;
   @Mock private InputDevice mockInputDevice;
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
+  @Before
+  public void setUp() throws Exception {
     MockitoAnnotations.initMocks(this);
     strategy = new HumanPlayerStrategy(COLOUR, mockGame, mockInputDevice);
   }
 
+  @Test
   public void testBidOnPlant() {
     // Set up
     final Plant mockPlant = mock(Plant.class);
@@ -54,6 +58,7 @@ public class HumanPlayerStrategyTest extends TestCase {
     assertEquals(BID, bid);
   }
 
+  @Test
   public void testGetPlantsToOperate() {
     // Set up
     final int[] plants = new int[] {PLANT_NUMBER};
@@ -68,6 +73,7 @@ public class HumanPlayerStrategyTest extends TestCase {
     assertEquals(PLANT_NUMBER, actualPlants[0]);
   }
 
+  @Test
   public void testGetResourcesToBuy() {
     // Set up
     final ResourcePool mockResources = mock(ResourcePool.class);
@@ -80,6 +86,7 @@ public class HumanPlayerStrategyTest extends TestCase {
     assertSame(mockResources, resources);
   }
 
+  @Test
   public void testGetCitiesToConnect() {
     // Set up
     final String[] cityNames = new String[] {CITY_NAME};
@@ -94,6 +101,7 @@ public class HumanPlayerStrategyTest extends TestCase {
     assertEquals(CITY_NAME, actualCityNames[0]);
   }
 
+  @Test
   public void testSelectValidPlantToAuction() {
     // Set up
     final Plant mockPlantOne = mock(Plant.class);

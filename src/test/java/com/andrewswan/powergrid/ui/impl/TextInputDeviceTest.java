@@ -8,6 +8,10 @@ import static com.andrewswan.powergrid.domain.ResourceMarket.Resource.GARBAGE;
 import static com.andrewswan.powergrid.domain.ResourceMarket.Resource.OIL;
 import static com.andrewswan.powergrid.domain.ResourceMarket.Resource.URANIUM;
 import static com.andrewswan.powergrid.ui.impl.TextInputDevice.LINE_SEPARATOR;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,9 +19,9 @@ import static org.mockito.Mockito.when;
 import java.io.InputStream;
 import java.util.Arrays;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.lang.StringUtils;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
@@ -32,7 +36,7 @@ import com.andrewswan.powergrid.ui.OutputDevice;
 /**
  * Unit test of the text {@link TextInputDevice}
  */
-public class TextInputDeviceTest extends TestCase {
+public class TextInputDeviceTest {
 
   // Constants
   protected static final Logger LOGGER =
@@ -47,9 +51,8 @@ public class TextInputDeviceTest extends TestCase {
   @Mock private InputStream mockInputStream;
   @Mock private OutputDevice mockOutputDevice;
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
+  @Before
+  public void setUp() throws Exception {
     MockitoAnnotations.initMocks(this);
     inputDevice = new TextInputDevice(mockInputStream, mockOutputDevice);
   }
@@ -73,6 +76,7 @@ public class TextInputDeviceTest extends TestCase {
       when(mockInputStream.read()).thenReturn(firstChar, remainingChars);
   }
 
+  @Test
   public void testMandatoryBidOnPlant() throws Exception {
     // Set up
     final Plant mockPlant = mock(Plant.class);
@@ -89,16 +93,19 @@ public class TextInputDeviceTest extends TestCase {
     assertEquals(13, bid.intValue());
   }
 
+  @Test
   public void testGetNoCitiesToConnect() throws Exception {
     assertCitiesToConnect(LINE_SEPARATOR, new String[0]);
   }
 
+  @Test
   public void testGetOneCityToConnect() throws Exception {
     final String city = "Paris";
     assertCitiesToConnect(
         city + LINE_SEPARATOR + LINE_SEPARATOR, new String[] {city});
   }
 
+  @Test
   public void testGetTwoCitiesToConnect() throws Exception {
     final String london = "London";
     final String paris = "Paris";
@@ -132,14 +139,17 @@ public class TextInputDeviceTest extends TestCase {
     assertTrue(Arrays.equals(expectedCities, actualCities));
   }
 
+  @Test
   public void testGetNoPlantNumbers() throws Exception {
     assertGetPlantsToOperate(LINE_SEPARATOR, new int[0]);
   }
 
+  @Test
   public void testGetOnePlantNumber() throws Exception {
     assertGetPlantsToOperate("5" + LINE_SEPARATOR, new int[] {5});
   }
 
+  @Test
   public void testGetFourPlantNumbers() throws Exception {
     // Here we test all combinations of separators
     assertGetPlantsToOperate(
@@ -171,16 +181,19 @@ public class TextInputDeviceTest extends TestCase {
     assertTrue(Arrays.equals(expectedPlantNumbers, actualPlantNumbers));
   }
 
+  @Test
   public void testBuyNoResources() throws Exception {
     assertGetResourcesToBuy(LINE_SEPARATOR, new ResourcePoolImpl());
   }
 
+  @Test
   public void testBuyOneCoal() throws Exception {
     final ResourcePool expectedResources = new ResourcePoolImpl();
     expectedResources.addResource(COAL, 1);
     assertGetResourcesToBuy("1c" + LINE_SEPARATOR, expectedResources);
   }
 
+  @Test
   public void testBuySomeOfEachResource() throws Exception {
     final ResourcePool expectedResources = new ResourcePoolImpl();
     expectedResources.addResource(COAL, 10);
@@ -217,6 +230,7 @@ public class TextInputDeviceTest extends TestCase {
     assertEquals(expectedResources, actualResources);
   }
 
+  @Test
   public void testSelectNoPlantForAuction() throws Exception {
     // Set up
     final Plant[] currentMarket = getMockPlants(PLANT_NUMBER, PLANT_NUMBER + 1);
@@ -233,6 +247,7 @@ public class TextInputDeviceTest extends TestCase {
     assertNull(plantNumber);
   }
 
+  @Test
   public void testSelectPlantForAuction() throws Exception {
     // Set up
     final Plant[] currentMarket = getMockPlants(PLANT_NUMBER);

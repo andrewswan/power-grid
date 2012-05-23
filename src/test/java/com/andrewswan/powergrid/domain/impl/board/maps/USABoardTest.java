@@ -3,9 +3,12 @@
  */
 package com.andrewswan.powergrid.domain.impl.board.maps;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Set;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import com.andrewswan.powergrid.domain.Area;
 import com.andrewswan.powergrid.domain.Board;
@@ -13,8 +16,9 @@ import com.andrewswan.powergrid.domain.Board;
 /**
  * Unit test of the U.S.A. board
  */
-public class USABoardTest extends TestCase {
+public class USABoardTest {
 
+    @Test
   public void testAreaAdjacencies() {
     assertAdjacentAreas("Purple", 3);
     assertAdjacentAreas("Dark Green", 2);
@@ -37,6 +41,7 @@ public class USABoardTest extends TestCase {
     assertEquals(expectedNeighbours, area.getAdjacentAreas().size());
   }
 
+  @Test
   public void testVariousLinkCounts() {
     assertLinkCountEquals("Kansas City", 7);
     assertLinkCountEquals("Minneapolis", 6);
@@ -60,6 +65,7 @@ public class USABoardTest extends TestCase {
         expectedLinkCount, linkCount);
   }
 
+  @Test
   public void testAreasInPlay() {
     assertNumberOfAreasInPlay(2, 3);
     assertNumberOfAreasInPlay(3, 3);

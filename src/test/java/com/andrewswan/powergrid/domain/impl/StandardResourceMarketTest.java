@@ -7,7 +7,10 @@ import static com.andrewswan.powergrid.domain.impl.StandardResourceMarket.STARTI
 import static com.andrewswan.powergrid.domain.impl.StandardResourceMarket.STARTING_GARBAGE;
 import static com.andrewswan.powergrid.domain.impl.StandardResourceMarket.STARTING_OIL;
 import static com.andrewswan.powergrid.domain.impl.StandardResourceMarket.STARTING_URANIUM;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
 
 import com.andrewswan.powergrid.domain.CostedResourcePool;
 import com.andrewswan.powergrid.domain.ResourceMarket;
@@ -17,11 +20,12 @@ import com.andrewswan.powergrid.domain.ResourcePool;
 /**
  * Unit test of the standard {@link ResourceMarket}
  */
-public class StandardResourceMarketTest extends TestCase {
+public class StandardResourceMarketTest {
 
   // Fixture
   private StandardResourceMarket market;
 
+  @Test
   public void testStartingResources() {
     // Invoke
     market = new StandardResourceMarket(2); // number of players irrelevant here
@@ -33,6 +37,7 @@ public class StandardResourceMarketTest extends TestCase {
     assertEquals(STARTING_URANIUM, market.getStock(Resource.URANIUM));
   }
 
+  @Test
   public void testStartingPrices() {
     // Invoke
     market = new StandardResourceMarket(2); // number of players irrelevant here
@@ -63,44 +68,52 @@ public class StandardResourceMarketTest extends TestCase {
     assertEquals(expectedCost, resourcesBought.getCost());
   }
 
+  @Test
   public void testBuyingNullResourcesCostsZero() {
     assertResourceCost(null, 0);
   }
 
+  @Test
   public void testBuyingNoResourcesCostsZero() {
     assertResourceCost(new ResourcePoolImpl(), 0);
   }
 
+  @Test
   public void testBuyingOneCoalCostsOneElektro() {
     final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.COAL, 1);
     assertResourceCost(resources, 1);
   }
 
+  @Test
   public void testBuyingOneOilCostsThreeElektro() {
     final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.OIL, 1);
     assertResourceCost(resources, 3);
   }
 
+  @Test
   public void testBuyingOneGarbageCostsSevenElektro() {
     final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.GARBAGE, 1);
     assertResourceCost(resources, 7);
   }
 
+  @Test
   public void testBuyingOneUraniumCostsFourteenElektro() {
     final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.URANIUM, 1);
     assertResourceCost(resources, 14);
   }
 
+  @Test
   public void testBuyingFourCoalCostsFiveElektro() {
     final ResourcePool resources = new ResourcePoolImpl();
     resources.addResource(Resource.COAL, 4);
     assertResourceCost(resources, 5);
   }
 
+  @Test
   public void testPriceOfCoalForAllStockLevels() {
     // Set up
     market = new StandardResourceMarket(2); // number of players irrelevant here

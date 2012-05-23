@@ -3,7 +3,11 @@
  */
 package com.andrewswan.powergrid.domain.impl;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
 
 import com.andrewswan.powergrid.domain.Plant;
 import com.andrewswan.powergrid.domain.PlantMarket;
@@ -12,11 +16,12 @@ import com.andrewswan.powergrid.domain.impl.deck.StandardDeck;
 /**
  * Tests the standard {@link PlantMarket}
  */
-public class StandardPlantMarketTest extends TestCase {
+public class StandardPlantMarketTest {
 
   // Fixture
   private StandardPlantMarket market;
 
+  @Test
   public void testStartingCurrentMarket() {
     // Set up
     market = new StandardPlantMarket(2);  // number of players irrelevant here
@@ -32,6 +37,7 @@ public class StandardPlantMarketTest extends TestCase {
     }
   }
 
+  @Test
   public void testStartingFutureMarket() {
     // Set up
     market = new StandardPlantMarket(2);  // number of players irrelevant here
@@ -47,6 +53,7 @@ public class StandardPlantMarketTest extends TestCase {
     }
   }
 
+  @Test
   public void testThirteenPlantIsNext() {
     // Set up
     market = new StandardPlantMarket(2);  // number of players irrelevant here
@@ -62,6 +69,7 @@ public class StandardPlantMarketTest extends TestCase {
     assertEquals(StandardDeck.PLANT_ON_TOP, highestPlant.getNumber());
   }
 
+  @Test
   public void testRemoveObsoletePlants() {
     // Set up
     market = new StandardPlantMarket(2);  // number of players irrelevant here
@@ -75,6 +83,7 @@ public class StandardPlantMarketTest extends TestCase {
     assertEquals(4, removedPlants[1].getNumber());
   }
 
+  @Test
   public void testCannotBuyPlantInFutureMarket() {
     // Set up
     market = new StandardPlantMarket(2);  // number of players irrelevant here
@@ -83,6 +92,7 @@ public class StandardPlantMarketTest extends TestCase {
     assertCannotBuyPlant(market.getFutureMarket()[0]);
   }
 
+  @Test
   public void testCannotBuyNullPlant() {
     assertCannotBuyPlant(null);
   }

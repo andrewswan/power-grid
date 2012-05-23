@@ -3,7 +3,9 @@
  */
 package com.andrewswan.powergrid.domain.impl.board.maps;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 import com.andrewswan.powergrid.domain.Area;
 import com.andrewswan.powergrid.domain.Board;
@@ -12,8 +14,9 @@ import com.andrewswan.powergrid.domain.City;
 /**
  * Unit test of our basic {@link Board} implementation, using a dummy subclass
  */
-public class AbstractBoardTest extends TestCase {
+public class AbstractBoardTest {
 
+    @Test
   public void testAddAreasAndCitiesAndGetDistances() {
     // Set up
     final TestBoard board = new TestBoard(2);
