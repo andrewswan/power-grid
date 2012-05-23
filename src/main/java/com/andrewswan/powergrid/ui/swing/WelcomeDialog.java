@@ -11,7 +11,7 @@ import javax.swing.JDialog;
 /**
  * The modal dialog initially displayed when the application starts
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public class WelcomeDialog extends JDialog {
 

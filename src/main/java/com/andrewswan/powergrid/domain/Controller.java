@@ -8,7 +8,7 @@ import com.andrewswan.powergrid.Utils;
 /**
  * The MVC controller for this application
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public class Controller {
 

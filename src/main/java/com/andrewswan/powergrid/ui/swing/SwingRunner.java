@@ -12,7 +12,7 @@ import com.andrewswan.powergrid.domain.GameModel;
 /**
  * Runs this application using a Swing view
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public final class SwingRunner {
 

@@ -11,7 +11,7 @@ import com.andrewswan.powergrid.domain.PlayerStrategy;
 /**
  * Services relating to the {@link Player} domain type.
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public interface PlayerService {
 

@@ -10,7 +10,7 @@ import com.andrewswan.powergrid.domain.service.BoardService;
 /**
  * POJO implementation of the {@link BoardService}
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public class BoardServiceImpl implements BoardService {
 

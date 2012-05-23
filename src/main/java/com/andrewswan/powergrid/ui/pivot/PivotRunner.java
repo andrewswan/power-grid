@@ -42,7 +42,7 @@ import com.andrewswan.powergrid.domain.service.impl.PlayerServiceImpl;
 /**
  * Runs this application with the Apache Pivot UI
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public class PivotRunner implements Application {
 

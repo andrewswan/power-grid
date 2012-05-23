@@ -8,7 +8,7 @@ import java.util.Observable;
 /**
  * The MVC model for this application
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public class GameModel extends Observable {
 

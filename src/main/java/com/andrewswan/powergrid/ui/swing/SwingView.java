@@ -12,7 +12,7 @@ import com.andrewswan.powergrid.ui.AbstractView;
 /**
  * A Swing-based View (in MVC terms) for this application
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public class SwingView extends AbstractView {
     

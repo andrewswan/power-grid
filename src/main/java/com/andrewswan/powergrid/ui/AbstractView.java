@@ -16,7 +16,7 @@ import com.andrewswan.powergrid.domain.GameModel;
 /**
  * Superclass for for this application's MVC views 
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public abstract class AbstractView implements Observer {
     

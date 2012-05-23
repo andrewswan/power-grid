@@ -8,7 +8,7 @@ import com.andrewswan.powergrid.domain.Board;
 /**
  * Services relating to the {@link Board} domain type
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public interface BoardService {
 

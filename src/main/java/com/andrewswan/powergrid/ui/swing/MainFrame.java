@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 /**
  * The main {@link JFrame} for this Swing view
  * 
- * @author Admin
+ * @author Andrew Swan
  */
 public class MainFrame extends JFrame {
 

@@ -14,7 +14,7 @@ import com.andrewswan.powergrid.domain.service.PlayerService;
 /**
  * POJO implementation of the {@link PlayerService}
  *  
- * @author Admin
+ * @author Andrew Swan
  */
 public class PlayerServiceImpl implements PlayerService {
 
