@@ -38,4 +38,6 @@ public final class BidOnPlantTester {
         // Output
         System.out.println("Bid = " + bid);
     }
+    
+    private BidOnPlantTester() {}
 }

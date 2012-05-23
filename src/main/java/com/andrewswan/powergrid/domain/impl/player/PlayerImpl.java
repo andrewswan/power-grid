@@ -123,11 +123,9 @@ public class PlayerImpl implements Player {
     public Integer getHighestPlantNumber() {
         Integer highestPlantNumber = null;
         for (final Plant plant : plants) {
-            if (plant != null) {
-                if (highestPlantNumber == null
-                        || plant.getNumber() > highestPlantNumber) {
-                    highestPlantNumber = plant.getNumber();
-                }
+            if (plant != null
+                    && (highestPlantNumber == null || plant.getNumber() > highestPlantNumber)) {
+                highestPlantNumber = plant.getNumber();
             }
         }
         return highestPlantNumber;

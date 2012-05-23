@@ -125,7 +125,7 @@ public class TextInputDeviceTest {
      * @throws Exception
      */
     private void assertCitiesToConnect(final String inputStream,
-            final String[] expectedCities) throws Exception {
+            final String[] expectedCities) throws IOException {
         // Set up
         setUpInputStream(inputStream);
 

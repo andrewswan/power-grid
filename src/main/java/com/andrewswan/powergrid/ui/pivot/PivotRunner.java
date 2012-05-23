@@ -92,7 +92,7 @@ public class PivotRunner implements Application {
     public void startup(final Display display,
             final Map<String, String> properties) throws Exception {
         // Set the desired locale and use it to load the translations
-        String language = properties.get(LANGUAGE_PROPERTY_NAME);
+        final String language = properties.get(LANGUAGE_PROPERTY_NAME);
         if (language != null) {
             Locale.setDefault(new Locale(language));
         }

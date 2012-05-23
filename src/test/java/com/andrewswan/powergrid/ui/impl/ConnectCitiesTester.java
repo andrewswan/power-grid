@@ -30,4 +30,6 @@ public final class ConnectCitiesTester {
         // Output
         System.out.println("Cities = " + Arrays.toString(cities));
     }
+    
+    private ConnectCitiesTester() {}
 }
