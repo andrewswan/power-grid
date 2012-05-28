@@ -1,5 +1,7 @@
 This project aims to implement the Power Grid board game in Java.
 
+[![Build Status](https://buildhive.cloudbees.com/job/andrewswan/job/power-grid/badge/icon)](https://buildhive.cloudbees.com/job/andrewswan/job/power-grid/)
+
 Feature roadmap (in no particular order):
 * Create the core game engine (UI- and language- neutral)
 * Create a text interface in English
