@@ -15,17 +15,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <p>
- * Description: a game of Power Grid
- * </p>
- * <p>
- * Copyright: Copyright (c) 2007
- * </p>
- * <p>
- * Company: Business Information Services
- * </p>
+ * A game of Power Grid.
  * 
- * @author andrews
+ * @author Andrew Swan
  */
 public interface Game extends Serializable {
 
