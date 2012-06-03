@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.BorderFactory;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -65,7 +64,7 @@ public class WelcomeDialog extends JDialog {
         
         private WelcomeButton(final Action action) {
             super(action);
-            setBorder(BorderFactory.createEmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+            setBorder(SwingUtils.getEmptyBorder(BORDER_SIZE));
         }
     }
     

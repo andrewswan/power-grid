@@ -18,7 +18,7 @@ public final class SwingRunner {
      * @param args ignored
      */
     public static void main(final String[] args) {
-        final WelcomeDialogController welcomeDialogController = new WelcomeDialogController();
+        final MainFrameController mainFrameController = new MainFrameController();
 
         // Always create Swing components in the Event Dispatch Thread (EDT)
         SwingUtilities.invokeLater(new Runnable() {
@@ -26,7 +26,7 @@ public final class SwingRunner {
             @Override
             public void run() {
                 // Start the GUI and await user input
-                new WelcomeDialog(welcomeDialogController);
+                new MainFrame(mainFrameController);
             }
         });
     }
