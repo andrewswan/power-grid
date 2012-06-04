@@ -36,7 +36,7 @@ public class MainFrameController {
     }
 
     public void startNewGame() {
-        System.out.println("Starting new game");
-        // TODO Auto-generated method stub
+        // TODO wire up the controller
+        new NewGameDialog(mainFrame);
     }
 }
